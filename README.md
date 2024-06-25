@@ -1,5 +1,5 @@
 # hugo-blog
-使用hugo-blog搭建的博客网站
+使用hugo搭建的博客网站
 
 ## 常用命令
 

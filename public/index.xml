@@ -7,12 +7,268 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Mon, 24 Jun 2024 18:12:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>First</title>
+        <title>DRF的介绍</title>
         <link>http://localhost:1313/post/first/</link>
         <pubDate>Mon, 24 Jun 2024 18:12:17 +0800</pubDate>
         
         <guid>http://localhost:1313/post/first/</guid>
-        <description>&lt;p&gt;这是First文本&lt;/p&gt;
+        <description>&lt;h1 id=&#34;serializer&#34;&gt;Serializer
+&lt;/h1&gt;&lt;p&gt;Django REST Framework (DRF) 提供了多种序列化器 (Serializer) 类，用于处理数据的序列化和反序列化。这些序列化器可以帮助你将复杂数据如查询集和模型实例转换为Python数据类型，这些数据类型然后可以很容易地被渲染成JSON、XML或其他内容类型。以下是DRF中一些主要的序列化器类型：&lt;/p&gt;
+&lt;h3 id=&#34;1-serializer&#34;&gt;1. &lt;code&gt;Serializer&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;基础的序列化器类，用于手动处理复杂的数据序列化。你需要定义每个字段，并可能需要手动实现创建和更新方法。它提供了最高的灵活性。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; rest_framework &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; serializers
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MySerializer&lt;/span&gt;(serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Serializer):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;CharField(max_length&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    email &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;EmailField()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    date_joined &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DateTimeField()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;create&lt;/span&gt;(self, validated_data):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; User&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;objects&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;create(&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;validated_data)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;(self, instance, validated_data):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        instance&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; validated_data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;, instance&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;name)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        instance&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;email &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; validated_data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;email&amp;#39;&lt;/span&gt;, instance&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;email)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        instance&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; instance
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-modelserializer&#34;&gt;2. &lt;code&gt;ModelSerializer&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;继承自&lt;code&gt;Serializer&lt;/code&gt;，自动根据模型生成序列化器字段，非常适合快速开发。它也自动实现了简单的创建和更新模型实例的方法。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; rest_framework &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; serializers
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; .models &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; MyModel
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyModelSerializer&lt;/span&gt;(serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ModelSerializer):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Meta&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        model &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; MyModel
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        fields &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;__all__&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#或者列出需要的字段 [&amp;#39;name&amp;#39;, &amp;#39;description&amp;#39;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-hyperlinkedmodelserializer&#34;&gt;3. &lt;code&gt;HyperlinkedModelSerializer&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;与&lt;code&gt;ModelSerializer&lt;/code&gt;类似，但它使用超链接来表示关联关系，而不是使用主键。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; rest_framework &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; serializers
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; .models &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; MyModel
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyHyperlinkedModelSerializer&lt;/span&gt;(serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;HyperlinkedModelSerializer):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Meta&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        model &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; MyModel
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        fields &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;url&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;owner&amp;#39;&lt;/span&gt;]  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;url&amp;#39;&lt;/span&gt; 是一个必要字段
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        extra_kwargs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;url&amp;#39;&lt;/span&gt;: {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;view_name&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mymodel-detail&amp;#39;&lt;/span&gt;},
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;owner&amp;#39;&lt;/span&gt;: {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;view_name&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;user-detail&amp;#39;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;4-listserializer&#34;&gt;4. &lt;code&gt;ListSerializer&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;用于处理序列化对象列表的序列化器。通常，你不需要直接使用它，因为&lt;code&gt;ModelSerializer&lt;/code&gt;和&lt;code&gt;Serializer&lt;/code&gt;在定义字段时会自动处理列表字段。&lt;/p&gt;
+&lt;h3 id=&#34;5-baseserializer&#34;&gt;5. &lt;code&gt;BaseSerializer&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;所有其他序列化器的基类。通常不直接使用，但可以用于实现高度定制的序列化需求。&lt;/p&gt;
+&lt;h3 id=&#34;特殊字段和组件&#34;&gt;特殊字段和组件
+&lt;/h3&gt;&lt;p&gt;除了这些基本序列化器类之外，DRF还提供了多种字段和组件，用于处理特定类型的数据：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;字段类&lt;/strong&gt;：&lt;code&gt;CharField&lt;/code&gt;, &lt;code&gt;IntegerField&lt;/code&gt;, &lt;code&gt;DateField&lt;/code&gt;, &lt;code&gt;DateTimeField&lt;/code&gt;, &lt;code&gt;EmailField&lt;/code&gt;, &lt;code&gt;FileField&lt;/code&gt;, &lt;code&gt;ImageField&lt;/code&gt;, &lt;code&gt;JSONField&lt;/code&gt;, &lt;code&gt;ChoiceField&lt;/code&gt;, &lt;code&gt;BooleanField&lt;/code&gt; 等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关联关系字段&lt;/strong&gt;：&lt;code&gt;PrimaryKeyRelatedField&lt;/code&gt;, &lt;code&gt;HyperlinkedRelatedField&lt;/code&gt;, &lt;code&gt;SlugRelatedField&lt;/code&gt;, &lt;code&gt;StringRelatedField&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;验证和转换方法&lt;/strong&gt;：可以在序列化器中定义&lt;code&gt;validate_&amp;lt;fieldname&amp;gt;()&lt;/code&gt;和&lt;code&gt;validate()&lt;/code&gt;方法来进行数据验证。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些序列化器和字段提供了丰富的功能，帮助你在Django项目中轻松地实现RESTful API的开发。&lt;/p&gt;
+&lt;h1 id=&#34;modelserializer使用参考&#34;&gt;&lt;code&gt;ModelSerializer&lt;/code&gt;使用参考
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;ModelSerializer&lt;/code&gt; 是 Django REST Framework (DRF) 中的一个强大工具，用于自动将 Django 模型转换为序列化器。它基于模型字段自动生成相应的序列化器字段，并提供默认的实现来处理创建和更新模型实例的逻辑。使用 &lt;code&gt;ModelSerializer&lt;/code&gt; 可以极大简化序列化器的代码量，特别是对于直接映射到数据库模型的简单 API。&lt;/p&gt;
+&lt;h3 id=&#34;modelserializer-基础使用&#34;&gt;ModelSerializer 基础使用
+&lt;/h3&gt;&lt;p&gt;先看一个基础示例，其中定义了一个用于操作 &lt;code&gt;Post&lt;/code&gt; 模型的 &lt;code&gt;ModelSerializer&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; rest_framework &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; serializers
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; .models &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Post
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PostSerializer&lt;/span&gt;(serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ModelSerializer):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Meta&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        model &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Post
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        fields &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;__all__&amp;#39;&lt;/span&gt;  包括模型中的所有字段
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在这个基本的 &lt;code&gt;ModelSerializer&lt;/code&gt; 中，&lt;code&gt;Meta&lt;/code&gt; 类定义了序列化器将操作的模型 (&lt;code&gt;model&lt;/code&gt;) 和包括哪些字段 (&lt;code&gt;fields&lt;/code&gt;)。&lt;code&gt;fields = &#39;__all__&#39;&lt;/code&gt; 表示包含模型中定义的所有字段。&lt;/p&gt;
+&lt;h3 id=&#34;自定义逻辑的入口&#34;&gt;自定义逻辑的入口
+&lt;/h3&gt;&lt;h4 id=&#34;字段级自定义&#34;&gt;字段级自定义
+&lt;/h4&gt;&lt;p&gt;你可以在序列化器中声明额外的字段或者重写现有字段的行为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PostSerializer&lt;/span&gt;(serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ModelSerializer):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    is_published &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;BooleanField(default&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;#添加额外的字段&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Meta&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        model &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Post
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        fields &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;__all__&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        read_only_fields &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;author&amp;#39;&lt;/span&gt;,)  &lt;span style=&#34;color:#75715e&#34;&gt;#将 &amp;#39;author&amp;#39; 字段设置为只读&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;validate_title&lt;/span&gt;(self, value):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34; 自定义标题字段的验证逻辑 &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Django&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; value:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;raise&lt;/span&gt; serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ValidationError(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Title must include the word &amp;#39;Django&amp;#39;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; value
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;实例创建和更新的自定义&#34;&gt;实例创建和更新的自定义
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;ModelSerializer&lt;/code&gt; 提供了 &lt;code&gt;create()&lt;/code&gt; 和 &lt;code&gt;update()&lt;/code&gt; 方法，你可以重写这些方法以实现自定义的创建或更新逻辑：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PostSerializer&lt;/span&gt;(serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ModelSerializer):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Meta&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        model &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Post
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        fields &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;__all__&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;create&lt;/span&gt;(self, validated_data):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34; 自定义创建逻辑 &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        instance &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Post&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;objects&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;create(&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;validated_data)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;#可以添加额外的处理逻辑&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; instance
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;(self, instance, validated_data):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34; 自定义更新逻辑 &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        instance&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; validated_data&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;, instance&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# 更新更多字段&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        instance&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;save()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; instance
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;验证整体数据&#34;&gt;验证整体数据
+&lt;/h4&gt;&lt;p&gt;除了字段级验证，你还可以重写 &lt;code&gt;validate()&lt;/code&gt; 方法来添加整体数据的验证逻辑：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PostSerializer&lt;/span&gt;(serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ModelSerializer):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Meta&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        model &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Post
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        fields &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;__all__&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;validate&lt;/span&gt;(self, data):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34; 检查特定的条件是否满足 &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; data[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;start_date&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; data[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;end_date&amp;#39;&lt;/span&gt;]:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;raise&lt;/span&gt; serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ValidationError(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;end_date must occur after start_date&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; data
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;动态字段和条件逻辑&#34;&gt;动态字段和条件逻辑
+&lt;/h4&gt;&lt;p&gt;有时候，你可能希望基于请求或其他条件动态地调整序列化器的行为，如改变序列化的字段集：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;DynamicFieldsPostSerializer&lt;/span&gt;(serializers&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ModelSerializer):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Meta&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        model &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Post
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        fields &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;__all__&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;init&lt;/span&gt;(self, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        super()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__init__(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;request&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;context:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;context[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;request&amp;#39;&lt;/span&gt;]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;user&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;is_anonymous:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fields&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;draft&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;结论&#34;&gt;结论
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;ModelSerializer&lt;/code&gt; 提供了多种方式来自定义和扩展序列化器的功能。通过重写方法和自定义字段，你可以实现精确控制序列化和反序列化过程，从而满足不同的业务需求。使用 &lt;code&gt;ModelSerializer&lt;/code&gt; 不仅可以减少重复代码，还能提高开发效率和维护性。&lt;/p&gt;
+&lt;h1 id=&#34;view&#34;&gt;View
+&lt;/h1&gt;&lt;p&gt;Django REST Framework (DRF) 提供了多种视图组件，帮助开发者快速地构建 RESTful API。以下是DRF中一些主要的视图组件：&lt;/p&gt;
+&lt;h3 id=&#34;1-apiview&#34;&gt;1. &lt;code&gt;APIView&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;APIView&lt;/code&gt;是所有视图类的基类，提供了处理HTTP请求的基本方法。你可以通过重写&lt;code&gt;get()&lt;/code&gt;, &lt;code&gt;post()&lt;/code&gt;, &lt;code&gt;put()&lt;/code&gt;, &lt;code&gt;delete()&lt;/code&gt;等方法来处理不同类型的HTTP请求。&lt;/p&gt;
+&lt;h3 id=&#34;2-genericapiview&#34;&gt;2. &lt;code&gt;GenericAPIView&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;GenericAPIView&lt;/code&gt;继承自&lt;code&gt;APIView&lt;/code&gt;，添加了对Django模型的支持，包括序列化器类、查询集等。这个视图本身不实现任何请求方法（如GET或POST），需要与&lt;code&gt;mixins&lt;/code&gt;一起使用来添加这些方法。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Mixins&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;DRF提供了一系列mixin类，用于扩展&lt;code&gt;GenericAPIView&lt;/code&gt;，以实现常见的API操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;CreateModelMixin&lt;/code&gt;：提供创建对象的方法。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ListModelMixin&lt;/code&gt;：提供列出查询集的方法。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RetrieveModelMixin&lt;/code&gt;：提供检索单个对象的方法。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;UpdateModelMixin&lt;/code&gt;：提供更新对象的方法。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DestroyModelMixin&lt;/code&gt;：提供删除对象的方法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-listapiview-和-createapiview&#34;&gt;4. &lt;code&gt;ListAPIView&lt;/code&gt; 和 &lt;code&gt;CreateAPIView&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;这些视图组合了&lt;code&gt;GenericAPIView&lt;/code&gt;与相应的mixin，为常见的行为提供了现成的实现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ListAPIView&lt;/code&gt;：使用&lt;code&gt;ListModelMixin&lt;/code&gt;，用于展示数据列表。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CreateAPIView&lt;/code&gt;：使用&lt;code&gt;CreateModelMixin&lt;/code&gt;，用于创建新的数据条目。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-retrieveapiview-updateapiview-destroyapiview&#34;&gt;5. &lt;code&gt;RetrieveAPIView&lt;/code&gt;, &lt;code&gt;UpdateAPIView&lt;/code&gt;, &lt;code&gt;DestroyAPIView&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;这些也是组合了&lt;code&gt;GenericAPIView&lt;/code&gt;与相应的mixin：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;RetrieveAPIView&lt;/code&gt;：使用&lt;code&gt;RetrieveModelMixin&lt;/code&gt;，用于获取单个数据详情。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;UpdateAPIView&lt;/code&gt;：使用&lt;code&gt;UpdateModelMixin&lt;/code&gt;，用于更新数据。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DestroyAPIView&lt;/code&gt;：使用&lt;code&gt;DestroyModelMixin&lt;/code&gt;，用于删除数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;6-listcreateapiview-retrieveupdateapiview-retrievedestroyapiview-retrieveupdatedestroyapiview&#34;&gt;6. &lt;code&gt;ListCreateAPIView&lt;/code&gt;, &lt;code&gt;RetrieveUpdateAPIView&lt;/code&gt;, &lt;code&gt;RetrieveDestroyAPIView&lt;/code&gt;, &lt;code&gt;RetrieveUpdateDestroyAPIView&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;这些视图组合了多个mixins，为更复杂的需求提供解决方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ListCreateAPIView&lt;/code&gt;：结合列表显示和创建新对象的功能。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RetrieveUpdateAPIView&lt;/code&gt;：结合检索和更新对象的功能。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RetrieveDestroyAPIView&lt;/code&gt;：结合检索和删除对象的功能。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RetrieveUpdateDestroyAPIView&lt;/code&gt;：结合检索、更新和删除对象的功能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;7-viewset&#34;&gt;7. &lt;code&gt;ViewSet&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;ViewSet&lt;/code&gt;类似于Django的&lt;code&gt;View&lt;/code&gt;，但专为DRF设计，用于管理一组相关的请求处理操作。通常与路由器一起使用，以自动配置URL路由。&lt;/p&gt;
+&lt;h3 id=&#34;8-modelviewset&#34;&gt;8. &lt;code&gt;ModelViewSet&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;ModelViewSet&lt;/code&gt;自动提供&lt;code&gt;list&lt;/code&gt;, &lt;code&gt;create&lt;/code&gt;, &lt;code&gt;retrieve&lt;/code&gt;, &lt;code&gt;update&lt;/code&gt;, 和 &lt;code&gt;destroy&lt;/code&gt;动作。它基本上结合了所有的mixin和&lt;code&gt;GenericAPIView&lt;/code&gt;的功能。&lt;/p&gt;
+&lt;h3 id=&#34;使用实例&#34;&gt;使用实例
+&lt;/h3&gt;&lt;p&gt;这些视图使得构建API变得非常快捷和高效。例如，如果你只需要一个API来列出所有对象和创建新对象，你可以使用&lt;code&gt;ListCreateAPIView&lt;/code&gt;并简单地指定序列化器和查询集：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; rest_framework.generics &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; ListCreateAPIView
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; .models &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; MyModel
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; .serializers &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; MyModelSerializer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyModelListCreateAPIView&lt;/span&gt;(ListCreateAPIView):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    queryset &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; MyModel&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;objects&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;all()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    serializer_class &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; MyModelSerializer
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这些视图和视图集极大简化了API的开发流程，使得开发者可以专注于业务逻辑而非基础架构代码&lt;/p&gt;
+&lt;h1 id=&#34;modelviewset参考&#34;&gt;&lt;code&gt;ModelViewSet&lt;/code&gt;参考
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;ModelViewSet&lt;/code&gt; 在 Django REST Framework (DRF) 中是一个非常强大的工具，它结合了列表视图、创建视图、检索视图、更新视图和删除视图的功能。它提供了一系列方法和属性，使得你可以在单个类中处理与模型相关的所有 CRUD（创建、读取、更新、删除）操作。&lt;/p&gt;
+&lt;h3 id=&#34;modelviewset-基础使用&#34;&gt;ModelViewSet 基础使用
+&lt;/h3&gt;&lt;p&gt;先看一个简单的例子，其中定义了一个用于操作 &lt;code&gt;Post&lt;/code&gt; 模型的 &lt;code&gt;ModelViewSet&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; rest_framework &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; viewsets
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; .models &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Post
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; .serializers &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; PostSerializer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PostViewSet&lt;/span&gt;(viewsets&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ModelViewSet):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    queryset &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Post&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;objects&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;all()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    serializer_class &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; PostSerializer
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在这个基本的 &lt;code&gt;ModelViewSet&lt;/code&gt; 中，&lt;code&gt;queryset&lt;/code&gt; 属性定义了视图集将操作的模型对象集合，&lt;code&gt;serializer_class&lt;/code&gt; 属性指定了用于序列化和反序列化数据的类。&lt;/p&gt;
+&lt;h3 id=&#34;自定义逻辑的入口-1&#34;&gt;自定义逻辑的入口
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;动作方法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;ModelViewSet&lt;/code&gt; 自动为你创建了 &lt;code&gt;list&lt;/code&gt;, &lt;code&gt;create&lt;/code&gt;, &lt;code&gt;retrieve&lt;/code&gt;, &lt;code&gt;update&lt;/code&gt;, &lt;code&gt;partial_update&lt;/code&gt;, 和 &lt;code&gt;destroy&lt;/code&gt; 这些动作。你可以通过重写这些方法来添加自定义逻辑：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PostViewSet&lt;/span&gt;(viewsets&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ModelViewSet):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    queryset &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Post&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;objects&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;all()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    serializer_class &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; PostSerializer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;list&lt;/span&gt;(self, request, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# 添加自定义逻辑&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; super()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;list(request, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# 可以修改响应等&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; response
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;create&lt;/span&gt;(self, request, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# 自定义创建逻辑&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; super()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;create(request, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;retrieve&lt;/span&gt;(self, request, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# 自定义检索逻辑&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; super()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;retrieve(request, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;(self, request, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# 自定义更新逻辑&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; super()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update(request, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;destroy&lt;/span&gt;(self, request, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# 自定义删除逻辑&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; super()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;destroy(request, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;args, &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;kwargs)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;查询集和序列化器的动态选择&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在某些情况下，根据请求的不同，你可能需要使用不同的查询集或序列化器。你可以重写 &lt;code&gt;get_queryset&lt;/code&gt; 和 &lt;code&gt;get_serializer_class&lt;/code&gt; 方法来实现这一点：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PostViewSet&lt;/span&gt;(viewsets&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ModelViewSet):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    serializer_class &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; PostSerializer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_queryset&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;user&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;is_staff:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Post&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;objects&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;all()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Post&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;objects&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;filter(active&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_serializer_class&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;action &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;list&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; PostListSerializerel
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;action &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;retrieve&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; PostDetailSerializer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; DefaultPostSerializer
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;验证和权限&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;你可以通过设置 &lt;code&gt;permission_classes&lt;/code&gt; 和 &lt;code&gt;authentication_classes&lt;/code&gt; 属性来控制访问权限和验证方式。此外，DRF 允许你在视图级别进行更细粒度的权限控制：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; rest_framework.permissions &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; IsAuthenticated, AllowAny
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PostViewSet&lt;/span&gt;(viewsets&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ModelViewSet):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    queryset &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Post&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;objects&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;all()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    serializer_class &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; PostSerializer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_permissions&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;action &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;retrieve&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [AllowAny()]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [IsAuthenticated()]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;过滤、排序和分页&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;DRF 支持强大的查询过滤、排序和分页功能。你可以通过设置 &lt;code&gt;filter_backends&lt;/code&gt;, &lt;code&gt;filterset_class&lt;/code&gt;, &lt;code&gt;ordering_fields&lt;/code&gt;, &lt;code&gt;pagination_class&lt;/code&gt; 等属性来配置这些功能：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; rest_framework.filters &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; SearchFilter, OrderingFilter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; django_filters.rest_framework &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; DjangoFilterBackend
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;PostViewSet&lt;/span&gt;(viewsets&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ModelViewSet):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    queryset &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Post&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;objects&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;all()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    serializer_class &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; PostSerializer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    filter_backends &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [DjangoFilterBackend, SearchFilter, OrderingFilter]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    filterset_fields &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;category&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;author&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    search_fields &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;content&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ordering_fields &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;published_date&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;结论-1&#34;&gt;结论
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;ModelViewSet&lt;/code&gt; 提供了非常灵活的方法来构建具有完整 CRUD 功能的 API。通过重写方法和配置属性，你可以轻松地定制视图的行为以满足具体需求。&lt;/p&gt;
 </description>
         </item>
         <item>
