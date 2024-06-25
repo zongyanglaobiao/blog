@@ -20,3 +20,10 @@
 # Go workspace file
 go.work
 go.work.sum
+/.idea/hugo-blog.iml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
+
+/.idea/misc.xml
