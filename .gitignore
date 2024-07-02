@@ -27,3 +27,5 @@ go.work.sum
 /.idea/vcs.xml
 
 /.idea/misc.xml
+/public
+/resources
