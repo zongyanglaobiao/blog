@@ -1,4 +1,4 @@
-# hugo-blog
+# Hugo-Blog
 使用hugo搭建的博客网站
 
 ## 常用命令
