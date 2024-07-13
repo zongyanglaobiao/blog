@@ -1,0 +1,6 @@
+languageCode = 'zh-CN'
+title = 'JamesAks'
+
+[[module.imports]]
+# 引入主题
+path = "github.com/CaiJimmy/hugo-theme-stack/v3"

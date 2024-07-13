@@ -1,7 +1,7 @@
 +++
-title = 'DRF的介绍'
-date = 2024-06-24T18:12:17+08:00
-description = "关于Python的Django框架大家一定有爱恨情仇"
+title = 'DRF入门'
+date = '{{ .Date }}'
+description = "不用写SQL的Python Web框架"
 +++
 # Serializer
 

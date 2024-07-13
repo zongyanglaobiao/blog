@@ -1,8 +1,0 @@
-baseURL = 'https://example.com/'
-languageCode = 'zh-CN'
-title = 'JamesAks'
-#theme = 'https://github.com/CaiJimmy/hugo-theme-stack'
-#
-#[module.imports]
-#path = 'https://github.com/CaiJimmy/hugo-theme-stack'
-
