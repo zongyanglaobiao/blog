@@ -1,7 +1,6 @@
 +++
 title = '新手值得一看的JavaWeb笔记'
 date = '{{ .Date }}'
-description = "往后看从Java EE 到 JavaWeb , 往前看从JavaWeb 到 Spring Boot... 正所谓万里长征从头走 "
 +++
 
 # javaWeb
@@ -11,7 +10,7 @@ description = "往后看从Java EE 到 JavaWeb , 往前看从JavaWeb 到 Spring 
 ### 1：web程序是什么
 
 - 可以提供浏览器访问的程序
-- **程序 = 数据结构+算法  **
+- **程序 = 数据结构+算法**
 
 ### 2：Tomcat
 
@@ -71,7 +70,7 @@ description = "往后看从Java EE 到 JavaWeb , 往前看从JavaWeb 到 Spring 
 
 - 网站该有的的结构
 
-  - ```java
+  - ```
     ---webapps : Tomcat服务器的web目录
         -ROOT
         -XXLStudy ：网站的目录名
