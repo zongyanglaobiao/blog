@@ -1,0 +1,16 @@
+name: 部署博客
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy-hugo-blog:
+    permissions:
+      contents: write
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: 执行命令
+#        uses: actions/checkout@v4
+        run: |
+          go version
