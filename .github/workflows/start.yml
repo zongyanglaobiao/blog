@@ -5,12 +5,21 @@ on:
       - master
 jobs:
   deploy-hugo-blog:
+    name: 开始部署
     permissions:
       contents: write
       packages: write
     runs-on: ubuntu-latest
     steps:
+
+      - name: 设置hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.128.2'
+          extended: true
+
       - name: 执行命令
 #        uses: actions/checkout@v4
         run: |
           go version
+          hugo version
