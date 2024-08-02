@@ -18,8 +18,8 @@ jobs:
           hugo-version: '0.128.2'
           extended: true
 
-      - name: 执行命令
-#        uses: actions/checkout@v4
+      - name: 编译
+        uses: actions/checkout@v4
         run: |
           go version
           hugo version
