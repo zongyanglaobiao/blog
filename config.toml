@@ -1,8 +1,5 @@
 languageCode = 'zh-CN'
 title = 'JamesAks'
-
-favicon = "favicon/blog.svg"
-
 [[module.imports]]
 # 引入主题
 path = "github.com/CaiJimmy/hugo-theme-stack/v3"
