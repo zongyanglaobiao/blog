@@ -37,7 +37,7 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: 安装 Dart Sass
         run: sudo snap install dart-sass
-      - name: Checkout
+      - name: 拉取项目
         uses: actions/checkout@v4
         with:
           submodules: recursive
@@ -45,9 +45,9 @@ jobs:
       - name: 设置页面
         id: pages
         uses: actions/configure-pages@v5
-      - name: Install Node.js dependencies
+      - name: 下载node.js
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-      - name: Build with Hugo
+      - name: hugo构建
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
