@@ -30,3 +30,6 @@ go.work.sum
 /public
 /resources
 /hugo-blog.iml
+/.idea/encodings.xml
+/.idea/hugo-theme-stack-starter.iml
+/.idea/misc.xml

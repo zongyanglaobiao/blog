@@ -1,7 +1,6 @@
-# Hugo-Blog
-使用hugo搭建的博客网站
+# 介绍
+**使用hugo搭建的博客，记录自己的学习笔记、学习心得、生活感悟**
 
-## 常用命令
+## ➡️Hugo主题
+这里特别感谢[CaiJimmy](https://github.com/CaiJimmy)，本项目使用CaiJimmy的Hugo模板[hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)
 
-1. ` hugo server --theme=hugo-theme-stack --buildDrafts`
-2. `hugo --theme=hugo-theme-stack --baseUrl="https://github.com/zongyanglaobiao/hugo-blog"`
