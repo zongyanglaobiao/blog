@@ -33,3 +33,4 @@ go.work.sum
 /.idea/encodings.xml
 /.idea/hugo-theme-stack-starter.iml
 /.idea/misc.xml
+/.idea/
