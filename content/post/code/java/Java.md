@@ -4,7 +4,7 @@ description: W测试
 slug: Java
 date: 2022-03-06 00:00:00+0000
 toc: true
-image: /img/girl-for-test.png
+image: img/girl-for-test.png
 categories:
   -  学习笔记
 tags:
