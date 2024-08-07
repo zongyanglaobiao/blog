@@ -74,7 +74,3 @@ jobs:
       - name: 部署到 GitHub 页面
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: 查看文件是否存在
-        run: |
-          ls -al /home/runner/work/hugo-blog/hugo-blog
