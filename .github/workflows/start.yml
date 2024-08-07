@@ -77,4 +77,4 @@ jobs:
 
       - name: 查看文件是否存在
         run: |
-          pwd && cd / && ls ./
+          pwd && ls /home/runner/work/hugo-blog/hugo-blog/public
