@@ -58,10 +58,6 @@ jobs:
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"    
 
-      - name: 查看文件是否存在
-        run: |
-          ls ./public
-
       - name: 上传项目
         uses: actions/upload-pages-artifact@v3
         with:
@@ -81,5 +77,5 @@ jobs:
 
       - name: 查看文件是否存在
         run: |
-          pwd
+#          pwd
           ls /home/runner/work/hugo-blog/hugo-blog
