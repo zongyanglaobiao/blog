@@ -7,6 +7,7 @@
 - `hugo server  --buildDrafts ` 用于是否显示草稿文章
 - `hugo server  --theme xxx ` 用于指定主题xxx为下载在themes目录下的主题
 - `hugo server --ignoreCache --cleanDestinationDir` 用于忽略缓存，清理目标目录
+- `hugo server -v` 用于查看启动信息
 
 ## ➡️Hugo主题
 这里特别感谢[CaiJimmy](https://github.com/CaiJimmy)，本项目使用CaiJimmy的Hugo模板[hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)
