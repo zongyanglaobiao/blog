@@ -36,3 +36,4 @@ go.work.sum
 /.idea/
 /.idea/
 /.hugo_build.lock
+/hugo-blog-vm/
