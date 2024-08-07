@@ -37,11 +37,11 @@ tags:
 
 - 在bin文件内点startup.bat
 
-  ![image-20221228120857316](../img/image-20221228120857316.png)
+  ![image-20221228120857316](img/image-20221228120857316.png)
 
   - 访问地址localhost:8080
 
-##### 2.2配置文件：
+##### 配置文件：
 
 - 改主机名称：在conf\service文件中改成自己想要的域名【例如www.xxl.com】还要把自己主机的名称一起改掉在C:\Windows\System32\drivers\etc目录下host文件把本来映射localhost的改成www.xxl.com【注意是加一个】
 
@@ -71,11 +71,11 @@ tags:
 
     1. 有：直接返回对应的ip地址
 
-    ![image-20221129141843038](../img/image-20221129141843038.png)
+    ![image-20221129141843038](img/image-20221129141843038.png)
 
       2.没有：去dns服务器找，能找到就返回，找不到就返回找不到
 
-    ​	![img](../img/L377CV890TBGA{904_F26.png)
+    ​	![img](img/L377CV890TBGA{904_F26.png)
 
 ##### 2.4、发布一个web网站
 
@@ -229,7 +229,7 @@ tags:
   - MAVEN_HOME   E:\Program Files (x86)\TomcatAndMaven\apache-maven-3.8.6-bin\apache-maven-3.8.6
   - path里的maven目录   E:\Program Files (x86)\TomcatAndMaven\apache-maven-3.8.6-bin\apache-maven-3.8.6\bin
 
-![image-20221228164932271](../img/image-20221228164932271.png)
+![image-20221228164932271](img/image-20221228164932271.png)
 
 ##### 4.4、修改Maven配置文件的镜像
 
@@ -256,11 +256,11 @@ tags:
 
 - 在idea设置中修改
 
-![image-20221228172129655](../img/image-20221228172129655.png)
+![image-20221228172129655](img/image-20221228172129655.png)
 
 - 在设置中设置自动下载源代码
 
-**![image-20221228182122799](../img/image-20221228182122799.png)**
+**![image-20221228182122799](img/image-20221228182122799.png)**
 
 - 不重复配置maven文件方法：在idea默认全局配置设置
 
@@ -268,23 +268,23 @@ tags:
 
 - 点击当前文件进行配置
 
-![image-20221228190143133](../img/image-20221228190143133.png)
+![image-20221228190143133](img/image-20221228190143133.png)
 
 - 配置上下文路径映射，也就是url地址会显示
 
-  ![image-20221228190810818](../img/image-20221228190810818.png)
+  ![image-20221228190810818](img/image-20221228190810818.png)
 
-  ![image-20221228191139999](../img/image-20221228191139999.png)
+  ![image-20221228191139999](img/image-20221228191139999.png)
 
 - 启动tomcat，这下面的文件就是index.jsp
 
 
 
-![image-20221228191236459](../img/image-20221228191236459.png)
+![image-20221228191236459](img/image-20221228191236459.png)
 
 - maven的结构
 
-![微信图片_20221228191616](../img/微信图片_20221228191616.jpg)
+![微信图片_20221228191616](img/微信图片_20221228191616.jpg)
 
 ##### 4.8、pom文件
 
@@ -366,7 +366,7 @@ tags:
 
 - maven目录树
 
-![image-20221228194212331](../img/image-20221228194212331.png)
+![image-20221228194212331](img/image-20221228194212331.png)
 
 - idea默认的web.xml版本太低问题：把tomcat的web.xml文件版本复制过去
 

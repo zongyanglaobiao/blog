@@ -107,13 +107,11 @@ def operate_md_file_pictures_folder(args: list[str], is_delete=False):
     with open(md_file_path, 'r', encoding='utf-8') as md_file:
         content = md_file.read()
 
-    # 使用正则表达式匹配 Markdown 文件中的图片路径
-    # 匹配 ![alt text](url) 格式的图片链接
+    # 使用正则表达式匹配 Markdown 文件中的图片路径, 匹配 ![alt text](url) 格式的图片链接
     image_urls = re.findall(r'!\[.*?\]\((.*?)\)', content)
 
     def delete_file():
         complete_count = 0
-        # 使用正则表达式匹配 Markdown 文件中的图片路径, 匹配 ![alt text](url) 格式的图片链接
         for url in image_urls:
             img_name = url.replace('\\', '/').rsplit('/', 1)[-1]
             img_file_path = os.path.join(NEW_IMAGE_FILE_PATH, img_name)
@@ -129,7 +127,6 @@ def operate_md_file_pictures_folder(args: list[str], is_delete=False):
 
     def copy_file():
         complete_count = 0
-        # 使用正则表达式匹配 Markdown 文件中的图片路径, 匹配 ![alt text](url) 格式的图片链接
         for url in image_urls:
             img_name = url.replace('\\', '/').rsplit('/', 1)[-1]
             img_file_path = os.path.join(OLD_IMAGE_FILE_PATH, img_name)
@@ -159,15 +156,34 @@ def copy_md_file_pictures_folder(args: list[str]):
     operate_md_file_pictures_folder(args)
 
 
+def batch_modify(args: list[str]):
+    with open(args[0], 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # 使用正则表达式匹配 Markdown 文件中的图片路径, 匹配 ![alt text](url) 格式的图片链接
+    image_urls = re.findall(r'!\[.*?\]\((.*?)\)', content)
+
+    complete_count = 0
+    for url in image_urls:
+        print(url)
+        # 替换图片路径
+        new_img_name = ING_PATH + url.replace('\\', '/').rsplit('/', 1)[-1]
+        # 使用url匹配原有的内容，然后把图片路径替换为new_img_name
+        content = content.replace(url, new_img_name)
+        complete_count += 1
+
+    # 将修改后的内容写回文件
+    with open(args[0], 'w', encoding='utf-8') as f:
+        f.write(content)
+    print(f'图片总共{len(image_urls)}个，已替换{complete_count}个')
+
+
 if __name__ == '__main__':
     commands = [
         Command('-cm', '--create_md_file', '创建MD文件模板, 1.文件夹路径(有默认值) 2.文件名称', create_md_file,
                 args_num=2),
-        Command('-cd', '--copy_directory_contents',
-                '把文件夹内容拷贝到另一个文件夹内容, 1.源文件夹(有默认值) 2.目标文件夹(有默认值)', None,
-                default_value=[OLD_IMAGE_FILE_PATH, NEW_IMAGE_FILE_PATH], args_num=2),
-        Command('-bp', '--batch_modify', '文件内容批量替换, 1.文件路径 2.匹配的字符串 3.替换的字符串', None,
-                args_num=3),
+        Command('-bm', '--batch_modify', '文件内容批量替换, 1.文件路径', batch_modify,
+                args_num=1),
         Command('-cym', '--copy_md_file_pictures_folder', '下载MD文件中的图片到指定文件夹, 1.MD文件路径',
                 copy_md_file_pictures_folder, args_num=1),
         Command('-dm', '--delete_md_file_pictures_folder', '在指定文件夹删除MD文件中的图片, 1.MD文件路径',

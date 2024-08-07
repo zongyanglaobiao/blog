@@ -39,19 +39,22 @@ type = "search"
 type = "archives"
 
 [widgets.homepage.params]
+# 按年份归档，显示5年
 limit = 5
 
 [[widgets.homepage]]
 type = "categories"
 
 [widgets.homepage.params]
-limit = 10
+# 分类个数
+limit = 9999
 
 [[widgets.homepage]]
 type = "tag-cloud"
 
 [widgets.homepage.params]
-limit = 10
+# 标签个数
+limit = 9999
 
 [[widgets.page]]
 type = "toc"
