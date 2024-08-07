@@ -1,7 +1,8 @@
 # Change baseurl before deploy
-#baseurl = "https://zongyanglaobiao.github.io/hugo-blog"
+baseurl = "https://zongyanglaobiao.github.io"
 paginate = 5
 title = "J.A"
 # Change it to your Disqus shortname before using
 disqusShortname = "hugo-theme-stack"
+# 解决因为文章的时间问题
 buildFuture = true
