@@ -8,8 +8,6 @@ import time
 OLD_IMAGE_FILE_PATH = r"E:\Program Files (x86)\Typora\note\img"
 NEW_IMAGE_FILE_PATH = r'D:\Program Files (x86)\idea\IDEAproject\github\hugo-blog\static\img'
 ING_PATH = r'img/'
-CREATE_FILE_PATH = r'D:\Program Files (x86)\idea\IDEAproject\github\hugo-blog\content\post'
-
 
 class Command:
 
@@ -99,7 +97,7 @@ weight: 1
 if __name__ == '__main__':
     commands = [
         Command('-cm', '--create_md_file', '创建MD文件模板, 1.文件夹路径(有默认值) 2.文件名称', create_md_file,
-                [CREATE_FILE_PATH], 2),
+                args_num=2),
         Command('-cd', '--copy_directory_contents',
                 '把文件夹内容拷贝到另一个文件夹内容, 1.源文件夹(有默认值) 2.目标文件夹(有默认值)', None,
                 default_value=[OLD_IMAGE_FILE_PATH, NEW_IMAGE_FILE_PATH], args_num=2),

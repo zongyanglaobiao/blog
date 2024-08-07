@@ -4,5 +4,5 @@ paginate = 5
 title = "J.A"
 # Change it to your Disqus shortname before using
 disqusShortname = "hugo-theme-stack"
-# 解决因为文章的时间问题
+# 解决因为时间不渲染文章问题
 buildFuture = true

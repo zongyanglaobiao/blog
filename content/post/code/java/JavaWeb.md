@@ -3,7 +3,6 @@ title: 学习JavaWeb的知识点
 description: 快速帮助你学会JavaWeb方面的知识
 slug: JavaWeb
 date: 2024-08-08 00:00:00+0000
-image: img/girl-for-test.png
 toc: true
 categories:
     - 学习笔记
@@ -2194,7 +2193,7 @@ public void easyMail() throws IOException, GeneralSecurityException, MessagingEx
         MimeMessage mimeMessage = new MimeMessage(session);
         //准备图片
         MimeBodyPart img = new MimeBodyPart();
-        String path = "D:\\Program Files (x86)\\idea\\IDEAproject\\javaweb02-maven\\servlet-09\\src\\main\\resources\\img\\girl5.jpg";
+        String path = "D:\\Program Files (x86)\\idea\\IDEAproject\\javaweb02-maven\\servlet-09\\src\\main\\resources\\img\\avatar.jpg";
         DataHandler dataHandler = new DataHandler(new FileDataSource(path));
         img.setDataHandler(dataHandler); //在主体中放入图片数据
         img.setContentID("girl.jpg");
