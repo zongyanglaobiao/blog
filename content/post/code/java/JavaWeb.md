@@ -1,6 +1,6 @@
 ---
-title: 学习JavaWeb的知识点
-description: 快速帮助你学会JavaWeb方面的知识
+title: JavaWeb
+description: 一遍文章让你快速入门JavaWeb
 slug: JavaWeb
 date: 2024-08-08 00:00:00+0000
 toc: true
@@ -10,28 +10,30 @@ tags:
     - Java
     - Web
     - SQL
+    - Tomcat
     - 计算机网络
-weight: 1
 ---
 
 # javaWeb
 
 ***
 
-### 1：web程序是什么
+## Web程序是什么
 
-- 可以提供浏览器访问的程序
-- **程序 = 数据结构+算法**
+- 可以提供浏览器访问的网页
+- 程序 = 数据结构+算法
 
-### 2：Tomcat
+## Tomcat
 
-##### 2.1启动Tocmcat
+> Apache Tomcat 是一个开源的实现了 Java Servlet、JavaServer Pages（JSP）、Java Expression Language（EL）和 Java WebSocket 技术的 web 服务器和 servlet 容器
+
+### 启动Tomcat
 
 - **注意tomcat10以上好多坑时刻注意版本问题**
 
 - 配置Java环境：在本机上配置一个JAVA_HOME的变量
 
-  ![image-20221129140528956](../img/image-20221129140528956.png)
+  ![image-20221129140528956](img/image-20221129140528956.png)
 
 - 在bin文件内点startup.bat
 

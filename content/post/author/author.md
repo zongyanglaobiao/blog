@@ -4,7 +4,6 @@ description: 路漫漫其修远兮，吾将上下而求索
 slug: author
 date: 2024-08-08 04:13:33+0000
 image: img/fj-bg.jpg
-toc: true
 categories:
   - 生活感悟
 tags:
@@ -12,4 +11,10 @@ tags:
 weight: 1
 ---
 
-# 自动生成标题
+# 😐个人介绍
+我是一个极其无聊的人，没有什么兴趣。说来话长，记得当我开始学JAVA的时候被里面各种知识吸引
+
+## 联系方式
+- 🐧 3578144921@qq.com
+- 📱 15156246017
+- 📩 aksisnotx@gmail.com
