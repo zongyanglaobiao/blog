@@ -3,7 +3,7 @@ title: 学习JavaWeb的知识点
 description: 快速帮助你学会JavaWeb方面的知识
 slug: JavaWeb
 date: 2024-08-07 20:33:00+0000
-image: img/img.png
+image: img/girl-for-test.png
 toc: true
 categories:
     - 学习笔记
@@ -12,6 +12,7 @@ tags:
     - Web
     - SQL
     - 计算机网络
+weight: 1
 ---
 
 # javaWeb
