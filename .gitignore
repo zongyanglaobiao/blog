@@ -37,3 +37,10 @@ go.work.sum
 /.idea/
 /.hugo_build.lock
 /hugo-blog-vm/
+/content/post/hello-world/
+/content/post/image-gallery/
+/content/post/hello-world/
+/content/post/shortcodes/
+/content/post/math-typesetting/
+/content/post/markdown-syntax/
+/content/post/image-gallery/
