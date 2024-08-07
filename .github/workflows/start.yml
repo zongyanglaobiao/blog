@@ -82,4 +82,4 @@ jobs:
       - name: 查看文件是否存在
         run: |
           pwd
-          ls
+          ls /home/runner/work/hugo-blog/hugo-blog
