@@ -1,5 +1,6 @@
 ---
 title: Links
+slug: links
 links:
   - title: GitHub
     description: GitHub is the world's largest software development platform.
@@ -8,6 +9,7 @@ links:
 menu:
     main: 
         weight: 4
+        name: 链接
         params:
             icon: link
 

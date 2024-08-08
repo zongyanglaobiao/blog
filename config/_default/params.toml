@@ -6,7 +6,7 @@ favicon = "/favicon.svg"
 
 [footer]
 since = '2024/08/06'
-customText = "<a target='_blank' href='https://github.com/zongyanglaobiao/hugo-blog'>Powered by Hugo-Blog</a>"
+customText = "<a target='_blank' href='https://github.com/zongyanglaobiao/blog'>Powered by Blog</a>"
 
 [dateFormat]
 published = "Jan 02, 2006"

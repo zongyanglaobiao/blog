@@ -6,6 +6,7 @@ slug: "archives"
 menu:
     main:
         weight: 2
+        name: 档案
         params: 
             icon: archives
 ---
