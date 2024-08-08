@@ -6,6 +6,18 @@ links:
     description: GitHub 是全球最大的软件开发平台。
     website: https://github.com
     image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+  - title: SpringBoot
+    description: Spring Boot 可以轻松创建独立的、生产级的基于 Spring 的应用程序，您可以“直接运行”。
+    website: https://spring.io/projects/spring-boot
+    image: https://spring.io/img/logos/spring-initializr.svg
+  - title: v2rayN
+    description: v2rayN 是一个完全开源的梯子，提供了简洁好用的UI界面
+    website: https://github.com/2dust/v2rayN
+    image: https://avatars.githubusercontent.com/u/31833384?v=4
+  - title: Django
+    description: Django 最初被设计用于具有快速开发需求的新闻类站点，目的是要实现简单快捷的网站开发。以下内容简要介绍了如何使用 Django 实现一个数据库驱动的网络应用。
+    website: https://docs.djangoproject.com/zh-hans
+    image: https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico 
 menu:
     main: 
         weight: 4
@@ -16,30 +28,3 @@ toc: true
 comments: false
 ---
 
-# 工具链接
-
-To use this feature, add `links` section to frontmatter.
-
-This page's frontmatter:
-
-## 搜索引擎
-
-## Java
-
-## 前端
-
-## 开发快捷工具
-
-```yaml
-links:
-  - title: GitHub
-    description: GitHub is the world's largest software development platform.
-    website: https://github.com
-    image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-  - title: TypeScript
-    description: TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
-    website: https://www.typescriptlang.org
-    image: ts-logo-128.jpg
-```
-
-“image”字段接受本地和外部图像。
