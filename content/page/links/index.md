@@ -3,7 +3,7 @@ title: Links
 slug: links
 links:
   - title: GitHub
-    description: GitHub is the world's largest software development platform.
+    description: GitHub 是全球最大的软件开发平台。
     website: https://github.com
     image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
 menu:
@@ -12,13 +12,23 @@ menu:
         name: 链接
         params:
             icon: link
-
+toc: true 
 comments: false
 ---
+
+# 工具链接
 
 To use this feature, add `links` section to frontmatter.
 
 This page's frontmatter:
+
+## 搜索引擎
+
+## Java
+
+## 前端
+
+## 开发快捷工具
 
 ```yaml
 links:
@@ -32,4 +42,4 @@ links:
     image: ts-logo-128.jpg
 ```
 
-`image` field accepts both local and external images.
+“image”字段接受本地和外部图像。
