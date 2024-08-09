@@ -1,6 +1,7 @@
 ---
 title: Links
 slug: links
+date: 2024-08-09 04:13:33+0000
 links:
   - title: GitHub
     description: GitHub 是全球最大的软件开发平台。
@@ -19,12 +20,12 @@ links:
     website: https://docs.djangoproject.com/zh-hans
     image: https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico 
 menu:
-    main: 
+    main:   
         weight: 4
         name: 链接
         params:
             icon: link
-toc: true 
+toc: false 
 comments: false
 ---
 

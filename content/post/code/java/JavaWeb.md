@@ -8,9 +8,10 @@ categories:
     - 学习笔记
 tags:
     - Java
-    - Web
+    - JavaWeb
     - SQL
     - Tomcat
+    - Maven
     - 计算机网络
 ---
 
@@ -23,13 +24,13 @@ tags:
 - 可以提供浏览器访问的网页
 - 程序 = 数据结构+算法
 
-## Tomcat
+##  Tomcat
 
 > Apache Tomcat 是一个开源的实现了 Java Servlet、JavaServer Pages（JSP）、Java Expression Language（EL）和 Java WebSocket 技术的 web 服务器和 servlet 容器
 
-### 启动Tomcat
+### 下载并启动Tomcat
 
-- **注意tomcat10以上好多坑时刻注意版本问题**
+- **注意tomcat10以上注意版本问题**
 
 - 配置Java环境：在本机上配置一个JAVA_HOME的变量
 
@@ -39,45 +40,51 @@ tags:
 
   ![image-20221228120857316](img/image-20221228120857316.png)
 
-  - 访问地址localhost:8080
+- 访问地址localhost:8080
 
-##### 配置文件：
+### Tomcat配置文件
 
-- 改主机名称：在conf\service文件中改成自己想要的域名【例如www.xxl.com】还要把自己主机的名称一起改掉在C:\Windows\System32\drivers\etc目录下host文件把本来映射localhost的改成www.xxl.com【注意是加一个】
+#### 修改主机名称
 
-  ```xml
-  <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true">
-  ```
+Tomcat只能启动通过localhost去访问？ 可以修改在C:\Windows\System32\drivers\etc目录下host文件中有映射主机名称步骤如下
 
-  
+1. 修改改主机名称：在conf\service文件中改成自己想要的域名如`www.xxl.com`还要把自己主机的名称一起改掉在C:\Windows\System32\drivers\etc目录下host文件把本来映射localhost的改成www.xxl.com**注意是加映射**
 
-- 改端口【默认8080】在E:\Program Files (x86)\Tomcat\apache-tomcat-10.0.27-windows-x64\apache-tomcat-10.0.27\conf\service.xml文件中
+    ```xml
+    <!-- tomcat配置文件  -->
+    <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true" />
+    ```
 
-  ```xml
-  <Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443"/>
-  ```
+#### 修改端口
 
-  - mysql【默认3306】
-  - http【默认80】.
-  - https【默认端口443】
+Tomcat目录中conf\service.xml文件中
 
-##### 2.3高难度面试题
+```xml
+<!-- tomcat配置文件  -->
+<Connector port="8080" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443"/>
+```
+
+**Tip:**
+1. mysql【默认3306】
+2. http【默认80】.
+3. https【默认端口443】
+
+
+##### 相关面试题
 
 - 请你谈谈网站是如何进行访问的！
-
   - 输入一个域名：回车
-
   - 检查本机的C:\Windows\System32\driv ers\etc\hosts配置文件有没有这个域名映射
 
     1. 有：直接返回对应的ip地址
 
     ![image-20221129141843038](img/image-20221129141843038.png)
 
-      2.没有：去dns服务器找，能找到就返回，找不到就返回找不到
+    2. 没有：去dns服务器找，能找到就返回，找不到就返回找不到
 
-    ​	![img](img/L377CV890TBGA{904_F26.png)
+    ![img](img/L377CV890TBGA{904_F26.png)
 
-##### 2.4、发布一个web网站
+#### 发布一个web网站
 
 - 将自己写的网站放到服务器【tomcat】中指定的web应用的文件夹下【webapps】，就可以访问了
 

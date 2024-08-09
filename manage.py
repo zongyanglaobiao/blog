@@ -70,6 +70,7 @@ def create_md_file(args: list[str]):
     ---
 title: {args[1]}
 description: 自动生成
+# 默认url路径是title如果不写slug
 slug: {args[1]}
 date: {time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}+0000
 image: 自动生成.jpg
