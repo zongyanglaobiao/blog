@@ -13,6 +13,7 @@ tags:
     - Tomcat
     - Maven
     - HTTP
+    - Servlet
 ---
 
 # JavaWeb
@@ -426,3 +427,457 @@ IDEA默认的web.xml版本太低问题：把Tomcat的web.xml文件版本复制�
 #### 优先级
 
 映射优先级：固定匹配规则 > 通用匹配规则
+
+### Maven子摸快
+
+```xml
+<modules>
+    <!-- 子摸快,servlet01对应Pom文件中artifactId名字   -->
+    <module>servlet01</module>
+</modules>
+ ```
+
+子目录会有父目录的AGV
+
+```xml
+<parent>
+    <artifactId>javaweb02-maven</artifactId>
+    <groupId>com.xxl</groupId>
+    <version>1.0-SNAPSHOT</version>
+</parent>
+ ```
+
+**父模块可以用来管理依赖，子摸快可以直接使用**
+
+## Servlet
+
+1.  Servlet就是sun公司**开发动态Web的一门技术**
+2. Sun公司在这些API提供了一个接口就做：Servlet，如果要开发一个Servlet程序，需要两个步骤
+    - 编写一个类实现Servlet接口
+    - 把开发好的Java类部署到web服务器中，实现了Servlet接口的程序叫做**Servlet**
+3. **Servlet是单例模式**
+
+### Servlet原理
+
+- Servlet是由web服务器调用，web服务器在收到浏览器请求之后，会：
+
+    ![image-20221229132501759](img/javaweb/image-20221229132501759.png)
+
+- 简图
+
+    ![image-20221229133758829](img/javaweb/image-20221229133758829.png)
+
+### ServletContext
+
+Web容器在启动的时候，他会为每个web程序都创建一个对应的ServletContext对象，他代表当前的web应用
+
+#### 共享数据 
+
+**共享数据：** 因为一个web应用只有一个上下文，所有的servlet都可以拿到这个上下文对象，所以数据可以共享
+
+
+![img](img/javaweb/C9C66AC0E5979A71CD52AA77490DDD70.png)
+
+
+1. **设置数据**
+
+    ```java
+    //设置数据
+    String username = "xxl";  
+    ServletContext servletContext = req.getServletContext();   
+    servletContext.setAttribute("username",username);
+    
+    String text = "<h1>开始设置数据</h1>";
+    //流不需要设置type和encoding
+    ServletOutputStream outputStream = resp.getOutputStream();
+    outputStream.write(text.getBytes(),0,text.getBytes().length);
+    outputStream.close();
+    ```
+
+    ![image-20221229165933759](img/javaweb/image-20221229165933759.png)
+
+2. **拿到数据**
+
+    ```java
+    ServletContext servletContext = req.getServletContext();
+    String  username = (String) servletContext.getAttribute("username");
+     
+    resp.setCharacterEncoding("utf-8");
+    resp.setContentType("text/html");
+    String name = "姓名：";
+    //字符流需要设置type和encoding，字节流不需要
+    PrintWriter writer = resp.getWriter();
+    writer.print(name+username);
+    writer.close();
+    ```
+
+    ![image-20221229165955253](img/javaweb/image-20221229165955253.png)
+
+#### 获取初始化参数
+
+```java
+ServletContext servletContext = this.getServletContext();
+String url = servletContext.getInitParameter("url");//这个就是获得web.xml中设置的context-param参数
+String text = "<h1>" + url + "</h1>";
+ServletOutputStream outputStream = resp.getOutputStream();
+outputStream.write(text.getBytes(),0,text.getBytes().length);
+outputStream.close();
+```
+
+![image-20221229172428454](img/javaweb/image-20221229172428454.png)
+
+####  转发和重定向
+
+##### 转发
+
+**转发：当前文件地址，转发带参数**
+
+```java
+ServletContext servletContext = this.getServletContext();
+RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/demo01");  //还没开始转发
+requestDispatcher.forward(req, resp);  //开始转发
+```
+
+##### 重定向
+
+**重定向：得带上项目地址，相当于之前重新发起请求，不能携带之前的request中参数**
+
+```java  
+//getContextPath  项目地址不带/  
+resp.sendRedirect(req.getServletContext().getContextPath()+"/success/success.jsp");   重定向  
+```  
+
+
+
+![image-20221229174355664](img/javaweb/image-20221229174355664.png)
+
+
+
+#### 读取资源文件
+
+- 发现问题在java目录下的properties文件识别不了，解决方案：在Maven篇章写了
+- 相对路径：target\servlet-02\WEB-INF\classes，俗称classpath
+
+**读取配置文件**
+
+```java
+//设置配置文件第一步加载load(),第二步保存stone()
+Properties properties = new Properties();
+//加载配置文件
+properties.load(servletContext.getResourceAsStream(path));  //getResourceAsStream(path)把资源路径变成一个流
+//读取配置文件
+String username = (String) properties.get("username");
+String pwd = (String) properties.get("pwd");
+//设置配置文件
+properties.setProperty("username", "wyx");
+properties.setProperty("pwd", "wyx12345");
+//保存配置文件
+properties.store(new FileWriter(path2),null);
+```
+
+#### 路径问题
+
+```java
+this.getServletContext().getRealPath("/WEB-INF/upload")
+// 等于tomcat服务器所在的位置的webapps中 E:\Program Files (x86)\TomcatAndMaven\apache-tomcat-10.0.27-windows-x64\apache-tomcat-10.0.27\webapps\servlet_09\WEB-INF\upload\
+```
+
+### HttpServletRequest
+
+HttpServletRequest代表客户端的请求，用户通过http协议访问服务器，http请求中的所有信息都会被封装到HttpServletRequest对象中，通过这个对象的方法可以获得客户端的所有信息
+
+#### 常用方法
+
+```java
+req.getContextPath();  //拿到上下文路径后后面不带/
+req.getAuthType();  //作者信息(谁访问的)
+req.getHeader();   //拿到请求头信息
+req.getHttpServletMapping(); //拿到请求路径
+req.getMethod();      //拿到请求方法
+req.getQueryString(); //查询信息
+req.getRemoteUser();  //拿到远程用户信息
+req.getRequestURI(); //拿到请求路径
+req.getParameter();  //拿到请求中参数信息
+req.getParameterValues();  //拿到请求中参数信息  这个是数组
+```
+
+#### 简单示例
+
+简单模拟写一个登录页
+
+**后端**
+
+```JAVA
+//处理请求
+String username = req.getParameter("username");
+String password = req.getParameter("password");
+System.out.println("用户名：" + username + ",密码：" + password);
+
+//登录成功之后，重定向
+//重定向一定要记住，要当前的项目路径+页面路径
+resp.sendRedirect("/servlet02/loginSuccess.jsp");
+```
+
+**前端**
+
+```JSP
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<h2>努力学习java中</h2>
+<%--表单--%>
+  <%--contextPath：当前发布出的路径，后面不带/    --%>  
+<form action="${pageContext.request.contextPath}/login" method="get">
+    用户名:<input type="text" name="username"><br>
+    密码  :<input type="password" name="password"><br>
+<%--    提交按钮--%>
+    <input type="submit">
+</form>
+</body>
+</html>
+```
+
+##### 获取参数 & 请求转发
+
+```java
+String[] hobbies = req.getParameterValues("hobbies");
+String username = req.getParameter("username");
+String password = req.getParameter("password");
+//解决后端乱码问题
+req.setCharacterEncoding("utf-8");
+resp.setCharacterEncoding("utf-8");
+//打印信息
+System.out.println("=====================================");
+System.out.println("用户名" + username);
+System.out.println("密码" + password);
+System.out.println(Arrays.toString(hobbies));
+System.out.println("getContextPath:" + req.getContextPath());
+System.out.println("=====================================");
+//请求转发
+if (username.equals("xxl") && password.equals("xxl123456")) {
+    //注意不用加上项目路劲，默认是加上的
+    req.getRequestDispatcher("/loginSuccess.jsp").forward(req,resp);
+}else {
+    //测试这会在那个页面出现
+    ServletOutputStream outputStream = resp.getOutputStream();
+    String text = "登录失败";
+    outputStream.write(text.getBytes(),0,text.getBytes().length);
+    outputStream.close();
+}
+```
+
+```jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<h2>努力学习java中</h2>
+<%--表单--%>
+  <%--重要的是这个action，他表示谁会来那个页面处理这个请求--%>  
+<form action="${pageContext.request.contextPath}/login2" method="post">
+    用户名:<input type="text" name="username"><br>
+    密码  :<input type="password" name="password"><br>
+    <%--    checkbox，name名字要一致--%>
+    爱好  :<input type="checkbox" name="hobbies" value="girl">女孩
+          <input type="checkbox" name="hobbies" value="code">打代码
+          <input type="checkbox" name="hobbies" value="basketball">打篮球
+          <input type="checkbox" name="hobbies" value="吃美食">吃美食
+    <br>
+<%--    提交按钮--%>
+    <input type="submit">
+</form>
+</body>
+</html>
+```  
+### HttpServletResponse
+
+响应，web服务器接收端客户端的http请求，针对这个请求，分别创建一个代表请求的HttpServletRequest对象和一个代表响应的HttpServletResponse的对象。
+    - HttpServletRequest可以获取请求过来的参数
+    - HttpServletResponse可以在这个对象加一些响应的信息
+
+#### 常用方法
+
+- 负责向浏览器发送数据的方法
+
+```java
+public ServletOutputStream getOutputStream() throws IOException;   字节流
+public PrintWriter getWriter() throws IOException;   字符流
+```  
+
+负责向浏览器发送的响应头的方法
+
+```java  
+public void setCharacterEncoding(String charset);  
+public void setContentType(String type);  
+public void setDateHeader(String name, long date);  
+public void addDateHeader(String name, long date);  
+public void setHeader(String name, String value)；  
+public void addHeader(String name, String value);  
+public void setIntHeader(String name, int value)；  
+public void addIntHeader(String name, int value);  
+```  
+
+#### 响应码
+
+```java  
+public static final int SC_CONTINUE = 100;  
+public static final int SC_SWITCHING_PROTOCOLS = 101;  
+public static final int SC_OK = 200;    //请求响应成功  
+public static final int SC_CREATED = 201;  
+public static final int SC_ACCEPTED = 202;  
+public static final int SC_NON_AUTHORITATIVE_INFORMATION = 203;  
+public static final int SC_NO_CONTENT = 204;  
+public static final int SC_RESET_CONTENT = 205;  
+public static final int SC_PARTIAL_CONTENT = 206;  
+public static final int SC_MULTIPLE_CHOICES = 300;  
+public static final int SC_MOVED_PERMANENTLY = 301;  
+public static final int SC_MOVED_TEMPORARILY = 302;  
+public static final int SC_FOUND = 302;    //重定向  
+public static final int SC_SEE_OTHER = 303;  
+public static final int SC_NOT_MODIFIED = 304;  
+public static final int SC_USE_PROXY = 305;  
+public static final int SC_TEMPORARY_REDIRECT = 307;    //转发  
+public static final int SC_BAD_REQUEST = 400;  
+public static final int SC_UNAUTHORIZED = 401;  
+public static final int SC_PAYMENT_REQUIRED = 402;   //找不到资源   
+public static final int SC_FORBIDDEN = 403;  
+public static final int SC_NOT_FOUND = 404;  
+public static final int SC_METHOD_NOT_ALLOWED = 405;  //方法不被永许  
+public static final int SC_NOT_ACCEPTABLE = 406;  
+public static final int SC_PROXY_AUTHENTICATION_REQUIRED = 407;  
+public static final int SC_REQUEST_TIMEOUT = 408;  
+public static final int SC_CONFLICT = 409;  
+public static final int SC_GONE = 410;  
+public static final int SC_LENGTH_REQUIRED = 411;  
+public static final int SC_PRECONDITION_FAILED = 412;  
+public static final int SC_REQUEST_ENTITY_TOO_LARGE = 413;  
+public static final int SC_REQUEST_URI_TOO_LONG = 414;  
+public static final int SC_UNSUPPORTED_MEDIA_TYPE = 415;   //不支持类型  
+public static final int SC_REQUESTED_RANGE_NOT_SATISFIABLE = 416;  
+public static final int SC_EXPECTATION_FAILED = 417;  
+public static final int SC_INTERNAL_SERVER_ERROR = 500;   //服务器代码错误   
+public static final int SC_NOT_IMPLEMENTED = 501;  
+public static final int SC_BAD_GATEWAY = 502;   //网关错误  
+public static final int SC_SERVICE_UNAVAILABLE = 503;  
+public static final int SC_GATEWAY_TIMEOUT = 504;  
+public static final int SC_HTTP_VERSION_NOT_SUPPORTED = 505;  
+```  
+
+#### 简单示例
+
+##### 下载文件
+
+```java
+//文件路径
+String path = "D:\\Program Files (x86)\\idea\\IDEAproject\\javaweb02-maven\\servlet-02\\src\\main\\java\\com\\xxl\\servlet\\response\\女孩.jpeg";
+//上下文拿到的真实路径:  E:\Program Files (x86)\TomcatAndMaven\apache-tomcat-10.0.27-windows-x64\apache-tomcat-10.0.27\webapps\servlet02\迪丽热巴.png
+//图片不可能在tomcat下面
+System.out.println("getRealPath拿到的路径："+this.getServletContext().getRealPath("女孩.jpeg"));
+//拿到文件名
+String fileName = path.substring(path.lastIndexOf("\\")+1);
+System.out.println("文件名字：" + fileName);
+//设置响应头用来可以下载文件，如果文件名是中文名下载会出现不显示的情况解决方法：
+resp.setHeader("Content-disposition","attachment;filename="+ URLEncoder.encode(fileName,"utf-8"));
+//输入流-->读取文件   相当于拷贝文件
+BufferedInputStream in = new BufferedInputStream(new FileInputStream(path));
+//输出流-->写出文件
+ServletOutputStream out = resp.getOutputStream();   //写出文件
+//开始写文件
+byte[] bytes = new byte[1024];   //容器
+int len = 0;         //真实容量
+while ((len = in.read(bytes)) != -1) {
+    out.write(bytes,0,len);
+}
+in.close();
+out.close();
+```
+
+##### 验证码实现
+
+```java
+@Override
+protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    //准备图片，图片上有我们随机生成的验证码
+    BufferedImage bufferedImage = new BufferedImage(100, 20,BufferedImage.TYPE_INT_RGB);
+    //画笔
+    Graphics2D graphics = (Graphics2D) bufferedImage.getGraphics();
+    //设置图片背景颜色
+    graphics.setColor(Color.white);
+    //设置图片背景填充颜色大小
+    graphics.fillRect(0,0,100,20);
+    //把验证码画到图片中，准确来说是把图片画到准备到画笔画出的的空间
+    graphics.setColor(Color.BLACK);
+    graphics.setFont(new Font(null,Font.BOLD,20));
+    graphics.drawString(getRandomNUmber(),0,20);
+    //让验证码3秒刷新一次
+    resp.setHeader("refresh","5");
+    //告诉浏览器用图片的方式打开
+    resp.setContentType("image/png");
+    //告诉浏览器不用缓存
+    resp.setDateHeader("expires",-1);
+    resp.setHeader("Cache-Control","no-cache");
+    resp.setHeader("Pragma","no-cache");
+    //把图片写给浏览器
+    boolean io = ImageIO.write(bufferedImage, "png", resp.getOutputStream());
+}
+/**
+ *@date:2022/12/31/13:44
+ *@explian:  生成随机数，总共八位
+ */
+private String getRandomNUmber() {
+    Random random = new Random();
+    String i  = random.nextInt(999999999) + "";
+    StringBuffer stringBuffer = new StringBuffer(i);
+    //缺几位就补几位0，实际随机生成的就是8位数
+    for (int i1 = 0; i1 < 8 - i.length(); i1++) {
+        stringBuffer.append("0");
+    }
+    return stringBuffer.toString();
+}
+```
+
+##### **重定向**
+
+```java
+//路径要注意还要加上项目路径
+resp.sendRedirect("/servlet02/code");  
+```
+
+#### 面试题
+
+请你聊聊重定向和转发的区别: 
+- 相同点
+    - 页面都会跳转
+- 不同点
+  - 重定向：url地址栏会变化
+  - 转发：url地址栏不会发生变化
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
