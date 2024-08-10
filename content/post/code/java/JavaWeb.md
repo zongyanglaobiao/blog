@@ -34,11 +34,11 @@ tags:
 
 - 配置Java环境：在本机上配置一个JAVA_HOME的变量
 
-  ![image-20221129140528956](img/image-20221129140528956.png)
+  ![image-20221129140528956](img/javaweb/image-20221129140528956.png)
 
 - 在bin文件内点startup.bat
 
-  ![image-20221228120857316](img/image-20221228120857316.png)
+  ![image-20221228120857316](img/javaweb/image-20221228120857316.png)
 
 - 访问地址localhost:8080
 
@@ -78,25 +78,11 @@ Tomcat目录中conf\service.xml文件中
 
     1. 有：直接返回对应的ip地址
 
-    ![image-20221129141843038](img/image-20221129141843038.png)
+    ![image-20221129141843038](img/javaweb/image-20221129141843038.png)
 
     2. 没有：去dns服务器找，能找到就返回，找不到就返回找不到
 
-    ![img](img/L377CV890TBGA{904_F26.png)
-
-##### 相关面试题
-
-- 请你谈谈网站是如何进行访问的！
-  - 输入一个域名：回车
-  - 检查本机的C:\Windows\System32\driv ers\etc\hosts配置文件有没有这个域名映射
-
-    1. 有：直接返回对应的ip地址
-
-    ![image-20221129141843038](img/image-20221129141843038.png)
-  
-    2. 没有：去dns服务器找，能找到就返回，找不到就返回找不到
-
-    ![img](img/L377CV890TBGA{904_F26.png)
+    ![img](img/javaweb/L377CV890TBGA{904_F26.png)
 
 #### 发布一个web网站
 
@@ -204,7 +190,7 @@ Locatuion：让网页重新定位
   - MAVEN_HOME：`E:\Program Files (x86)\TomcatAndMaven\apache-maven-3.8.6-bin\apache-maven-3.8.6`
   - 还需要在Path环境变量中增加：`E:\Program Files (x86)\TomcatAndMaven\apache-maven-3.8.6-bin\apache-maven-3.8.6\bin`   
 
-  ![image-20221228164932271](img/image-20221228164932271.png)
+  ![image-20221228164932271](img/javaweb/image-20221228164932271.png)
 
 ### 修改Maven配置文件的镜像
 
@@ -233,33 +219,33 @@ Locatuion：让网页重新定位
 
 修改在IDEA的maven为我们自己的下载
 
-![image-20221228172129655](img/image-20221228172129655.png)
+![image-20221228172129655](img/javaweb/image-20221228172129655.png)
 
 在设置中设置自动下载源代码
 
-![image-20221228182122799](img/image-20221228182122799.png)
+![image-20221228182122799](img/javaweb/image-20221228182122799.png)
 
-**Tip: ** 以上配置如不想要每个项目都配置一次，则在在IDEA默认全局配置设置
+**Tip：** 以上配置如不想要每个项目都配置一次，则在在IDEA默认全局配置设置
 
 ### IDEA配置Tomcat
 
 1. 点击当前文件进行配置
 
-    ![image-20221228190143133](img/image-20221228190143133.png)
+    ![image-20221228190143133](img/javaweb/image-20221228190143133.png)
 
 2. 配置上下文路径映射，也就是url地址会显示
 
-    ![image-20221228190810818](img/image-20221228190810818.png)
+    ![image-20221228190810818](img/javaweb/image-20221228190810818.png)
 
-    ![image-20221228191139999](img/image-20221228191139999.png)
+    ![image-20221228191139999](img/javaweb/image-20221228191139999.png)
 
 3.  启动Tomcat，默认首页是index.jsp
 
-    ![image-20221228191236459](img/image-20221228191236459.png)
+    ![image-20221228191236459](img/javaweb/image-20221228191236459.png)
 
 4.  项目的结构
 
-    ![微信图片_20221228191616](img/微信图片_20221228191616.jpg)
+    ![微信图片_20221228191616](img/javaweb/微信图片_20221228191616.jpg)
 
 ### POM文件
 

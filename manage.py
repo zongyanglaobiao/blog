@@ -8,7 +8,7 @@ import shutil
 import time
 
 OLD_IMAGE_FILE_PATH = r"E:\Program Files (x86)\Typora\note\img"
-NEW_IMAGE_FILE_PATH = r'D:\Program Files (x86)\idea\IDEAproject\github\hugo-blog\static\img'
+NEW_IMAGE_FILE_PATH = r'D:\Program Files (x86)\idea\IDEAproject\github\blog\static\img'
 ING_PATH = r'img/'
 
 
@@ -103,6 +103,8 @@ weight: 1
 def operate_md_file_pictures_folder(args: list[str], is_delete=False):
     # args[0] 是 Markdown 文件路径
     md_file_path = args[0]
+    # args[1] 是文件夹名称
+    md_img_file = args[1]
 
     # 读取 Markdown 文件内容
     with open(md_file_path, 'r', encoding='utf-8') as md_file:
@@ -115,7 +117,7 @@ def operate_md_file_pictures_folder(args: list[str], is_delete=False):
         complete_count = 0
         for url in image_urls:
             img_name = url.replace('\\', '/').rsplit('/', 1)[-1]
-            img_file_path = os.path.join(NEW_IMAGE_FILE_PATH, img_name)
+            img_file_path = os.path.join(NEW_IMAGE_FILE_PATH, md_img_file, img_name)
 
             if os.path.exists(img_file_path):
                 # 文件存在，将其删除
@@ -134,7 +136,7 @@ def operate_md_file_pictures_folder(args: list[str], is_delete=False):
 
             if os.path.exists(img_file_path):
                 # 文件存在，将其复制到指定文件夹
-                new_img_file_path = os.path.join(NEW_IMAGE_FILE_PATH, img_name)
+                new_img_file_path = os.path.join(NEW_IMAGE_FILE_PATH, md_img_file, img_name)
                 os.makedirs(NEW_IMAGE_FILE_PATH, exist_ok=True)
                 shutil.copy2(img_file_path, new_img_file_path)
                 complete_count += 1
@@ -166,11 +168,11 @@ def batch_modify(args: list[str]):
 
     complete_count = 0
     for url in image_urls:
-        print(url)
         # 替换图片路径
-        new_img_name = ING_PATH + url.replace('\\', '/').rsplit('/', 1)[-1]
+        new_img_name = ING_PATH + args[1] + "/" + url.replace('\\', '/').rsplit('/', 1)[-1]
         # 使用url匹配原有的内容，然后把图片路径替换为new_img_name
         content = content.replace(url, new_img_name)
+        print(f'替换{url} ➡️ {new_img_name}')
         complete_count += 1
 
     # 将修改后的内容写回文件
@@ -183,12 +185,18 @@ if __name__ == '__main__':
     commands = [
         Command('-cm', '--create_md_file', '创建MD文件模板, 1.文件夹路径(有默认值) 2.文件名称', create_md_file,
                 args_num=2),
-        Command('-bm', '--batch_modify', '文件内容批量替换, 1.文件路径', batch_modify,
-                args_num=1),
-        Command('-cym', '--copy_md_file_pictures_folder', '下载MD文件中的图片到指定文件夹, 1.MD文件路径',
-                copy_md_file_pictures_folder, args_num=1),
-        Command('-dm', '--delete_md_file_pictures_folder', '在指定文件夹删除MD文件中的图片, 1.MD文件路径',
-                delete_md_file_pictures_folder, args_num=1),
+        Command('-bm', '--batch_modify', 'MD文件中照片路径批量替换, 1.文件路径 2.新文件夹名字', batch_modify,
+                args_num=2),
+        Command('-cym', '--copy_md_file_pictures_folder', '下载MD文件中的图片到指定文件夹, 1.MD文件路径 2.保存图片新文件夹名字',
+                copy_md_file_pictures_folder, args_num=2),
+        Command('-dm', '--delete_md_file_pictures_folder', '删除MD文件中的图片, 1.MD文件路径 2.保存图片新文件夹名字',
+                delete_md_file_pictures_folder, args_num=2),
     ]
     handle_command(commands)
     print('执行完成')
+
+"""
+1.  python ./manage.py  -cym  "D:\Program Files (x86)\idea\IDEAproject\github\blog\content\post\code\java\JavaWeb.md"  javaweb
+2.  python ./manage.py  -bm  "D:\Program Files (x86)\idea\IDEAproject\github\blog\content\post\code\java\JavaWeb.md"  javaweb
+3.  python ./manage.py  -dm  "D:\Program Files (x86)\idea\IDEAproject\github\blog\content\post\code\java\JavaWeb.md"  javaweb
+"""
