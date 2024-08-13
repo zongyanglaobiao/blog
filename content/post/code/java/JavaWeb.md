@@ -797,7 +797,7 @@ in.close();
 out.close();
 ```
 
-##### 验证码实现
+##### 验证码
 
 ```java
 @Override
