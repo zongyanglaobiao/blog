@@ -196,7 +196,11 @@ if __name__ == '__main__':
     print('执行完成')
 
 """
+示例
+下载图片
 1.  python ./manage.py  -cym  "D:\Program Files (x86)\idea\IDEAproject\github\blog\content\post\code\java\JavaWeb.md"  javaweb
+批量替换照片路径
 2.  python ./manage.py  -bm  "D:\Program Files (x86)\idea\IDEAproject\github\blog\content\post\code\java\JavaWeb.md"  javaweb
+批量删除文件中图片
 3.  python ./manage.py  -dm  "D:\Program Files (x86)\idea\IDEAproject\github\blog\content\post\code\java\JavaWeb.md"  javaweb
 """
