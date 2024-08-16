@@ -856,9 +856,119 @@ resp.sendRedirect("/servlet02/code");
 - 不同点
   - 重定向：url地址栏会变化，不会携带原请求的请求参数
   - 转发：url地址栏不会发生变化，会携带原请求的请求参数
-  
-  
-  
+
+## Cookie
+
+### 会话
+
+- **重点：除了服务器创建的cookie，自己增加的cookie只会在你response回去的那个页面（详细信息见下面图解），也就是说转发会携带请求和cookie，而重定向不会**
+
+- **cookie是有作用范围，范围的大小决定请求的时候能带哪些cookie所以有的时候明明设置了cookie却无法生效，看下图**
+
+  ![image-20230404143945057](img/javaweb/image-20230404143945057.png)
+
+- 用户打开浏览器，点击了很多链接，访问多个web资源，然后关闭浏览器，这个过程可以称之为会话
+
+- 一次会话是指： 好比打电话，当A打给B，电话接通了 会话开始，持续到会话结束。 浏览器访问服务器，就如同打电话，浏览器A给服务器发送请求，访问web程序，该次会话就开始，其中不管浏览器发送了多少请求 ，都为一次会话，直到浏览器关闭，本次会话结束。
+
+    ```java
+    // 解决ajax跨域导致session不一致的问题，由于sessionId是存在cookie,而每次获取getSession()
+    // 都会通过cookie中的sessionId来获取session,如果没有就会创建一个新的session，然后把sessionId存在cookie中
+    // 把cookie中的sessionId给下一个请求，失败因为跨域原因导致cookie崩创建
+    String sessionId = "JSESSIONID";
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        log.info("cookie=不为null");
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(sessionId)) {
+                Cookie cookie1 = new Cookie(sessionId,cookie.getValue());
+                response.addCookie(cookie1);
+            }
+        }
+    }
+    ```
+
+### 有状态会话
+
+- 第一次去某个网站然后登录，之后会给你标记，下次来的时候，网站识别到这个标记，知道你来过，所以就不用重新登录了
+
+### 保存会话的两种技术
+
+- **cookie**：客户端技术 ，存的数据比较少
+- **session**：服务器技术，利用这个技术，可以保存用户的会话信息，可以把数据或者信息放在session中
+
+### Cookie的使用方法
+
+- cookie常用的方法
+
+  ```java
+  Cookie cookie = new Cookie();
+  cookie.getName();  //得到cookie的键
+  cookie.setMaxAge();  //设置cookie的存活期
+  cookie.getValue(); //得到当前cookie的值
+  cookie.setPath();  //设置作用范围
+  ```
+
+- 从请求中拿到cookie，再响应一个cookie给客户端
+
+    ```java
+    String h1 = "<h1>";
+    String h1end = "</h1>";
+    //查看cookie一般从请求中得到
+    Cookie[] cookies = req.getCookies();   //cookie不止一个
+    //响应
+    ServletOutputStream outputStream = resp.getOutputStream();
+    //判断有没有cookie
+    if (cookies != null) {
+        for (Cookie ck : cookies) {
+            if (ck.getName().equals("lastLoginTime")) {
+                String text = h1+"上次登录时间："+ck.getValue()+h1end;
+                outputStream.write(text.getBytes(),0,text.getBytes().length);
+            }
+        }
+    }else {
+        String text = h1+"第一次没有cookie"+h1end;
+        outputStream.write(text.getBytes(),0,text.getBytes().length);
+    }
+    resp.setCharacterEncoding("utf-8");
+    //添加cookie
+    Date date = new Date();
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss");
+    String format1 = format.format(date);
+    Cookie lastLoginTime = new Cookie("lastLoginTime",format1);
+    //设置这个cookie存活时间,单位是秒
+    lastLoginTime.setMaxAge(24*60*60);
+    Cookie cookie = new Cookie("info", "随便写的");
+    resp.addCookie(lastLoginTime);
+    resp.addCookie(cookie);
+    outputStream.close();
+    ```
+
+- 一个网站的cookie上限：**一个web站点可以给浏览器发送多个cookie，最多存放20个cookie**
+
+- cookie大小有限制：**4kb**
+
+- **300个cookie是一个浏览器的上限**
+
+- 删除cookie
+
+    - 不设置有效期
+
+    - 设置有效期为0
+
+      ```java
+       Cookie cookie = new Cookie("name", "xxl");
+       //cookie.setMaxAge(0)  //写在这就是这个会话期间就没了，但没什么意义
+       resp.addCookie(cookie);
+      //cookie.setMaxAge(0);  //写在这跟默认是一样的就是浏览器关闭cookie就没
+      ```
+
+- 网络编程时刻注意编码问题
+
+  ```java
+    编码：URLEncoder.encode();
+    解码： URLDecoder.decode();
+    ```
   
   
   
