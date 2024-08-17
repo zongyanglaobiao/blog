@@ -14,6 +14,8 @@ tags:
     - Maven
     - HTTP
     - Servlet
+    - Cookie
+    - Session
 ---
 
 # JavaWeb
@@ -969,8 +971,117 @@ resp.sendRedirect("/servlet02/code");
     编码：URLEncoder.encode();
     解码： URLDecoder.decode();
     ```
-  
-  
+
+## Session
+
+- **每个人获取的session都不同，只要不是在同一个浏览器**
+
+- **session是存在服务器上，cookie是存在浏览器(每次请求会携带当前页的所有cookie)，session对象在服务器默认存活时间未30分钟**
+
+- 对session来说也是一样的，除非程序通知服务器删除一个session，否则服务器会一直保留。
+
+  > 所以浏览器从来不会主动在关闭之前通知服务器它将要关闭，因此服务器根本不会有机会知道浏览器已经关闭，之所以会有这种错觉，是大部分session机制都使用会话cookie来保存session id，而关闭浏览器后这个session id就消失了，再次连接服务器时也就无法找到原来的session
+  > 恰恰是由于关闭浏览器不会导致session被删除，迫使服务器为session设置了一个失效时间，一般是30分钟也就是说这个session可以一直存在，只要服务器不刷新，或者设置一个存话时间(这样浏览器关闭也会存在)，当距离客户端上一次使用session的时间超过这个失效时间时，服务器就可以认为客户端已经停止了活动，才会把session删除以节省存储空间
+
+- 服务器刷新，浏览器关闭/刷新，session就没了，不适合存数据
+
+- cookie可以存在浏览器，只要还在cookie存活期cookie就一直存在。
+
+- **session和cookie关系**
+
+  ```text
+  场景：通过session里用户判断是否登录
+      设置session时间(是这个session对象在服务器的存活时间，一般为30分钟)：如果关闭浏览页再打开Session中还是存着用户信息的.关闭浏览器再打开就要重新登录，
+      （注意session是可以跨同个服务器的多个页面这就是保存用户信息的核心(它存在web上下文中)，cookie则不可以，只能在某一页，但是cookie
+      是存在请求中的，也就是每次请求都会携带当前页的cookie）
+      session是是通过cookie中存的sessionId获得的，但保存sessionId的cookie是服务器自己创建的，一旦关闭浏览器
+      再次打开页面就会重新创建cookie同时session也会变化，(想要完成“记住我”这种功能，需要cookie和session一起合作)
+      所以需要设置cookie存活期，浏览器默认创建的cookie存活期为一次会话，也就是浏览器不够就心
+  ```
+
+### 什么是Session
+
+- 服务器会给，会给每一个用户(浏览器某个app)，创建一个Session对象
+- 一个web应用只有一个session并且独占一个浏览器（**也就是session是唯一的**），也就是换了一个浏览器也有session只是不一样，但这个session独占这个浏览器。只要浏览器没有关闭，这个Session就存在。这一点跟cookie一样
+
+### Session和Cookie的区别
+
+- cookie：是把用户的数据写给用户的浏览器，浏览器保存(可以保存多个)
+- session：把用户的数据写给用户独占的session中，服务端保存，**session对象由服务器创建**
+
+### Session用法
+
+**存数据**
+
+```java
+//解决乱码问题
+req.setCharacterEncoding("utf-8");
+resp.setCharacterEncoding("utf-8");
+//把文本转为html，但其实不用设置，默认就是这样的
+resp.setContentType("text/html");
+//得到session
+HttpSession session = req.getSession();
+//存数据
+session.setAttribute("name","xxl");
+//存一个对象数据
+session.setAttribute("person",new Person("wyx",18));
+
+//这个session是否是新创建的if (session.isNew()) {resp.getWriter().write("<h1>session是新创建的</h1>");
+}else {
+    //只会走这一步(根据浏览器来，chrome就会走上面的)，因为打开那个页面就自动会创建一个会话session,只要访问就会产生一个sessionresp.getWriter().write("<h1>session不是新创建的，id："+session.getId()+"</h1>");
+}
+//取数据
+String name = (String)session.getAttribute("name");
+System.out.println(name);
+//session创建的时候做了什么
+/*Cookie cookie = new Cookie("JSESSIONID", session.getId());
+ resp.addCookie(cookie);*/
+ ```
+
+**servlet与servlet之间的通信用session**
+
+```java
+//解决乱码问题
+req.setCharacterEncoding("utf-8");
+resp.setCharacterEncoding("utf-8");
+//把文本转为html，但其实不用设置，默认就是这样的
+resp.setContentType("text/html");
+//取出demo01存的数据
+HttpSession session = req.getSession();
+Person person = (Person) session.getAttribute("person");
+
+String text =  "<h1>demo02:"+session.getAttribute("name")+"</h1>";
+String text1 = "<h1>demo02:" + person.toString() + "</h1>";
+PrintWriter writer = resp.getWriter();
+writer.write(text);
+writer.write(text1);
+writer.close();
+ ```
+
+**手动注销session以及session的存的数据**
+
+```java
+HttpSession session = req.getSession();
+//注销session中所存的数据
+session.removeAttribute("name");
+//注销掉整个session
+session.invalidate();
+ ```
+
+**自动注销session在配置文件(web.xml)中设置session存活时间**
+
+```xml
+<!--  session配置  -->
+<session-config>
+    <!--     设置存活时间，以分钟为单位 设置在服务器的存活时间  -->
+    <session-timeout>1</session-timeout>
+</session-config>
+ ```
+
+### 使用场景
+
+- 保存一个登录用户的时间
+- 购物车信息  
   
   
   

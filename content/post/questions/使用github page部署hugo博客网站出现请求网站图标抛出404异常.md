@@ -9,6 +9,7 @@ categories:
   - BUG
 tags:
   - HUGO搭建博客
+draft: true
 ---
 
 ## 网站图标404问题
