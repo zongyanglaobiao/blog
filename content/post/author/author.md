@@ -3,7 +3,7 @@ title: 我是谁
 description: 路漫漫其修远兮，吾将上下而求索
 slug: author
 date: 2024-08-08 04:13:33+0000
-image: author/fj-bg.jpg
+image: img/author/fj-bg.jpg
 categories:
   - life-insights-category
 tags:

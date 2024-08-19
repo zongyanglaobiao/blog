@@ -5,8 +5,12 @@ date: 2024-08-09 04:13:33+0000
 links:
   - title: GitHub
     description: GitHub 是全球最大的软件开发平台。
-    website: https://github.com
+    website: https://www.bilibili.com
     image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+  - title: B站
+    description: B站大学
+    website: https://www.bilibili.com
+    image: /pages/links/b.png
   - title: SpringBoot
     description: Spring Boot 可以轻松创建独立的、生产级的基于 Spring 的应用程序，您可以“直接运行”。
     website: https://spring.io/projects/spring-boot
