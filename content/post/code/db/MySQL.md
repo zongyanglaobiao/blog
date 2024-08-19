@@ -354,7 +354,7 @@ LocalDateTime dateTime = LocalDateTime.now();  //精确到秒  对应mysql中tim
 //2023-06-25T00:18:48.428517600
 ```
 
-## 联表查询
+## 连表查询
 
 ### 分页
 
@@ -423,7 +423,7 @@ SELECT userName,userRole,roleCode,roleName,r.creationDate FROM smbms_user u,smbm
 SELECT u.userName,u.userRole,r.roleCode,r.roleName,r.creationDate FROM smbms_user u,smbms_role r WHERE u.`userRole` = r.`roleCode`;
 ```
 
-#### 联表写法
+#### 连表写法
 
 有n个表实现多表查询，则至少需要n-1的连接条件，可以有多个
 
