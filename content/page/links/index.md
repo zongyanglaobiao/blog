@@ -10,7 +10,7 @@ links:
   - title: B站
     description: B站大学
     website: https://www.bilibili.com
-    image: /pages/links/b.png
+    image: pages/links/b.png
   - title: SpringBoot
     description: Spring Boot 可以轻松创建独立的、生产级的基于 Spring 的应用程序，您可以“直接运行”。
     website: https://spring.io/projects/spring-boot
