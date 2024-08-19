@@ -9,6 +9,8 @@ categories:
   - BUG
 tags:
   - HUGO搭建博客
+keywords:
+  - HUGO
 draft: true
 ---
 

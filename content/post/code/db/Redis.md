@@ -6,8 +6,10 @@ slug: Redis
 date: 2024-08-15 14:16:54+0000
 toc: true
 categories:
-  - 学习笔记
+  - study-note-category
 tags:
+  - Redis
+keywords:
   - Redis
 ---
 

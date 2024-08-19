@@ -6,8 +6,13 @@ slug: MySQL
 date: 2024-08-13 12:06:05+0000
 toc: true
 categories:
-  - 学习笔记
+  - study-note-category
 tags:
+  - SQL
+  - MySQL
+  - DDL
+  - DML
+keywords:
   - SQL
   - MySQL
   - DDL

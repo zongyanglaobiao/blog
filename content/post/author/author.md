@@ -5,7 +5,7 @@ slug: author
 date: 2024-08-08 04:13:33+0000
 image: author/fj-bg.jpg
 categories:
-  - 生活感悟
+  - life-insights-category
 tags:
   - 作者有话说
 weight: 1

@@ -5,7 +5,7 @@ slug: JavaWeb
 date: 2024-08-08 00:00:00+0000
 toc: true
 categories:
-    - 学习笔记
+    - study-note-category
 tags:
     - Java
     - JavaWeb
@@ -16,6 +16,16 @@ tags:
     - Servlet
     - Cookie
     - Session
+keywords:
+  - Java
+  - JavaWeb
+  - SQL
+  - Tomcat
+  - Maven
+  - HTTP
+  - Servlet
+  - Cookie
+  - Session
 ---
 
 # JavaWeb
