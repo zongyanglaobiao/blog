@@ -1,10 +1,10 @@
 ---
 title: Spring
-description: 约定大于配置
+description: 学习Spring家族的框架是每个Java程序员的必经之路
 image: category/spring.png
 
 # Badge style
 style:
-    background: "#6a994e"
+    background: "#4a7c59"
     color: "#ffffff"
 ---
