@@ -1,12 +1,12 @@
 ---
-title: 使用github page部署hugo博客网站出现请求网站图标抛出404异常
+title: 使用github page部署hugo博客请求网站图标抛出404异常
 description:  使用github page部署hugo博客网站出现请求网站图标抛出404异常
 # 默认url路径是title如果不写slug
 slug: questions1
 date: 2024-08-14 12:06:05+0000
 toc: true
 categories:
-  - BUG
+  - bug-category
 tags:
   - HUGO搭建博客
 keywords:
