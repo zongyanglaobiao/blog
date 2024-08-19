@@ -8,7 +8,6 @@ categories:
     - db-category
     - java-category
 tags:
-    - Java
     - JavaWeb
     - SQL
     - Tomcat
