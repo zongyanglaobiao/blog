@@ -41,4 +41,8 @@ favicon = "/favicon.svg"
 
 ## 解决方法
 
-正在需找中...
+最后发现是配置文件写错了,hugo中图片是否带`/`会影响图片是否正常显示。去掉`/`就可以正常显示
+
+```toml
+favicon = "favicon.svg"
+```
