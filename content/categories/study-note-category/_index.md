@@ -1,7 +1,7 @@
 ---
 title: 学习笔记
 description: 学无止境 —— 荀子
-image: /category/学习笔记.png
+image: /category/study-note-category.png
 
 # Badge style
 style:
