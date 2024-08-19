@@ -5,7 +5,8 @@ slug: JavaWeb
 date: 2024-08-08 00:00:00+0000
 toc: true
 categories:
-    - study-note-category
+    - db-category
+    - java-category
 tags:
     - Java
     - JavaWeb

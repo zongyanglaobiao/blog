@@ -6,7 +6,7 @@ slug: MySQL
 date: 2024-08-13 12:06:05+0000
 toc: true
 categories:
-  - study-note-category
+  - db-category
 tags:
   - SQL
   - MySQL

@@ -6,7 +6,7 @@ slug: Redis
 date: 2024-08-15 14:16:54+0000
 toc: true
 categories:
-  - study-note-category
+  - db-category
 tags:
   - Redis
 keywords:
