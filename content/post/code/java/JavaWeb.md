@@ -1094,15 +1094,79 @@ session.invalidate();
 - 购物车信息  
 
 
-### 12：多个用户如何共享数据
+## 多个用户共享数据
 
-##### 12.1、多个用户在同一个web应用如何共享数据
+**使用ServletContext**
+- session因为每个用户都有自己的一个唯一的sessionId
+- cookie因为每个浏览器的cookie不一致
 
-- **只能用ServletContext**，cookie不行，session也不行
-    - session是因为每个用户都有自己的一个唯一的sessionId
-    - cookie是因为无法做到，是因为需要提交cookie  
-  
-  
+
+## JSP原理
+
+> JSP文件底层实际是一个Java类
+
+### 什么是JSP
+
+**JSP(Java Server Pager)**：Java服务器端页面，和Servlet一样，用于动态Web技术,最大的特点：写JSP就像写Html，**同时JSP中可以嵌入Java代码**
+
+### JSP原理
+
+- **JSP怎么执行的：JSP最终也会转变成一个java类**
+
+  ![image-20230102132718626](img/javaweb/image-20230102132718626.png)
+
+    - IDEA的Tomcat工作空间
+
+      ```text
+      C:\Users\xxl\AppData\Local\JetBrains\IntelliJIdea2022.2\tomcat\e15f62a3-55e4-44b3-b0d0-787c68ff1d5e\work\Catalina\localhost\servlet_04\org\apache\jsp
+      ```
+
+- **JSP本质是一个Servlet**
+
+  ```java
+  public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase  //HttpJspBase继承了HttpServlet。
+      implements org.apache.jasper.runtime.JspSourceDependent,
+                   org.apache.jasper.runtime.JspSourceImports{}
+  ```
+
+- JSP的底层方法
+
+  ```java
+  //初始化
+  public void _jspInit() {
+    }
+  //销毁	
+  public void _jspDestroy() {
+  }
+  //jsp服务
+  public void _jspService(final jakarta.servlet.http.HttpServletRequest request, final jakarta.servlet.http.HttpServletResponse response){}
+  ```
+
+**工作原理**：如果JSP中有Java代码就原封不动写进去(xxx_jsp.java类)，有Html代码就写成字符串，让浏览器去识别
+
+### JSP内置对象
+
+```java
+final jakarta.servlet.jsp.PageContext pageContext;  //页面上下文
+jakarta.servlet.http.HttpSession session = null;  //session
+final jakarta.servlet.ServletContext application;  //ServletContext
+final jakarta.servlet.ServletConfig config;   //配置
+jakarta.servlet.jsp.JspWriter out = null;  //写出对象
+final java.lang.Object page = this;    //代表当前页
+final jakarta.servlet.http.HttpServletRequest request, //请求 
+final jakarta.servlet.http.HttpServletResponse response  //响应
+```
+
+### 在JSP中写Java代码
+
+```jsp
+写java代码必须在<%%>中
+<%  out.write();   %>
+```
+
+### 请求一个JSP页面的流程图
+
+![image-20230102134552563](img/javaweb/image-20230102134552563.png)
   
   
   
