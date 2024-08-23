@@ -1101,7 +1101,7 @@ session.invalidate();
 - cookie因为每个浏览器的cookie不一致
 
 
-## JSP原理
+## JSP
 
 > JSP文件底层实际是一个Java类
 
@@ -1167,18 +1167,941 @@ final jakarta.servlet.http.HttpServletResponse response  //响应
 ### 请求一个JSP页面的流程图
 
 ![image-20230102134552563](img/javaweb/image-20230102134552563.png)
+
+
+
+### JSP基础语法和指令
+
+#### JSP指令
+
+**第一种：<%=java%>这是一个输出的语句，里面的内容直接输出，注意不要写分号。所有地方的变量都可以引用**
+
+**第二种：<%java%>在这里面我们就可以写一些java代码,for循环之类的。**
+
+**第三种：<!%java%>写java代码和方法，不同之处在于这个直接在类中**
+
+**第四种：<%@ %><%@ include file%>将引入的文件和原来的文件合二为一，就是不能有一样的变量....,<jsp:includ/>则相反**
+
+| <%@ page ... %>    | 定义网页依赖属性，比如脚本语言、error页面、缓存需求等等 |
+| ------------------ | ------------------------------------------------------- |
+| <%@ include ... %> | 包含其他文件                                            |
+| <%@ taglib ... %>  | 引入标签库的定义    
+
+**第五种：<jsp:  args   />可以在这里写一些配置代码**
+
+#### Java代码中嵌入Html代码
+
+- **java代码中不能嵌入html代码**，可以伪嵌入
+
+  ```jsp
+  <%
+      for (int i = 0; i < 5; i++) {
+  %>
+  <h1>hello,world</h1>   //实际是把java代码拆分了，中间写上html代码
+  <%
+      }
+   %>    
+  ```
+
+- Html嵌入java代码
+
+  ```jsp
+  <h2>姓名：<%=name%></h2>
+  ```
+
+#### JSP输出的区别
+
+**<%%>这个里面的表达式和代码都是在_jspService()方法中**
+
+**<!%%>这个里面的表达式和代码都是在xxx_jsp.java类中**，这叫jsp声明
+
+#### 注释的区别
+
+```jsp
+<!------->   //客户端会显示注释内容
+<%---------%>  //客户端不会显示
+```
+
+#### 定制错误页面
+
+**jsp文件**
+
+```jsp
+<%--定制错误页面，在web.xml文件也可定制--%>
+<%@ page errorPage="ErrorPage.jsp" %>
+```
+
+**web.xml文件**
+
+```xml
+<error-page>
+    <error-code>500</error-code>
+    <location>/ErrorPage.jsp</location>
+</error-page>
+```
+
+#### JSP9大内置对象
+
+- PageContext 
+- response
+- request  
+- session  
+- Application【ServletContext】  
+- Config【ServletConfig】 
+- out
+- page
+- exception
+
+
+示例：
+```jsp
+<%--注意在<%%>里就是x写java代码，所以注释别搞错了--%>
+<%
+    //存数据的四个对象，区别就在于作用域不一样、
+    pageContext.setAttribute("name1","xxl1");   //保存的数据只在一个页面有效
+    application.setAttribute("name2","xxl2");   //保存的数据在服务器有效，也就是到服务器关闭之前都是有效，或者说在一个web应用有效
+    request.setAttribute("name3","xxl3");       //保存的数据在一次请求有效，转发依然有效(因为转发地址不变)
+    session.setAttribute("name4","xxl4");       //保存的数据在一次会话中有效，从打开浏览器到关闭浏览器都有效
+%>
+<%
+    //取数据通过pageContext,也就是就说只要在这个页面存的数据都可以通过pageContext找到，其余几个存数据则不可以
+    String name1 = (String)pageContext.findAttribute("name1");
+    String name2 = (String)pageContext.findAttribute("name2");
+    String name3 = (String)pageContext.findAttribute("name3");
+    String name4 = (String)pageContext.findAttribute("name4");
+    String name5 = (String)pageContext.findAttribute("name5");
+ 	//pageContext可以设置作用域
+    /*public static final int PAGE_SCOPE = 1;
+    public static final int REQUEST_SCOPE = 2;
+    public static final int SESSION_SCOPE = 3;
+    public static final int APPLICATION_SCOPE = 4;*/
+    pageContext.setAttribute("name5","xxl5",PageContext.SESSION_SCOPE);
+    //上面那句 == session.setAttribute("name5","xxl5"); 
+%>
+<%--<%=%>与${}的区别，前者未取到值会显示null，后者未取到值不显示--%>
+<%--
+<h1>姓名：<%=name1%></h1><br>
+<h1>姓名：<%=name2%></h1><br>
+<h1>姓名：<%=name3%></h1><br>
+<h1>姓名：<%=name4%></h1><br>
+<h1>姓名：<%=name5%></h1><br>
+--%>
+<h1>姓名：${name1}</h1><br>
+<h1>姓名：${name2}</h1><br>
+<h1>姓名：${name3}</h1><br>
+<h1>姓名：${name4}</h1><br>
+<h1>姓名：${name5}</h1><br>
+```
+
+**转发**
+
+```jsp
+pageContext.forward("/index02.jsp");
+//上面这句等同于request.getRequestDispatcher().forward();
+```
   
+#### 四大对象的有效域
+
+**PageContext < Request < Session < Application**
+
+
+### Jsp标签以及表达式
+
+#### EL表达式
+
+- 作用域:**${} 小于 <%=%>**
+
+- 作用
+    - **获取数据**
+    - **执行运算(加减乘除，判断)**
+    - **获取Web常用开发对象**
+
+- 其中之一用法：${arg}等价于<%= arg%>,区别在于：**如果 arg不存在，<%= %>会返回null，而${}不会返回东西**，还有就是**获取变量时变量如果是在Html中就用`param.参数名`，如果是java定义，需要先存起来【session，pageContext，application(ServletContext)，request】然后就直接引用存起来的名字。**
+
+- 所用的依赖
+
+  ```xml
+  <!--    jsp表达式依赖   -->
+         <dependency>
+             <groupId>org.glassfish.web</groupId>
+             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+             <version>3.0.1</version>
+         </dependency>
+  <!--  standard标签库的依赖     -->
+         <dependency>
+             <groupId>taglibs</groupId>
+             <artifactId>standard</artifactId>
+             <version>1.1.2</version>
+         </dependency>
   
+  ```
+
+#### JSP标签
+
+示例
+
+```jsp
+<%--这个相当于http://localhost:8080/servlet_04/demo01.jsp?name1=xxl1&name2=xxl2--%>
+<jsp:forward page="demo02.jsp">
+  <jsp:param name="name1" value="xxl1"/>
+  <jsp:param name="name2" value="xxl2"/>
+</jsp:forward>
+```
+
+#### JSTL表达式
+
+- 为什么使用：为了弥补Html的不足
+
+- **核心标签(掌握部分即可,其他类型标签基本不使用)**
+
+  使用之前先导入
+
+  ```jsp
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  ```
+
+  ![image-20230102212714636](img/javaweb/image-20230102212714636.png)
+
+- **格式化标签**
+
+  使用之前先导入
+
+  ```jsp
+  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+  ```
+
+  ![image-20230102212802668](img/javaweb/image-20230102212802668.png)
+
+- **SQL标签**
+
+  使用之前先导入
+
+  ```jsp
+  <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+  ```
+
+  ![image-20230102212835145](img/javaweb/image-20230102212835145.png)
+
+- **Xml标签**
+
+  使用之前先导入
+
+  ```jsp
+  <%@ taglib prefix="x" 
+             uri="http://java.sun.com/jsp/jstl/xml" %>
+  ```
+
+  ![image-20230102212905284](img/javaweb/image-20230102212905284.png)
+
+#### 简单应用
+
+- 核心库if标签应用
+
+```jsp
+<%-- 把表单提交给这个页面   --%>
+<form action="demo03.jsp" method="get" >
+    <%--    value="${param.username}" 这是获取这个名字为username的表单的数据
+            获取表单中的数据格式为:${param.参数名}
+    --%>
+    <input type="text" name="username"  >
+    <input type="submit" value="登录" >
+</form>
+<%--  test：判读语句必须是返回true/false  var(定义变量的意思)：接收这个语句是true/false  表单里面就是true就输出的话--%>
+<c:if test="${param.username ==  'admin'}" var="isAdmin" >
+    <%--     <c:out value="管理员欢迎你" >输出value里的内容    --%>
+    <c:out value="管理员欢迎你" >
+    </c:out>
+</c:if>
+
+<c:out value="${isAdmin}"></c:out>
+```
+
+- 核心库set、when、choose、otherwise标签应用【**注意otherwise，when标签只能在when标签中使用**】
+
+  ```jsp
+  <%-- set标签就是定义变量像javascript var:变量  value:变量值 --%>
+  <c:set var="score" value="drg" ></c:set>
+  <%-- choose相当与ifelse-ifelse --%>
+  <c:choose>
+      <%--   相当与if，判断会从第一句开始，有一个符合条件就不继续判断了     --%>
+      <%--  有一个bug如果是随便输入的话它不走else，走的是第一句if ，可能跟他的比较方式有问题     --%>
+      <c:when test="${score >= '90' }">
+          <h1>优秀</h1>
+      </c:when>
+      <c:when test="${score >= '80' }">
+          <h1>良好</h1>
+      </c:when>
+      <c:when test="${score <= '60' }">
+          <h1>不及格</h1>
+      </c:when>
+      <%--   相当与else     --%>
+      <c:otherwise>
+          <c:out value="不优秀"/>
+      </c:otherwise>
+  </c:choose>
+  ```
+
+- 核心库的**foreach**标签的使用
+
+  ```jsp
+  <%
+      List<String> people = new ArrayList<>();
+      people.add(0,"xxl0");
+      people.add(1,"xxl1");
+      people.add(2,"xxl2");
+      people.add(3,"xxl3");
+      people.add(4,"xxl4");
+      people.add(5,"xxl5");
+      pageContext.setAttribute("list",people);
+  %>
+  <%--
+    for (String person : people) {} 这句相当与  <c:forEach items="${people}" var="person"/>
+    for (int i = 0; i < people.size(); i++) {}  这句相当于  <c:forEach items="${people}" var="person" begin="" end=" " step=""/>
+    items:要遍历的对象
+    var(变量)：遍历出的每一个值
+    begin:从那个开始   默认从0
+    end：到哪结束      默认到最后
+    step：步数        默认是1
+    --%>
+  <h1>第一种用法</h1>
+  <c:forEach items="${list}" var="person">
+      <h1>${person}</h1>
+  </c:forEach>
+  <h1>第二种用法</h1>
+  <%--  理想结果：xxl1   xxl3   --%>
+  <c:forEach items="${list}" var="person" begin="1" end="${list.size() - 2}" step="2">
+      <h1>${person}</h1>
+  </c:forEach>
+  ```  
+
+## JavaBean
+
+### JavaBean特定的写法
+
+- 必须有一个无参构造
+- 属性必须私有化
+- 必须有对应的get/set方法
+
+### JavaBean能做什么
+
+一般用于和数据库的数据映射，操作数据做CRUD
+
+### ORM(Object Relationship  Mapping)：对象关系映射
+
+- 表 ---> 类
+- 列 ----> 属性
+- 每行 ----> 对象
+
+![image-20230103133657945](img/javaweb/image-20230103133657945.png)
+
+### Jsp创建一个实体类对象
+
+- **jsp、${}、<%=%>的区别**
+
+```jsp
+<h1>用jsp标签写javaBean测试</h1>
+<hr>
+<%--   创建一个对象     --%>
+<%--
+    下面的等价与
+    People people1 = new People();
+    people1.setAddress("山水云间");
+    people1.setId(1);
+    people1.setName("xxl");
+    people1.setAge(19);
+
+    userBean：使用某一个类
+    class:类路径
+    id：给这个人类一个名字
+--%>
+<jsp:useBean id="people" class="com.xxl.pojo.People">
+    <%--     name：userBean创建的名字(就是实体类名字)   property：类属性   value:设置属性的值   --%>
+    <jsp:setProperty  name="people" property="id" value="1"/>
+    <jsp:setProperty  name="people" property="address" value="山水云间"/>
+    <jsp:setProperty  name="people" property="age" value="19"/>
+    <jsp:setProperty  name="people" property="name" value="xxl"/>
+</jsp:useBean>
+<%
+    People people1 = new People();
+%>
+<%--得到一个对象--%>
+<%--
+    下面等价于
+    People people1 = new People();
+    people1.getAddress();
+    people1.getAge();
+    people1.getName();
+    people1.getId();
+
+    name:对象名字
+    property:属性
+    本身有返回值
+ --%>
+<h1>通过jsp取对象属性</h1>
+<h1>id： <jsp:getProperty name="people" property="id"/></h1><br>
+<h1>姓名：<jsp:getProperty name="people" property="name"/></h1><br>
+<h1>地址：<jsp:getProperty name="people" property="address"/></h1><br>
+<h1>年龄：<jsp:getProperty name="people" property="age"/></h1><br>
+<h1>类：<jsp:getProperty name="people" property="class"/></h1>
+<hr>
+<h1>通过\${}取对象属性</h1>
+<h1>id： ${people.id}</h1><br>
+<h1>姓名：${people.name}</h1><br>
+<h1>地址：${people.address}</h1><br>
+<h1>年龄：${people.age}</h1><br>
+<hr>
+<h1>通过<\%%>取对象属性</h1>
+<h1>id： <%=people.getId()%></h1><br>
+<h1>姓名：<%=people.getName()%></h1><br>
+<h1>地址：<%=people.getAddress()%></h1><br>
+<h1>年龄：<%=people.getAge()%></h1><br>
+```
+## MVC
+
+>  MVC(model view controller 模型视图控制器)三层架构，目前Java最流行的开发规范
+
+### 原理图
+
+![image-20230103161815860](img/javaweb/image-20230103161815860.png)
+
+### MVC三层架构
+
+![image-20230103163020298](img/javaweb/image-20230103163020298.png)
+
+- Model
+    - 业务处理：业务逻辑(Service)
+    - 数据持久层：CRUD(dao)
+
+- View
+    - 展示数据
+    - 提供链接发起Service请求
+    - 监听事件
   
+- Controller(Servlet)
+    - 接收用户请求（request，session）
+    - 交给业务层处理对应的代码
+    - 控制视图的跳转
+
+## Filter(过滤器)
+
+- **来的请求过滤，回应则不过滤**
+
+- 路径说明：
+
+  ```text
+  在Spring Boot中，/**和/*是URL模式匹配的表达式，用于配置过滤器的应用范围。
   
+  /**：这是一种最广泛的URL模式匹配，表示匹配所有路径，包括多级路径。它会匹配以任意字符开头的路径，直到最后一个路径段，包括子路径和子目录。例如，/user, /user/profile, /user/profile/edit等都会匹配/**。
   
+  /*：这是一种比较限定的URL模式匹配，表示匹配单级路径。它只匹配以斜杠(/)开头的路径的第一级路径段，不会匹配子路径和子目录。例如，/user可以匹配/*，但是/user/profile不会匹配/*。
   
+  通常情况下，/**用于全局范围的过滤器配置，可以拦截所有的请求。而/*用于特定的路径或模块的过滤器配置，只拦截指定的一级路径。
+  ```
+
+### 作用
+
+- filter：过滤网站的数据
+
+  ![image-20230103164808526](img/javaweb/image-20230103164808526.png)
+
+### 编写过滤器
+
+- 第一步：实现过滤器接口，**注意如果是write的话需要指定type，outputStream则不需要，还有转型问题**
+
+  ```java
+  public class FilterDemo01 implements Filter {
+      //初始化:在web服务器启动就初始化
+      public void init(FilterConfig config) throws ServletException {
+          System.out.println("filter初始化");
+      }
+      //销毁：在web服务器关闭时被销毁
+      public void destroy() {
+          System.out.println("filter销毁");
+      }
+      //主要方法:
+       /*
+           1：过滤器中代码，在过滤特殊请求的时候都会被执行
+           2：必须让过滤器继续通行   doFilter(request, response);
+        */
+      @Override
+      public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+          request.setCharacterEncoding("utf-8");
+          response.setCharacterEncoding("utf-8");
+          response.setContentType("text/html");
+          System.out.println("过滤前");
+          //这句必须要写，不然程序到这里就被拦截停止！，相当于一个链条(chain)，继续把这个请求，响应转发下去
+          chain.doFilter(request, response);
+          System.out.println("过滤后");
+      }
+  }
+  ```
+
+- 第二步：web.xml文件中配置过滤器
+
+  ```xml
+  <filter>
+      <filter-name>f1</filter-name>
+      <filter-class>com.xxl.filter.FilterDemo01</filter-class>
+  </filter>
+  <filter-mapping>
+      <filter-name>f1</filter-name>
+      <!--   <url-pattern>/*</url-pattern>表示当前项目路径下的所有servlet都过经过这个过滤器     -->
+      <!--   <url-pattern>/demo01/demo01/*</url-pattern>表示demo01/demo01下的所有请求才会被过滤     -->
+      <!--   也就是说 url-pattern就是Servlet的url-pattern,就是过滤请求路径  -->
+      <url-pattern>/demo01/demo01</url-pattern>
+  </filter-mapping>
+  ```
+
+## 监听器
+
+> 对某些事件监听，如:session创建、session销毁
+
+### 编写监听器
+
+- 实现监听器接口
+
+  ```java
+  /**
+   * @author:xxl
+   * @date:2023/1/3
+   * @ProjectDescription:    监听器例子：统计有多少个用户
+   */
+  public class ListenerDemo01 implements  HttpSessionListener {
   
+      //监听session创建的时候
+      @Override
+      public void sessionCreated(HttpSessionEvent se) {
+          System.out.println("session被创建了");
+          ServletContext servletContext = se.getSession().getServletContext();;
+          Integer people = (Integer)servletContext.getAttribute("people");
+          //第一次重启服务器的时候会出现两个session同时存在，这是tomcat的启动、连接的的原因重新部署一下就行了
+          System.out.println("sessionId:"+se.getSession().getId());
+          if (people == null) {
+              //第一次创建session
+              servletContext.setAttribute("people",1);
+          }else {
+              people += people;
+              servletContext.setAttribute("people",people);
+          }
+      }
+      //监听session被销毁的时候
+      @Override
+      public void sessionDestroyed(HttpSessionEvent se) {
+          System.out.println("session被销毁");
+          ServletContext servletContext = se.getSession().getServletContext();;
+          Integer people = (Integer)servletContext.getAttribute("people");
+          if (people != null) {
+              //第一次创建session
+              people -= 1;
+              servletContext.setAttribute("people",people);
+          }else {
+              people = 0;
+              servletContext.setAttribute("people",people);
+          }
+      }
+  }
+  ```
+
+- 在web.xml中配置
+
+  ```xml
+  <listener>
+      <listener-class>com.xxl.listen.ListenerDemo01</listener-class>
+  </listener>
   
+  <!--  自动销毁  -->
+  <session-config>
+      <session-timeout>1</session-timeout>
+  </session-config>
+  ```
+
+## JDBC
+
+> JDBC（Java Database Connectivity）是Java语言中的一种API，用于连接和操作关系型数据库。
+
+![image-20230104162838162](img/javaweb/image-20230104162838162.png)
+
+JDBC为Java程序提供了一种统一的方式来执行SQL语句，从而实现对数据库的访问和操作。它主要包括以下几个部分：
+
+1. JDBC驱动程序：用于连接到特定类型的数据库。每种数据库（如MySQL、PostgreSQL、Oracle等）都有对应的JDBC驱动程序。
+
+2. Connection：代表与数据库的连接。通过Connection对象，Java应用程序可以与数据库建立连接。
+
+3. Statement：用于执行SQL语句。Statement接口有多种类型，如Statement、PreparedStatement和CallableStatement，分别用于执行简单SQL语句、预编译的SQL语句和存储过程。
+
+4. ResultSet：存储查询结果。ResultSet对象包含了从数据库返回的结果数据，并提供了方法来遍历和读取这些数据。
+
+5. SQLException：处理JDBC操作中的错误和异常。SQLException类捕获并处理数据库操作中可能发生的错误。
+
+### 需要的Jar包
+
+- maven导入
+
+  ```xml
+  <!--数据库连接驱动(必须要导)-->
+         <dependency>
+             <groupId>mysql</groupId>
+             <artifactId>mysql-connector-java</artifactId>
+           	<!--8.0.31对应的数据库版本-->  
+             <version>8.0.31</version>
+         </dependency>
+     </dependencies>
+  ```
+
+### 示例
+
+- 连接数据库
+
+  ```java
+  //配置信息
+  //characterEncoding=utf-8&useUnicode=true解决中文乱码
+  String str = "jdbc:mysql://localhost:3306/jdbc_demo01?useUnicode=true&characterEncoding=utf-8";
+  String username = "xxl";
+  String password = "xxl123456";
   
-  
-  
-  
-  
-  
+  //1、加载驱动
+  Class driver = Class.forName("com.mysql.cj.jdbc.Driver");
+  //2.连接数据库  connection代表数据库
+  Connection connection = DriverManager.getConnection(str, username, password);
+  //3、创建statement    statement:向数据库发送sql语句(CRUD)   prepared(准备)Statement(预编译):向数据库发送sql语句(CRUD)
+  Statement statement = connection.createStatement();
+  //PreparedStatement preparedStatement = connection.prepareStatement();
+  //4.编写sql语句
+  String sql = "SELECT * FROM users;";
+  //5.执行查询sql，返回一个resultSet(结果集)
+  ResultSet execute = statement.executeQuery(sql);
+  //必须要加上next
+  while (execute.next()) {
+      System.out.println("id:"+execute.getObject("id"));
+      System.out.println("username:"+execute.getObject("username"));
+      System.out.println("pwd:"+execute.getObject("pwd"));
+      System.out.println("email:"+execute.getObject("email"));
+      System.out.println("birthday:"+execute.getObject("birthday"));
+      System.out.println("---------------------");
+  }
+  //关闭连接，释放资源(一定要做)，先开后关
+  execute.close();
+  connection.close();
+  ```
+
+- **增删查改**
+
+  ```java
+   //4.编写sql语句
+          String sqlCheck = "SELECT * FROM users;";   //查询一张表  查
+          String sqlDelete = "DELETE FROM users WHERE id = 20;";   //删除表中数据  删
+          String sqlInsert = "INSERT INTO users(id,username,pwd,email,birthday)\n" +
+                  "VALUES(20,'xxl1','xxl123456','3578144921@qq.com','20030711');";   //插入   增
+           String sqlUpdate = "UPDATE `account` SET `balance` = 2000.0  WHERE `id` = 1; "; //改
+  //执行sql语句，返回一个受影响的行数(假如没有成功，就0行受影响，插入一条数据，就1行受影响，这点在sqlyog中比较明显)
+          int i = statement.executeUpdate(sqlInsert);//用于增删改
+          if (i > 0) {
+              System.out.println("删除成功");
+          }
+  ```
+
+### JDBC固定步骤有两种
+
+- 第一种
+
+  1. 加载驱动(不需要了)
+  2. 连接数据库
+  3. 创建向数据库发送sql语句的对象
+  4. 编写sql
+  5. 执行sql
+  6. 关闭连接，先开后关
+
+```java
+//1.加载驱动
+//2.连接数据库
+Connection connection = DriverManager.getConnection(url, username, password);
+//3.创建发送sql对象
+Statement statement = connection.createStatement();
+//4。编写sql语句
+String sqlInsert = "insert into users(id,username,pwd,email,birthday) value (25,'xxl6','xxl123456','3578144921@qq.com','20030711')";   //插入
+//5.执行sql
+int i = statement.executeUpdate(sqlInsert);
+if (i > 0) {
+    System.out.println("执行成功");
+}
+//5.关闭连接
+statement.close();
+connection.close();
+```
+
+- 第二种
+
+  1. 加载驱动
+  2. 连接数据库
+  3. 编写sql语句
+  4. 预编译
+  5. 执行sql语句
+  6. 关闭连接
+
+```java
+//配置信息
+//配置信息
+//characterEncoding=utf-8&useUnicode=true解决中文乱码
+String url = "jdbc:mysql://localhost:3306/jdbc_demo01?useUnicode=true&characterEncoding=utf-8";
+String username = "xxl";
+String password = "xxl123456";
+
+//1.加载驱动
+//2.连接数据库
+Connection connection = DriverManager.getConnection(url, username, password);
+//3.编写sql语句
+String sqlInsert = "insert into users(id,username,pwd,email,birthday) value (24,'xxl5','xxl123456','3578144921@qq.com','20030711')";   //插入
+//4.预编译
+PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
+//5.执行sql语句
+int i = preparedStatement.executeUpdate();
+if (i > 0) {
+    System.out.println("插入成功");
+}
+//6.关闭连接
+preparedStatement.close();
+connection.close();
+```
+
+### 占位符
+
+```java
+//配置信息
+//characterEncoding=utf-8&useUnicode=true解决中文乱码
+String url = "jdbc:mysql://localhost:3306/jdbc_demo01?useUnicode=true&characterEncoding=utf-8";
+String username = "xxl";
+String password = "xxl123456";
+
+//1.连接数据库
+Connection connection = DriverManager.getConnection(url, username, password);
+//2.编写sql语句
+String sqlDelete = "DELETE FROM users WHERE id  = ?;";  //占位符从1开始下标，这就是预编译的好处
+//3.预编译
+PreparedStatement preparedStatement = connection.prepareStatement(sqlDelete);
+preparedStatement.setInt(1,20);  //等同于setObject(1,20)就是效率慢点
+//4.执行sql语句
+int i = preparedStatement.executeUpdate();
+if (i > 0) {
+    System.out.println("删除成功");
+}
+//5.关闭连接
+preparedStatement.close();
+connection.close();
+```
+
+### 事务
+
+- **事务流程**
+
+  > 1. START TRANSACTION 或 BEGIN 开启一个新事务
+  > 2. COMMIT 提交当前事务，使其永久化。
+  > 3. ROLLBACK 回滚当前事务，取消其变更
+  > 4. SET autocommit 为当前会话启用或者禁用默认的自动提交模式
+
+- **事务：要么都成功，要么都失败。ACID原则保证数据的安全**
+
+  > 数据库事务ACID四大特点：
+  > 1. 原子性(Atomicity): 原子性是指事务包含的所有操作要么全部成功，要么全部失败回滚
+  > 2. 一致性(Consistency): 一致性是指事务必须使数据库从一个一致性状态变换到另一个一致性状态。例如，银行账户A和B分别有存款5000，一共10000，无论A转账给B，还是B转账给A，两个账户的总额总是为10000
+  > 3. 隔离性(Isolation): 隔离性是当多个用户并发访问数据库时，比如操作同一张表时，数据库为每一个用户开启的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离。
+  > 4. 持久性(Durability): 持久性是指一个事务一旦被提交了，那么对数据库中的数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作。
+
+- **开启事务 & 提交事务 & 回滚事务**
+
+  > 1. connection.setAutoCommit(false);  //开启事务
+  > 2. connection.commit(); //提交事务
+  > 3. connection.rollback();  //出现异常通知数据库，回滚事务
+
+```java
+Connection connection = null;
+try{
+//配置
+//配置信息
+//characterEncoding=utf-8&useUnicode=true解决中文乱码
+String url = "jdbc:mysql://localhost:3306/jdbc_demo01?useUnicode=true&characterEncoding=utf-8";
+String username = "xxl";
+String password = "xxl123456";
+//1.创建
+connection = DriverManager.getConnection(url, username, password);
+    connection.setAutoCommit(false);  //开启事务,出现错误不会执行sql语句
+//2.写sql语句
+String sqlUpdate = "UPDATE `account` SET `balance` = `balance` - 500  WHERE `id` =1;";
+//3.预编译并执行
+    connection.prepareStatement(sqlUpdate).executeUpdate();
+/*这里有一个错误，如果不开启事务,sql语句还是会执行成功，不符合数据的安全性，就像取钱一样：你取钱成功了，机子出现错误没扣你账户钱*/
+int i = 1/0;
+//4.关闭连接在final中
+//connection.commit(); //提交事务
+}catch (Exception e){
+        System.out.println(e);
+//出现异常通知数据库，回滚事务
+    connection.rollback();  
+}finally {
+        connection.close();
+}       
+```
+
+## 邮件
+
+邮件发送原理
+
+![image-20230123000234280](img/javaweb/image-20230123000234280.png)
+
+### 相关的协议
+
+- **发送邮件：SMTP协议**
+- **接受邮件：POP3协议**
+- **附件：mime协议**
+
+### 相关的依赖
+
+```xml
+<!--      邮件依赖 -->
+<dependency>       
+    <groupId>jakarta.mail</groupId>       
+    <artifactId>jakarta.mail-api</artifactId>       
+    <version>2.1.1</version>       
+</dependency>       
+<!--     邮件激活  -->
+<dependency>
+    <groupId>jakarta.activation</groupId>
+    <artifactId>jakarta.activation-api</artifactId>
+    <version>2.1.1</version>
+</dependency>
+<dependency>
+    <groupId>jakarta.mail</groupId>
+    <artifactId>jakarta.mail-api</artifactId>
+    <version>2.1.0</version>
+</dependency>
+<!-- https://github.com/eclipse-ee4j/angus-mail -->
+<dependency>
+    <groupId>org.eclipse.angus</groupId>
+    <artifactId>jakarta.mail</artifactId>
+    <version>1.0.0</version>
+</dependency>	   
+```
+
+### 简单邮件
+
+不带附件，纯文本
+
+```java
+public void easyMail() throws IOException, GeneralSecurityException, MessagingException {
+        Properties properties = new Properties();
+        //固定写法
+        properties.setProperty("mail.host","smtp.qq.com");  //设置qq邮件服务器
+        properties.setProperty("mail.transport","smtp");   //邮件发送协议
+        properties.setProperty("mail.smtp.auth","true");//需要验证用户名密码
+
+        //关于qq邮箱还要设置ssl加密,大厂都这样
+        MailSSLSocketFactory mailSSLSocketFactory= new MailSSLSocketFactory();
+        mailSSLSocketFactory.setTrustAllHosts(true);
+        properties.put("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.ssl.socketFactory", mailSSLSocketFactory);
+
+
+//1、创建session对象，这个对象是指在发送邮件的整个过程
+        //qq才有的
+        Session session = Session.getDefaultInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                //发件人，授权码
+                return new PasswordAuthentication("3578144921@qq.com","prkxrgpngrtccgih");
+            }
+        });
+
+        //开启debug模式监听session
+        session.setDebug(true);
+//2、通过session对象拿到transport对象
+        Transport transport = session.getTransport();
+//3、连接上邮件服务器
+        //服务器   用户名  授权码(qq设置中找)
+        transport.connect("smtp.qq.com","3578144921@qq.com","prkxrgpngrtccgih");
+//4、创建邮件
+        MimeMessage mimeMessage = new MimeMessage(session);
+        //设置邮件标题主题
+        mimeMessage.setSubject("邮件学习");
+        //发件人
+        mimeMessage.setFrom(new InternetAddress("3578144921@qq.com"));
+        //收件人
+        mimeMessage.setRecipient(Message.RecipientType.TO,new InternetAddress("1499476208@qq.com"));
+        //邮件的内容
+        mimeMessage.setContent("<h2 style=\"color: red\">正在学习邮件。。。</h2>","text/html;charset=utf-8");
+//5、接收邮件
+        transport.sendMessage(mimeMessage,mimeMessage.getAllRecipients());
+        transport.close();
+}
+```
+
+### 复杂邮件
+
+带附件，内容中嵌入照片
+
+- MimeBodyPart类(组成邮件的某个部分) & MimeMultipart类（相当于整个邮件对象）
+
+    ![image-20230123114958199](img/javaweb/image-20230123114958199.png)
+
+    ```java
+     public void difficultyMail() throws GeneralSecurityException, MessagingException {
+            Properties properties = new Properties();
+            //固定写法
+            properties.setProperty("mail.host","smtp.qq.com");  //设置qq邮件服务器
+            properties.setProperty("mail.transport","smtp");   //邮件发送协议
+            properties.setProperty("mail.smtp.auth","true");//需要验证用户名密码
+            //关于qq邮箱还要设置ssl加密,大厂都这样
+            MailSSLSocketFactory mailSSLSocketFactory= new MailSSLSocketFactory();
+            mailSSLSocketFactory.setTrustAllHosts(true);
+            properties.put("mail.smtp.ssl.enable", "true");
+            properties.put("mail.smtp.ssl.socketFactory", mailSSLSocketFactory);
+    //1、创建session对象，这个对象是指在发送邮件的整个过程-------------------------
+            //qq才有的
+            Session session = Session.getDefaultInstance(properties, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    //发件人，授权码(密码)
+                    return new PasswordAuthentication("3578144921@qq.com","prkxrgpngrtccgih");
+                }
+            });
+            //开启debug模式监听session
+            session.setDebug(true);
+    //2、通过session对象拿到transport对象--------------------------------------
+            Transport transport = session.getTransport();
+    //3、连接上邮件服务器------------------------------------------------------
+            //服务器   用户名  授权码(qq设置中找)
+            transport.connect("smtp.qq.com","3578144921@qq.com","prkxrgpngrtccgih");
+    //4、创建邮件-------------------------------------------------------------
+            MimeMessage mimeMessage = new MimeMessage(session);
+            //准备图片
+            MimeBodyPart img = new MimeBodyPart();
+            String path = "D:\\Program Files (x86)\\idea\\IDEAproject\\javaweb02-maven\\servlet-09\\src\\main\\resources\\img\\avatar.jpg";
+            DataHandler dataHandler = new DataHandler(new FileDataSource(path));
+            img.setDataHandler(dataHandler); //在主体中放入图片数据
+            img.setContentID("girl.jpg");
+            //邮件的内容
+            MimeBodyPart textBody = new MimeBodyPart();
+            String text = "<h2 style=\"color: red\">正在学习邮件。。。</h2><hr/><img src='cid:girl.jpg'/>";
+            //文件节点的设置一定要是setContent()
+            textBody.setContent(text,"text/html;charset=UTF-8");
+            //将文本节点和图片节点混合在一起
+            MimeMultipart mimeMultipart = new MimeMultipart();
+            mimeMultipart.addBodyPart(img);
+            mimeMultipart.addBodyPart(textBody);
+            mimeMultipart.setSubType("related");
+            //设置到邮件中保存修改
+            mimeMessage.setContent(mimeMultipart);
+            mimeMessage.saveChanges();
+            //设置邮件标题主题
+            mimeMessage.setSubject("困难邮件学习");
+            //发件人
+            mimeMessage.setFrom(new InternetAddress("3578144921@qq.com"));
+            //收件人
+            mimeMessage.setRecipient(Message.RecipientType.TO,new InternetAddress("1499476208@qq.com"));
+    //5、接收邮件----------------------------------------------------------------
+            transport.sendMessage(mimeMessage,mimeMessage.getAllRecipients());
+            transport.close();
+    
+        }
+    ```
+
+
 
