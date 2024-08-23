@@ -1092,9 +1092,15 @@ session.invalidate();
 
 - 保存一个登录用户的时间
 - 购物车信息  
-  
-  
-  
+
+
+### 12：多个用户如何共享数据
+
+##### 12.1、多个用户在同一个web应用如何共享数据
+
+- **只能用ServletContext**，cookie不行，session也不行
+    - session是因为每个用户都有自己的一个唯一的sessionId
+    - cookie是因为无法做到，是因为需要提交cookie  
   
   
   
