@@ -11,7 +11,6 @@ tags:
   - IO
 keywords:
   - IO
-draft: true
 ---
 
 ## 文件
@@ -24,46 +23,59 @@ draft: true
 
 ![image-20221210152954577](img/io/image-20221210152954577.png)
 
-- 创建文件的三种方式这里就展示一种。剩余去看idea的IoStreamTest01.java
+### 文件创建
+
+#### 完整路径
 
 ```java
-
-    //第一种   完整路径
-    public void createFile1() throws IOException {
-        String path = "D:\\Program Files (x86)\\idea\\IDEAproject\\HELLOWORLD_MYTEST\\src\\newknowledge\\iostream\\file1.txt";
-        File file = new File(path);
-        file.createNewFile();   //重点是这个方法createNewFile();
-        System.out.println("文件创建成功");
-    }
-
+public void createFile1() throws IOException {
+  String path = "D:\\Program Files (x86)\\idea\\IDEAproject\\HELLOWORLD_MYTEST\\src\\newknowledge\\iostream\\file1.txt";
+  File file = new File(path);
+  file.createNewFile();   //重点是这个方法createNewFile();
+  System.out.println("文件创建成功");
+}
 ```
 
-- **获取文件信息***
+#### 父目录子文件
+
 
 ```java
- //先创建文件对象、
-        File file = new File("D:\\Program Files (x86)\\idea\\IDEAproject\\HELLOWORLD_MYTEST\\src\\newknowledge\\iostream\\file1.txt");
-        System.out.println("文件名字：" + file.getName());
-        System.out.println("文件绝对路径：" + file.getAbsolutePath());
-        System.out.println("目标文件文件的父目录：" + file.getParent());
-        //utf-8  一个英文字符 = 1byte(字节) = 8bit(位)
-        //utf-8  一个中文字符 = 3byte(字节) = 24bit(位)
-        System.out.println("文件大小：" + file.length());
-        System.out.println("文件是否存在：" + file.exists());
-        System.out.println("文件是否是一个文件：" + file.isFile());
-        System.out.println("文件是否是一个目录：" + file.isDirectory());
+public void createFile2() throws IOException {
+  String parent = "D:\\";   //父目录
+  File file1 = new File(parent);   //就是创建个文件对象
+  //子路径
+  String path = "Program Files (x86)\\idea\\IDEAproject\\HELLOWORLD_MYTEST\\src\\newknowledge\\iostream\\file2.txt";
+  File file = new File(file1,path);   //这个是创建文件对象-->在内存中
+  file.createNewFile();   //这句才是生成文件----->生成在硬盘中
+  System.out.println("文件创建成功");
+}
 ```
 
-- **文件，目录删除。创建目录**
+### 文件操作
 
 ```java
+//先创建文件对象
+File file = new File("D:\\Program Files (x86)\\idea\\IDEAproject\\HELLOWORLD_MYTEST\\src\\newknowledge\\iostream\\file1.txt");
 File file = new File(String path);
 file.delete() //返回是boolean值，删除目录，文件都可以
 file.mkdir()  //创建一级目录。返回boolean    
 file.mkdirs()  //创建多级目录。返回boolean 
+System.out.println("文件名字：" + file.getName());        
+System.out.println("文件绝对路径：" + file.getAbsolutePath());        
+System.out.println("目标文件文件的父目录：" + file.getParent());        
+System.out.println("文件大小：" + file.length());        
+System.out.println("文件是否存在：" + file.exists());        
+System.out.println("文件是否是一个文件：" + file.isFile());        
+System.out.println("文件是否是一个目录：" + file.isDirectory());        
 ```
 
 ## IO流分类
+
+![image-20221226200113595](img/io/image-20221226200113595.png)
+
+
+![image-20221219233927406](img/io/image-20221219233927406.png)
+
 
 - **字节流**
 
@@ -87,7 +99,7 @@ file.mkdirs()  //创建多级目录。返回boolean
     - 各个处理流有一个父类的引用，也就是说它就可以包装这个父类的引用
     - 构造器需要一个节点流就是处理流
 
-##### 2.5、序列化(写)和反序列化(读)
+## 序列化(写)和反序列化(读)
 
 - 主要用到的流：ObjectOutputStream和ObjectInputStream
 
@@ -100,7 +112,7 @@ file.mkdirs()  //创建多级目录。返回boolean
     - Serializable：标记接口没有任何方法，推荐使用
     - Externalizable
 
-- 反序列化时**注意顺序**一定要跟序列化顺序一样【详细内容看IoStreamTest10】
+- 反序列化时**注意顺序**一定要跟序列化顺序一样
 
 - transient：防止变量被序列化只能用在**变量上**
 
@@ -112,40 +124,39 @@ file.mkdirs()  //创建多级目录。返回boolean
   private  static final long serialVersionUID = 1L;  //序列化版本可以自定义
   ```
 
-- 序列化对象时，里面的**属性(自定义类也需要)**也需要实现Serializable接口
+- 序列化对象时，里面的**属性(自定义类也需要)** 也需要实现Serializable接口
 - 序列化**可继承**，父类实现了Serializable接口，子类也就相当于实现了
 
-##### 2.6、标准输入输出流
+## 标准输入输出流
 
 - System.in标准输入、System.out标准输出
 - 相关的流
     - InputStream   =  键盘
     - PrintStream   =  显示器
 
-##### 2.7、转换流
+## 转换流
 
 - 目的：把**字节流转换(包装)字符流**，解决不同的编码问题
 - 相关的流：InputStreamReader和OutputStreamWriter他俩有一个共同的特点就是可以设置字符集
     - InputStreamReader是Reader子类
     - OutputStreamWriter是Writer的子类
 
-##### 2.8、打印流
+## 打印流
 
 - 相关的流：PrintStream和PrintWriter
     - PrintStream
-        - setOut()切换输出位置(可以是文件)
-    -
-- 打印流只有**输出（写）**默认是输出到控制台(显示器)
+      - setOut()切换输出位置(可以是文件)
+- 打印流只有**输出（写）** 默认是输出到控制台(显示器)
 
-##### 2.9、properties类：操作文件的
+## Properties
 
+- `Properties`用于读写配置文件**.properties**文件
 - 配置文件的格式：键=值，不能有空格，不用双引号默认类型是String
 
   ![image-20221227153900048](img/io/image-20221227153900048.png)
 
-![image-20221226200113595](img/io/image-20221226200113595.png)
 
-![image-20221219233927406](img/io/image-20221219233927406.png)
+
 
 ## IO小知识
 
