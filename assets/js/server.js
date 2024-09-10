@@ -88,12 +88,18 @@ const addReadNum = () =>{
     setDeviceId(generateDeviceId())
 }
 
-const setArticleReadNum = () => {
+const setArticleReadNum = (articleId) => {
     let result = '';
     for (let i = 0; i < 4; i++) {
         result += Math.floor(Math.random() * 10);  // 生成 0-9 的随机数
     }
-    document.getElementById('articleReadNum').innerHTML = result
+
+    const element = document.getElementById(articleId);
+    if (isNullOrUndefined(element)) {
+        return
+    }
+
+    document.getElementById(articleId).innerHTML = result
     /*fetch.get(SERVER_URL + GET_READ_NUM,{articleId: getArticleId()},(data)=>{
         document.getElementById('articleReadNum').innerHTML = data
     })*/

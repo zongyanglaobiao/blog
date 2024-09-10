@@ -48,13 +48,9 @@
         {{ end }}
         <div>
             {{ partial "helper/icon" "read" }}
-            <time id="articleReadNum"  class="article-time--reading">
+            <time id="{{ .Params.id }}"  class="article-time--reading">
             </time>
         </div>
-        <script>
-            setArticleReadNum()
-            logDeviceId()
-        </script>
     </footer>
     {{ end }}
 
@@ -69,3 +65,6 @@
     </footer>
     {{ end }}
 </div>
+<script>
+    setArticleReadNum("{{ .Params.id }}")
+</script>
