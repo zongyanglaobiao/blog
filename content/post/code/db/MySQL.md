@@ -17,6 +17,7 @@ keywords:
   - MySQL
   - DDL
   - DML
+id: 2
 ---
 
 #  MySQL

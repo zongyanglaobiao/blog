@@ -12,6 +12,7 @@ tags:
   - Redis
 keywords:
   - Redis
+id: 3
 ---
 
 ## Redis

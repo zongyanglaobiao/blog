@@ -14,5 +14,6 @@ keywords:
   - 自动生成
 weight: 1
 draft: true
+id: 6
 ---
 # 自动生成标题

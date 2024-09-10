@@ -6,6 +6,7 @@ import os
 import re
 import shutil
 import time
+import uuid
 
 OLD_IMAGE_FILE_PATH = r"E:\Program Files (x86)\Typora\note\img"
 NEW_IMAGE_FILE_PATH = r'D:\Program Files (x86)\idea\IDEAproject\github\blog\static\img'
@@ -82,6 +83,7 @@ tags:
 keywords:
   - 自动生成
 weight: 1
+id: {uuid.uuid4()}
 ---
 # 自动生成标题
     """
