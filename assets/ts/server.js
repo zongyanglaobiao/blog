@@ -1,4 +1,4 @@
-const fetch= {
+const fetch = {
     post: (url,data) => {
         console.log('执行post')
     },
