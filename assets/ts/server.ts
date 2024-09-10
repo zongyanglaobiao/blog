@@ -1,3 +1,4 @@
+/*
 const fetch = {
     post: (url,data) => {
         console.log('执行post')
@@ -9,4 +10,5 @@ const fetch = {
 }
 
 fetch.post()
-fetch.get()
+fetch.get()*/
+console.log('加载server ts')
