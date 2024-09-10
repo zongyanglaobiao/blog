@@ -58,10 +58,6 @@ jobs:
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"    
 
-      - name: 测试
-        run: |
-          ls ${{ github.workspace }}/public/js
-
       - name: 上传项目
         uses: actions/upload-pages-artifact@v3
         with:
@@ -78,3 +74,7 @@ jobs:
       - name: 部署到 GitHub 页面
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: 测试
+        run: |
+          ls ${{ github.workspace }}/public/js
