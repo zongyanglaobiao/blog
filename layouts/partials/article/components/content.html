@@ -1,6 +1,6 @@
 {{ $serverJs := resources.Get "js/server.js" | minify | fingerprint }}
 <!-- 引用处理后的JS文件 -->
-<script type="module" src="{{ $serverJs.Permalink }}"></script>
+<script  src="{{ $serverJs.Permalink }}"></script>
 <section class="article-content">
     <!-- Refer to https://discourse.gohugo.io/t/responsive-tables-in-markdown/10639/5 -->
     {{ $wrappedTable := printf "<div class=\"table-wrapper\">${1}</div>" }}
