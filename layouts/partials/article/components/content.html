@@ -1,8 +1,8 @@
-{{ $serverJs := resources.Get "js/server.js" | minify | fingerprint }}
 <!-- 引用处理后的JS文件 -->
 <section class="article-content"  data-article-id="{{ .Params.id }}">
     <!-- Refer to https://discourse.gohugo.io/t/responsive-tables-in-markdown/10639/5 -->
     {{ $wrappedTable := printf "<div class=\"table-wrapper\">${1}</div>" }}
     {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
 </section>
-<script  src="{{ $serverJs.Permalink }}"></script>
+<script>
+</script>

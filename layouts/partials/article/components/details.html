@@ -1,5 +1,5 @@
-
 <div class="article-details">
+
     {{ if .Params.categories }}
     <header class="article-category">
         {{ range (.GetTerms "categories") }}
@@ -48,10 +48,13 @@
         {{ end }}
         <div>
             {{ partial "helper/icon" "read" }}
-            <time id="memberRead"  class="article-time--reading">
-                1000人阅读过
+            <time id="articleReadNum"  class="article-time--reading">
             </time>
         </div>
+        <script>
+            setArticleReadNum()
+            logDeviceId()
+        </script>
     </footer>
     {{ end }}
 
