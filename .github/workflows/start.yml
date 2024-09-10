@@ -74,7 +74,3 @@ jobs:
       - name: 部署到 GitHub 页面
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: 测试
-        run: |
-          ls ${{ github.workspace }}/public/js
