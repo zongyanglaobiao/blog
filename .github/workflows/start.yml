@@ -60,7 +60,7 @@ jobs:
 
       - name: 测试
         run: |
-          ls ${{workspace}}/public/js
+          ls ${{ github.workspace }}/public/js
 
       - name: 上传项目
         uses: actions/upload-pages-artifact@v3
