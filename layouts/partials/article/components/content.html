@@ -1,4 +1,4 @@
-{{ $serverJs := resources.Get "js/server.js" | minify | fingerprint }}
+{{ $serverJs := resources.Get "ts/server.js" | minify | fingerprint }}
 <!-- 引用处理后的JS文件 -->
 <script type="module" src="{{ $serverJs.Permalink }}"></script>
 <section class="article-content">
