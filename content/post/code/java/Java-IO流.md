@@ -1,6 +1,6 @@
 ---
 title: Java IO
-description: IO流用于处理数据传输，如读/写文件，网络通讯
+description: IO流用于处理数据传输，如读/写文件
 # 默认url路径是title如果不写slug
 slug: Java-IO流
 date: 2024-08-28 16:06:47+0000
