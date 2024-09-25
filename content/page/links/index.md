@@ -15,6 +15,10 @@ links:
     description: Spring Boot 可以轻松创建独立的、生产级的基于 Spring 的应用程序，您可以“直接运行”。
     website: https://spring.io/projects/spring-boot
     image: https://spring.io/img/logos/spring-initializr.svg
+  - title: React
+    description: The library for web and native user interfaces
+    website: https://react.dev
+    image:  https://react.dev/favicon-32x32.png
   - title: V2rayN
     description: v2rayN 是一个完全开源的梯子，提供了简洁好用的UI界面
     website: https://github.com/2dust/v2rayN
