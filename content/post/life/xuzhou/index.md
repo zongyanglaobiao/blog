@@ -4,7 +4,7 @@ description:  徐州三只羊家羊肉串很绝
 # 默认url路径是title如果不写slug
 slug: xuzhou
 date: 2024-08-19 11:59:48+0000
-image: img/life/xuzhou/微信图片_20240819120851.jpg
+image: 微信图片_20240819120851.jpg
 toc: true
 categories:
   - scenery-category
