@@ -178,9 +178,9 @@ const AUTHORIZE_FAIL = false;
  *  用于监控TOKEN失效的state
  *  false 授权异常 true 授权正常
  */
-const authorizeProcessor = generateSlice(getRandomId(), AUTHORIZE_FAIL, {
+const authorizeProcessor = generateSlice(getRandomId(), {hasAuthorize: AUTHORIZE_FAIL}, {
     authorizeAction() {
-        return isBlank(getToken()) ? AUTHORIZE_FAIL : AUTHORIZE_SUCCESS
+        return {hasAuthorize:isBlank(getToken()) ? AUTHORIZE_FAIL : AUTHORIZE_SUCCESS}
     },
 });
 const authorizeProcessor = createSlice({
@@ -263,11 +263,10 @@ import {isBlank} from "@/lib/toolkit/util.js";
 import {authorizeAction} from "@/redux/feature/authorize.js";
 
 export const useToken = () => {
-    const authorize = useSelector(state => state.authorize);
+    const {hasAuthorize} = useSelector(state => state.authorize);
     const dispatch = useDispatch();
-
     return {
-        isLogin: authorize || !isBlank(getToken()),
+        isLogin: hasAuthorize || !isBlank(getToken()),
         token: getToken(),
         logout: () => {
             removeToken();
