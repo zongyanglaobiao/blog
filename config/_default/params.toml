@@ -84,7 +84,7 @@ enabled = true
 provider = "disqus"
 
 [comments.disqusjs]
-shortname = ""
+shortname = "https-zongyanglaobiao-github-io-hugo-blog"
 apiUrl = ""
 apiKey = ""
 admin = ""
