@@ -94,6 +94,9 @@ const setArticleReadNum = (articleId) => {
         result += Math.floor(Math.random() * 10);  // 生成 0-9 的随机数
     }
 
+    //开头不能是0
+    result = result.startsWith('0') ? result.substring(1) : result
+
     const element = document.getElementById(articleId);
     if (isNullOrUndefined(element)) {
         return
