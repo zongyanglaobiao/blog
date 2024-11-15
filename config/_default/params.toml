@@ -81,12 +81,12 @@ enabled = true
 ## Comments
 [comments]
 enabled = true
-provider = "disqus"
+provider = "vssue"
 
 [comments.disqusjs]
-shortname = "https-zongyanglaobiao-github-io-hugo-blog"
+shortname = ""
 apiUrl = ""
-apiKey = "QI1PLQGsoIGI3aLzW4AlaoipEzuoZ3Gp9JcvGjcUlIlw3tTohundiBJ87wl26edW"
+apiKey = ""
 admin = ""
 adminLabel = ""
 
@@ -101,11 +101,11 @@ site = ""
 locale = ""
 
 [comments.vssue]
-platform = ""
-owner = ""
-repo = ""
-clientId = ""
-clientSecret = ""
+platform = "github"
+owner = "zongyanglaobiao"
+repo = "blog"
+clientId = "Ov23lizn0TWjedw7esHi"
+clientSecret = "1c6031e201ed2ec641318ad82e9a54b6fc4e2966"
 autoCreateIssue = false
 
 [comments.waline]

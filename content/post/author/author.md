@@ -7,7 +7,7 @@ image: img/author/fj-bg.jpg
 categories:
   - life-insights-category
 tags:
-  - 作者有话说
+  - About Me
 weight: 1
 id: 1
 ---
