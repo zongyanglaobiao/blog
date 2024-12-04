@@ -8,7 +8,7 @@ links:
     website: https://www.bilibili.com
     image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
   - title: B站
-    description: B站大学
+    description: "大学"
     website: https://www.bilibili.com
     image: https://e.bilibili.com/assets/img/img_2.e38f2b5.png
   - title: SpringBoot
