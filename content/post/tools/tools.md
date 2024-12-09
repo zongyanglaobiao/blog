@@ -32,33 +32,35 @@ comments: true
 
 - [关于《Hello 算法》：动画图解、一键运行的数据结构与算法教程。支持 Python, Java, C++, C, C#, JS, Go, Swift, Rust, Ruby, Kotlin, TS, Dart 代码。简体版和繁体版同步更新，English version ongoing](https://github.com/krahets/hello-algo)
 
+## 编程语言
 
-
-## Java
+### Java
 
 - [一份通俗易懂、风趣幽默的Java学习指南，内容涵盖Java基础、Java并发编程、Java虚拟机、Java企业级开发、Java面试等核心知识点。学Java，就认准二哥的Java进阶之路😄](https://github.com/itwanger/toBeBetterJavaer)
 
 - [Microservices from Design to Deployment 中文版 《微服务：从设计到部署》](https://github.com/DocsHome/microservices)
 
-## Web
+### Python
+
+- [stock股票.获取股票数据,计算股票指标,识别股票形态,综合选股,选股策略,股票验证回测,股票自动交易,支持PC及移动设备](https://github.com/myhhub/stock?tab=readme-ov-file)
+
+### C++
 
 ### JavaScript
 
 - [FileSaver.js 是在客户端保存文件的解决方案，非常适合在客户端生成文件的 Web 应用程序，但是，如果文件来自服务器，我们建议您首先尝试使用Content-Disposition附件响应标头，因为它具有更好的跨浏览器兼容性。](https://github.com/eligrey/FileSaver.js)
 
-- [AI SDK是一个 TypeScript 工具包，旨在帮助您使用 Next.js、React、Svelte、Vue 等流行框架和 Node.js 等运行时构建 AI 驱动的应用程序。](https://github.com/vercel/ai): 
+- [AI SDK是一个 TypeScript 工具包，旨在帮助您使用 Next.js、React、Svelte、Vue 等流行框架和 Node.js 等运行时构建 AI 驱动的应用程序。](https://github.com/vercel/ai):
 
 - [HivisionIDPhotos: a lightweight and efficient AI ID photos tools. 一个轻量级的AI证件照制作算法。](https://github.com/Zeyi-Lin/HivisionIDPhotos)
 
-### React
-
 ### Html
 
-## Python
+### CSS
 
-- [stock股票.获取股票数据,计算股票指标,识别股票形态,综合选股,选股策略,股票验证回测,股票自动交易,支持PC及移动设备](https://github.com/myhhub/stock?tab=readme-ov-file)
+## 框架
 
-## C++
+### React
 
 ## 在线实用网站
 
