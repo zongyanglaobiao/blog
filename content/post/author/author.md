@@ -14,24 +14,39 @@ id: 1
 
 ## 📝 简介
 
-全栈开发者
+全栈开发
 
-### 编程语言
+### 技能介绍
+
+#### 编程语言
 
 - Java
 - Python
 - JavaScript & Html & CSS
 - Node
+- SQL
 
-### 开发框架
+#### 开发框架
 
-- 主流Spring技术
+- Spring家族
 - Django
 - React
+- NextJS
 
-## 规划
+#### 运维
 
-### 前五年
+- jenkins / JPom
+- Docker
+- Linux
+- MySQL
+- MonogDB
+- PostgreSQL
+
+### 作品
+
+### 规划
+
+#### 前五年
 
 **1️⃣**
 
@@ -42,7 +57,7 @@ id: 1
 - 学习英语
 - 阅读读关于计算机方面的书
 
-### 后五年
+#### 后五年
 
 thanking...
 

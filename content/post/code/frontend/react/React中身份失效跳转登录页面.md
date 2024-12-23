@@ -2,7 +2,7 @@
 title: React中身份失效跳转登录页面
 description: React中如何感知用户身份失效并跳转到登录页
 # 默认url路径是title如果不写slug
-slug: React中身份失效跳转登录页面
+slug: react
 date: 2024-09-25 09:10:34+0000
 toc: true
 categories:
