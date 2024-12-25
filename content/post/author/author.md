@@ -22,8 +22,7 @@ id: 1
 
 - Java
 - Python
-- JavaScript & Html & CSS
-- Node
+- JavaScript
 - SQL
 
 #### 开发框架
@@ -39,7 +38,7 @@ id: 1
 - Docker
 - Linux
 - MySQL
-- MonogDB
+- MongoDB
 - PostgreSQL
 
 ### 作品
