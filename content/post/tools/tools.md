@@ -54,6 +54,8 @@ comments: true
 
 - [HivisionIDPhotos: a lightweight and efficient AI ID photos tools. 一个轻量级的AI证件照制作算法。](https://github.com/Zeyi-Lin/HivisionIDPhotos)
 
+- [About 为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件](https://github.com/RealKai42/qwerty-learner?utm_source=gold_browser_extension)
+
 ### Html
 
 ### CSS
