@@ -56,6 +56,8 @@ comments: true
 
 - [About 为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件](https://github.com/RealKai42/qwerty-learner?utm_source=gold_browser_extension)
 
+- [社区制作的美观且一致的图标工具包。开源项目和 Feather Icons 的一个分支。](https://github.com/lucide-icons/lucide?utm_source=gold_browser_extension)
+
 ### Html
 
 ### CSS
