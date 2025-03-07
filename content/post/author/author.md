@@ -61,6 +61,4 @@ id: 1
 thanking...
 
 ## ☎️
-- 🐧 3578144921@qq.com
-- 📱 15156246017
 - 📩 aksisnotx@gmail.com
