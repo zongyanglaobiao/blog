@@ -21,7 +21,6 @@ comments: true
 
 ### 必看
 
-- [java博客 - pdai.tech](https://pdai.tech/md/resource/tools.html)
 - [科技爱好者周刊](https://github.com/ruanyf/weekly)
 - [分享 GitHub 上有趣、入门级的开源项目。Share interesting, entry-level open source projects on GitHub.](https://github.com/521xueweihan/HelloGitHub)
 - [坚持分享 GitHub 上高质量、有趣实用的开源技术教程、开发者工具、编程网站、技术资讯。A list cool, interesting projects of GitHub.](https://github.com/GitHubDaily/GitHubDaily)
@@ -37,6 +36,8 @@ comments: true
 ## 编程语言
 
 ### Java
+
+- [java博客 - pdai.tech](https://pdai.tech/md/resource/tools.html)
 
 - [一份通俗易懂、风趣幽默的Java学习指南，内容涵盖Java基础、Java并发编程、Java虚拟机、Java企业级开发、Java面试等核心知识点。学Java，就认准二哥的Java进阶之路😄](https://github.com/itwanger/toBeBetterJavaer)
 
@@ -61,6 +62,10 @@ comments: true
 - [About 为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件](https://github.com/RealKai42/qwerty-learner?utm_source=gold_browser_extension)
 
 - [社区制作的美观且一致的图标工具包。开源项目和 Feather Icons 的一个分支。](https://github.com/lucide-icons/lucide?utm_source=gold_browser_extension)
+
+### Rust
+
+- [🤱🏻 Turn any webpage into a desktop app with Rust. 🤱🏻 利用 Rust 轻松构建轻量级多端桌面应用](https://github.com/tw93/Pake)
 
 ### Html
 
