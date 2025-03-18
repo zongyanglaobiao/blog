@@ -67,6 +67,11 @@ comments: true
 
 - [🤱🏻 Turn any webpage into a desktop app with Rust. 🤱🏻 利用 Rust 轻松构建轻量级多端桌面应用](https://github.com/tw93/Pake)
 
+### Shell
+
+- [解决Cursor在免费订阅期间出现以下提示的问题: You've reached your trial request limit. / Too many free trial accounts used on this machine. Please upgrade to pro. We have this limit in place to prevent abuse. Please let us know if you believe this is a mistake.
+  Topics](https://github.com/yuaotian/go-cursor-help?tab=readme-ov-file)
+
 ### Html
 
 ### CSS

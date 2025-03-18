@@ -1,5 +1,5 @@
 ---
-title: "暂时想不出标题"
+title: "作品集"
 slug: "Works"
 date: 2025-02-06 05:00:00+0000
 links:
@@ -9,7 +9,7 @@ links:
 menu:
     main:
         weight: 5
-        name: 瞎做的
+        name: 作品集
         params: 
             icon: works
 id: 13
