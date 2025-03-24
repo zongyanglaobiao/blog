@@ -41,8 +41,6 @@ id: 1
 - MongoDB
 - PostgreSQL
 
-### 作品
-
 ### 规划
 
 #### 前五年
@@ -60,5 +58,5 @@ id: 1
 
 thanking...
 
-## ☎️
+## 📧
 - 📩 aksisnotx@gmail.com

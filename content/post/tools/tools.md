@@ -49,6 +49,8 @@ comments: true
 
 - [使 AI 代理可以访问网站 - Make websites accessible for AI agents](https://github.com/browser-use/browser-use?utm_source=gold_browser_extension)
 
+- [Translate the video from one language to another and add dubbing. 将视频从一种语言翻译为另一种语言，同时支持语音识别转录、语音合成、字幕翻译。](https://github.com/jianchang512/pyvideotrans?tab=readme-ov-file) 
+
 ### C++
 
 ### JavaScript

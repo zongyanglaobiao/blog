@@ -11,5 +11,5 @@
 - `hugo server -v` 用于查看启动信息
 
 ## ➡️Hugo主题
-这里感谢[CaiJimmy](https://github.com/CaiJimmy)，本项目使用CaiJimmy的Hugo模板[hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)
+本项目使用CaiJimmy的Hugo模板[hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)
 
