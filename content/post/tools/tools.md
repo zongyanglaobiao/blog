@@ -45,6 +45,8 @@ comments: true
 
 ### Python
 
+- [用于将文件和办公文档转换为Markdown的Python工具。](https://github.com/microsoft/markitdown?utm_source=gold_browser_extension)
+
 - [stock股票.获取股票数据,计算股票指标,识别股票形态,综合选股,选股策略,股票验证回测,股票自动交易,支持PC及移动设备](https://github.com/myhhub/stock?tab=readme-ov-file)
 
 - [使 AI 代理可以访问网站 - Make websites accessible for AI agents](https://github.com/browser-use/browser-use?utm_source=gold_browser_extension)
@@ -96,6 +98,7 @@ comments: true
 
 - [在线测试websocket](https://wstool.js.org/)
 - [加解密](https://www.sojson.com/encrypt.html)
+- [只要有 html 文件就能生成一个有域名公网可以访问的网站](https://www.yourware.so/)
 
 ## 剪辑相关
 
