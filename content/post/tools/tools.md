@@ -105,7 +105,11 @@ comments: true
 ### 资源
 
 - [这个网站提供世界各地的网上电视台。](https://tv.garden/comedy/HhYHpgeNR67LDQ)
-- [学习英语](https://en.knowledgefxg.com/)
+
+## 英语
+
+- [英语学习](https://www.knowledgefxg.com/en/index.html)
+- [为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件 / Words learning and English muscle memory training software designed for keyboard workers](https://github.com/RealKai42/qwerty-learner)
 
 ## 剪辑相关
 
