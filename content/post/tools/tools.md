@@ -96,9 +96,16 @@ comments: true
 
 ## 在线实用网站
 
+### 编程工具
+
 - [在线测试websocket](https://wstool.js.org/)
 - [加解密](https://www.sojson.com/encrypt.html)
 - [只要有 html 文件就能生成一个有域名公网可以访问的网站](https://www.yourware.so/)
+
+### 资源
+
+- [这个网站提供世界各地的网上电视台。](https://tv.garden/comedy/HhYHpgeNR67LDQ)
+- [学习英语](https://en.knowledgefxg.com/)
 
 ## 剪辑相关
 
