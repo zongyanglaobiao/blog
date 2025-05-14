@@ -108,8 +108,12 @@ comments: true
 
 ## 英语
 
-- [英语学习](https://www.knowledgefxg.com/en/index.html)
+- [英语学习资源导航](https://en.knowledgefxg.com/)
 - [为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件 / Words learning and English muscle memory training software designed for keyboard workers](https://github.com/RealKai42/qwerty-learner)
+
+## 跨平台
+
+- [Tauri是一个开源的软件框架，用户可以通过Web前端技术为Linux、macOS、Windows、Android和iOS创建跨平台的桌面和移动应用程序。该框架在技术上基于Rust后端和JavaScript前端，使用Tao、Wry等渲染库在本地的WebView库上运行。Tauri比现有的类似框架（如Electron）更轻量级。](https://v2.tauri.app/)
 
 ## 剪辑相关
 
