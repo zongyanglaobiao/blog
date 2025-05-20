@@ -25,6 +25,14 @@ id: a58c6f8e-0500-4bfd-8407-0ac260290cfb
 在阿里SDK中，很多调用接口都使用`类型安全的请求-响应模式`，[代码](https://www.alibabacloud.com/help/zh/sdk/developer-reference/initializing-1)。废话不多说，Show Code
 
 ```java
+
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpResponse;
+import cn.hutool.json.JSONUtil;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+import java.lang.reflect.InvocationTargetException;
+
 public class RequestResponsePattern {
     @Data
     static abstract class Response{
