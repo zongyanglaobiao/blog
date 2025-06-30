@@ -53,6 +53,8 @@ comments: true
 
 - [Translate the video from one language to another and add dubbing. 将视频从一种语言翻译为另一种语言，同时支持语音识别转录、语音合成、字幕翻译。](https://github.com/jianchang512/pyvideotrans?tab=readme-ov-file) 
 
+- [轻松打造原生桌面应用的 Python 框架。这是一个简单易用的 Python GUI 框架，专为构建跨平台原生桌面应用而设计。它结合了 Python 的简洁易懂和操作系统的原生体验，支持丰富的组件库和展示动态网页等功能。](https://github.com/beeware/toga)
+
 ### C++
 
 ### JavaScript
@@ -87,6 +89,8 @@ comments: true
 ## 运维
 
 ### Linux
+
+- [一键搞定 Linux 换源问题的脚本。该项目提供了一键切换 Linux 默认软件源为国内镜像源的脚本，以及 Docker 安装脚本，支持 Debian、Ubuntu、CentOS、Raspberry Pi OS 和 Deepin 等多种主流发行版](https://github.com/SuperManito/LinuxMirrors)
 
 ### Docker
 

@@ -84,6 +84,7 @@ keywords:
   - 自动生成
 weight: 1
 id: {uuid.uuid4()}
+comments: true
 ---
 # 自动生成标题
     """
