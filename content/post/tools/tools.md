@@ -84,7 +84,9 @@ comments: true
 
 ## 框架
 
-### React
+### React & NextJS
+
+- [🏋 现代开源健身教练平台。创建锻炼计划、追踪进度，并访问全面的锻炼数据库。](https://github.com/521xueweihan/HelloGitHub/blob/master/content/HelloGitHub111.md)
 
 ## 运维
 
