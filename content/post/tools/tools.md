@@ -65,8 +65,6 @@ comments: true
 
 - [HivisionIDPhotos: a lightweight and efficient AI ID photos tools. 一个轻量级的AI证件照制作算法。](https://github.com/Zeyi-Lin/HivisionIDPhotos)
 
-- [About 为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件](https://github.com/RealKai42/qwerty-learner?utm_source=gold_browser_extension)
-
 - [社区制作的美观且一致的图标工具包。开源项目和 Feather Icons 的一个分支。](https://github.com/lucide-icons/lucide?utm_source=gold_browser_extension)
 
 ### Rust
@@ -86,7 +84,6 @@ comments: true
 
 ### React & NextJS
 
-- [🏋 现代开源健身教练平台。创建锻炼计划、追踪进度，并访问全面的锻炼数据库。](https://github.com/Snouzy/workout-cool)
 
 ## 运维
 
@@ -108,20 +105,34 @@ comments: true
 - [加解密](https://www.sojson.com/encrypt.html)
 - [只要有 html 文件就能生成一个有域名公网可以访问的网站](https://www.yourware.so/)
 
-### 资源
+## 生活
 
-- [这个网站提供世界各地的网上电视台。](https://tv.garden/comedy/HhYHpgeNR67LDQ)
-
-## 英语
-
-- [英语学习资源导航](https://en.knowledgefxg.com/)
-- [为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件 / Words learning and English muscle memory training software designed for keyboard workers](https://github.com/RealKai42/qwerty-learner)
-
-## 跨平台
-
-- [Tauri是一个开源的软件框架，用户可以通过Web前端技术为Linux、macOS、Windows、Android和iOS创建跨平台的桌面和移动应用程序。该框架在技术上基于Rust后端和JavaScript前端，使用Tao、Wry等渲染库在本地的WebView库上运行。Tauri比现有的类似框架（如Electron）更轻量级。](https://v2.tauri.app/)
-
-## 剪辑相关
+### 剪辑相关
 
 - [Adobe全家桶 - 百度网盘](https://xia8.top/)
 - [Adobe全家桶 - 压缩包](https://www.sharelikes.com.cn/%E8%BD%AF%E4%BB%B6%E8%B5%84%E6%BA%90/Adobe%E5%85%A8%E5%AE%B6%E6%A1%B6)
+
+### 英语
+
+- [英语学习资源导航](https://en.knowledgefxg.com/)
+
+- [为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件 / Words learning and English muscle memory training software designed for keyboard workers](https://github.com/RealKai42/qwerty-learner)
+
+- [About 为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件](https://github.com/RealKai42/qwerty-learner?utm_source=gold_browser_extension)
+
+### 健身
+
+- [🏋 现代开源健身教练平台。创建锻炼计划、追踪进度，并访问全面的锻炼数据库。](https://github.com/Snouzy/workout-cool)
+
+
+## 资源
+
+### 影视资源
+
+- [这个网站提供世界各地的网上电视台。](https://tv.garden/comedy/HhYHpgeNR67LDQ)
+
+
+### 跨平台
+
+- [Tauri是一个开源的软件框架，用户可以通过Web前端技术为Linux、macOS、Windows、Android和iOS创建跨平台的桌面和移动应用程序。该框架在技术上基于Rust后端和JavaScript前端，使用Tao、Wry等渲染库在本地的WebView库上运行。Tauri比现有的类似框架（如Electron）更轻量级。](https://v2.tauri.app/)
+
