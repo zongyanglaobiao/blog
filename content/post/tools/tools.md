@@ -23,6 +23,8 @@ comments: true
 
 - [科技爱好者周刊](https://github.com/ruanyf/weekly)
 
+- [HelloGitHub](https://hellogithub.com)
+
 - [分享 GitHub 上有趣、入门级的开源项目。Share interesting, entry-level open source projects on GitHub.](https://github.com/521xueweihan/HelloGitHub)
 
 - [坚持分享 GitHub 上高质量、有趣实用的开源技术教程、开发者工具、编程网站、技术资讯。A list cool, interesting projects of GitHub.](https://github.com/GitHubDaily/GitHubDaily)

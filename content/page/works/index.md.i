@@ -1,19 +1,23 @@
 ---
-title: "作品集"
-slug: "Works"
+slug: "HelloGithub"
 date: 2025-02-06 05:00:00+0000
-links:
-  - title: file-cabinets
-    website: http://124.223.46.163:3000
-    description: 文件柜：免费、快速、便捷传递文件。使用 next 实现
 menu:
     main:
         weight: 5
-        name: 作品集
+        name: Hello Github
         params: 
-            icon: works
+            icon: helloGithub
 id: 13
 toc: false
 comments: false
 ---
+
+<div style="border: 2px solid #ccc; position: relative; width: 100%; padding-top: 56.25%; overflow: hidden;">
+    <iframe src="https://hellogithub.com"
+            loading="lazy"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
+    </iframe>
+</div>
+
+
 
