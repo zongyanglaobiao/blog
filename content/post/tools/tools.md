@@ -128,6 +128,9 @@ comments: true
 
 - [🏋 现代开源健身教练平台。创建锻炼计划、追踪进度，并访问全面的锻炼数据库。](https://github.com/Snouzy/workout-cool)
 
+## 工作
+
+- [💼【AI找工作助手】全平台自动投简历脚本：(boss、前程无忧、猎聘、拉勾、智联招聘)](https://github.com/loks666/get_jobs)
 
 ## 资源
 
