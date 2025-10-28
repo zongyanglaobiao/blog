@@ -1,0 +1,27 @@
+<style>
+    /* Overwrite CSS variable */
+    :root {
+        --article-font-family: "LXGW WenKai Screen R", sans-serif;
+    }
+</style>
+
+<script>
+    (function () {
+        //加载中文字体
+        const chinese = document.createElement('link');
+        chinese.href = "https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreenr.css";
+
+        chinese.type = "text/css";
+        chinese.rel = "stylesheet";
+
+        document.head.appendChild(chinese);
+
+        const english = document.createElement('link');
+        english.href = "https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap";
+
+        english.type = "text/css";
+        english.rel = "stylesheet";
+
+        document.head.appendChild(english);
+    }());
+</script>
