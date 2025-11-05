@@ -1,5 +1,5 @@
 ---
-title: ME
+title: ABOUT
 description: 路漫漫其修远兮，吾将上下而求索
 slug: author
 date: 2024-08-08 04:13:33+0000
@@ -7,16 +7,18 @@ image: img/author/fj-bg.jpg
 categories:
   - life-insights-category
 tags:
-  - About Me
+  - About
 weight: 1
 id: 1
 ---
 
 ## 📝 简介
 
-喜欢捣鼓
+> 你的时间花在哪里，你的收获就在哪里。技术只是技术，生活中的一小部分，仅此而已。 @pdai
 
-### 技能介绍
+寻找自由的海岛
+
+### 🛠 技能
 
 #### 编程语言
 
@@ -60,5 +62,6 @@ id: 1
 
 thinking...
 
-## 📧
-- 📩 aksisnotx@gmail.com
+## 📮 邮箱
+
+- aksisnotx@gmail.com
