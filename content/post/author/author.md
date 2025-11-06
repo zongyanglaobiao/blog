@@ -69,5 +69,5 @@ thinking...
 ## 📷 个人照片
 
 <div>
-    <img src="/img/author/me.jpeg" style="width: 170px;height: 215px" alt="个人照片">
+    <img src="/blog/img/author/me.jpeg" style="width: 170px;height: 215px" alt="个人照片">
 </div>
