@@ -75,6 +75,7 @@ description: 自动生成
 slug: {args[1]}
 date: {time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}+0000
 image: 自动生成.jpg
+# 是否生成目录
 toc: true
 categories:
   - 自动生成
@@ -84,6 +85,7 @@ keywords:
   - 自动生成
 weight: 1
 id: {uuid.uuid4()}
+# 是否可以添加评论
 comments: true
 ---
 # 自动生成标题
