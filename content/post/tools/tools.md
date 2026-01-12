@@ -19,7 +19,7 @@ comments: true
 
 - [Git的奇技淫巧](https://github.com/521xueweihan/git-tips)
 
-### 必看
+### 推荐
 
 - [科技爱好者周刊](https://github.com/ruanyf/weekly)
 
@@ -33,11 +33,19 @@ comments: true
 
 - [技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、系统设计](https://github.com/CyC2018/CS-Notes)
 
+## AI
+
+- [我的开发经验+提示词库=vibecoding工作站](https://github.com/tukuaiai/vibe-coding-cn/tree/main)
+
 ## 算法
 
 - [关于《Hello 算法》：动画图解、一键运行的数据结构与算法教程。支持 Python, Java, C++, C, C#, JS, Go, Swift, Rust, Ruby, Kotlin, TS, Dart 代码。简体版和繁体版同步更新，English version ongoing](https://github.com/krahets/hello-algo)
 
 ## 编程语言
+
+## 
+
+- [croc是一款允许任意两台计算机轻松安全地传输文件和文件夹的工具。 🐊 📦](https://github.com/schollz/croc?utm_source=gold_browser_extension)
 
 ### Java
 
@@ -60,6 +68,10 @@ comments: true
 - [轻松打造原生桌面应用的 Python 框架。这是一个简单易用的 Python GUI 框架，专为构建跨平台原生桌面应用而设计。它结合了 Python 的简洁易懂和操作系统的原生体验，支持丰富的组件库和展示动态网页等功能。](https://github.com/beeware/toga)
 
 ### C++
+
+### Go
+
+- [一款开源、可自行托管的笔记服务。你的想法，你的数据，你的控制权——无追踪，无广告，无订阅费。](https://github.com/usememos/memos)
 
 ### JavaScript
 
@@ -98,6 +110,8 @@ comments: true
 - [一键搞定 Linux 换源问题的脚本。该项目提供了一键切换 Linux 默认软件源为国内镜像源的脚本，以及 Docker 安装脚本，支持 Debian、Ubuntu、CentOS、Raspberry Pi OS 和 Deepin 等多种主流发行版](https://github.com/SuperManito/LinuxMirrors)
 
 ### Docker
+
+- [🤖 一个运行 Android 模拟器作为服务的极简且可定制的 Docker 镜像。](https://github.com/HQarroum/docker-android)
 
 ### Nginx
 
