@@ -24,9 +24,9 @@ url = "https://x.com/james_aks_"
 icon = "brand-twitter"
 
 [[social]]
-identifier = "csdn"
-name = "CSDN"
-url = "https://blog.csdn.net/m0_64332518?spm=1000.2115.3001.5343"
+identifier = "telegram"
+name = "telegram"
+url = "https://web.telegram.org/a/#6873880601"
 
 [social.params]
-icon = "csdn"
+icon = "telegram"
