@@ -56,10 +56,10 @@ cell.setCellFormula();
 
 ```java
 //这一步没有的话，导出的数据类型都是 String ，只有数值类型公式才会自动计算
+//Tip: 其实FastExcel 支持输入 Object 但是业务需求常常需要对输出进行处理所以我这里统一使用 String
+//但是我想说的时候如果公式没自动自动计算有可能是你的类型没识别成数值类型
 cell.setCellValue(Integer.parseInt(cell.getStringCellValue()));
 ```
-
-
 
 ## 完整测试代码
 
@@ -74,9 +74,6 @@ cell.setCellValue(Integer.parseInt(cell.getStringCellValue()));
 public class TestExportExcelStyle {
 
     public void reportExport(ExcelTemplate template) {
-        // 1. 检查数据
-        template.checkIsEmpty();
-
         // 2. 文件路径
         String filePath = "/Users/jamesaks/Downloads/excel-test/" + System.currentTimeMillis() + ".xlsx";
         File file = new File(filePath);
@@ -88,107 +85,107 @@ public class TestExportExcelStyle {
         }
 
         // 3. 写文件（注册样式）
-        try (ExcelWriter writer = template.getWriterBuilder(EasyExcel.write(file)).build()) {
-            WriteSheet sheet = EasyExcel.writerSheet(template.sheetName()).build();
-            writer.writeContext().writeWorkbookHolder().getWorkbook().setForceFormulaRecalculation(true);
+        try (ExcelWriter writer = EasyExcel.write(file).build()) {
+            // 1. 检查数据
+            template.checkIsEmpty();
 
-            // 写 head + rows：使用 Table 的 head 仅用于表头，实际我们写的是原始行数据
-            WriteTable table = EasyExcel.writerTable(0).needHead(true).head(template.getHead()).build();
-            writer.write(template.getBody(), sheet, table);
-            
-            //TODO 这里写不写都无所谓，不影响
-            //Workbook workbook = writer.writeContext().writeWorkbookHolder().getCachedWorkbook();
-            // 设置强制计算公式：不然公式会以字符串的形式显示在excel中
-            //workbook.setForceFormulaRecalculation(true);
-            // 新增：预计算所有公式，缓存结果值到 cell（解决显示 0 问题）
-            //FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
-            // 计算整个 workbook 的公式，并设置 cached value
-            //formulaEvaluator.evaluateAll();
+            //写入
+            WriteSheet sheet = template
+                    .getSheetBuilder(EasyExcel.writerSheet(template.sheetName()))
+                    .useDefaultStyle(false)
+                    .needHead(true)
+                    .head(template.getHead())
+                    .build();
+
+            //区分 Table 和 sheet 概念
+            writer.write(template.getBody(), sheet);
         }
     }
 
-
     @Test
-    void testExcel() {
-        //测试excel带公式导出
-        reportExport(getTemplate());
-        log.info("生成成功");
-    }
-
-    private ExcelTemplate getTemplate() {
-        return new ExcelTemplate() {
-
+    void exportExcel() {
+        reportExport(new ExcelTemplate() {
             @Override
             public String sheetName() {
-                return "测试EXCEL";
+                return "测试";
             }
 
             @Override
             public List<List<ExcelCell>> rows() {
+                //外层为一行
+                //内层为每行的列数
                 return List.of(
-                        List.of(new ExcelCell("2025-11-03"), new ExcelCell(1.0), new ExcelCell(2.0), new ExcelCell("=B2+C2")),
-                        List.of(new ExcelCell("2025-11-04"), new ExcelCell(1.0), new ExcelCell(2.0), new ExcelCell("=SUM(B2,C2)")),
-                        List.of(new ExcelCell("2025-11-05"), new ExcelCell(1.0), new ExcelCell(2.0), new ExcelCell("=IFERROR(B2 / 7 + C2,0)"))
+                        List.of(new ExcelCell(3), new ExcelCell(4), new ExcelCell("=SUM(A2:B2)"), new ExcelCell("=A2-B2")),
+                        List.of(new ExcelCell(100), new ExcelCell(200), new ExcelCell("=SUM(A3:B3)"), new ExcelCell("=A3-B3"))
                 );
             }
 
             @Override
             public List<List<ExcelCell>> head() {
+                //外层表达每行列数
+                //内层为有几行
                 return List.of(
-                        List.of(new ExcelCell("时间")),
-                        List.of(new ExcelCell("常量1")),
-                        List.of(new ExcelCell("常量2")),
-                        List.of(new ExcelCell("SUM"))
+                        List.of(new ExcelCell("数值1")),
+                        List.of(new ExcelCell("数值2")),
+                        List.of(new ExcelCell("相加")),
+                        List.of(new ExcelCell("相减"))
                 );
             }
 
             @Override
-            public ExcelWriterBuilder getWriterBuilder(ExcelWriterBuilder writerBuilder) {
-                return writerBuilder.registerWriteHandler(new ExcelFormulaHandler());
-            }
+            public ExcelWriterSheetBuilder getSheetBuilder(ExcelWriterSheetBuilder writerBuilder) {
+                //实现公式自动相加的核心逻辑
+                return writerBuilder.registerWriteHandler(new CellWriteHandler() {
+                    @Override
+                    public void afterCellDispose(WriteSheetHolder writeSheetHolder, WriteTableHolder writeTableHolder, List<WriteCellData<?>> cellDataList, Cell cell, Head head, Integer relativeRowIndex, Boolean isHead) {
+                        if (!isHead && CellType.STRING.equals(cell.getCellType()) && cell.getStringCellValue().contains("=")) {
+                            cell.setCellFormula(cell.getStringCellValue().substring(1));
+                        }
 
-            private record ExcelFormulaHandler() implements CellWriteHandler {
-                @Override
-                public void afterCellDispose(WriteSheetHolder writeSheetHolder, WriteTableHolder writeTableHolder, List<WriteCellData<?>> cellDataList, Cell cell, Head head, Integer relativeRowIndex, Boolean isHead) {
-                    if (!isHead && CellType.STRING.equals(cell.getCellType()) && cell.getStringCellValue().contains("=")) {
-                        //设置计算类型，去除=
-                        cell.setCellFormula(cell.getStringCellValue().substring(1));
+                        if (StrUtil.isNumeric(cell.getStringCellValue())) {
+                            //将字符串转为数值类型
+                            cell.setCellValue(Integer.parseInt(cell.getStringCellValue()));
+                        }
                     }
-                    
-                    //筛选出数值类型的 cell
-                    if (StrUtil.isNumeric(cell.getStringCellValue())) {
-                        cell.setCellValue(Integer.parseInt(cell.getStringCellValue()));
-                    }
-                }
+                });
             }
-        };
+        });
+        log.info("生成成功");
     }
-
-}
+}    
 ```
 
 **Excel导出模板接口**
 
 ```java
 /**
- * Excel 导出模板
+ * Excel 导出模板接口
  *
  * @author jamesaks
+ * @see ExportServiceImpl#reportExport(String, ExcelTemplate)
  * @since 2025/10/9
  */
 public interface ExcelTemplate {
     /**
-     * 页名称
+     * 获取 sheet 名称
+     *
+     * @return sheet名称
      */
     String sheetName();
 
     /**
      * 除了head之外的数据 rows 外层的 List 代表一行数据，里面的List 代表每行的每列数据
+     * {@link cn.idev.excel.ExcelWriter#write(Collection, WriteSheet)}
+     *
+     * @return 每行数据
      */
     List<List<ExcelCell>> rows();
 
     /**
      * Excel 标题，外层的 List 表达每一列，里面的List 代表有多少行，决定头有几行是里面的 List 决定的
+     * {@link AbstractParameterBuilder#head(List)}
+     *
+     * @return 标题
      */
     List<List<ExcelCell>> head();
 
@@ -213,9 +210,9 @@ public interface ExcelTemplate {
     }
 
     /**
-     * excel 构建者，样式相关的可以在这设置，不是复杂样式使用excelStyle即可，不使用 easy excel 默认样式则需要重写这个
+     * sheet 构建者，样式相关的可以在这设置，不是复杂样式使用excelStyle即可，不使用 easy excel 默认样式则需要重写这个
      */
-    default ExcelWriterBuilder getWriterBuilder(ExcelWriterBuilder writerBuilder) {
+    default ExcelWriterSheetBuilder getSheetBuilder(ExcelWriterSheetBuilder writerBuilder) {
         return writerBuilder.registerWriteHandler(getExcelStyle());
     }
 
@@ -282,17 +279,21 @@ public interface ExcelTemplate {
         private static final String EMPTY = "";
 
         /**
-         *  一格的数据，为多个表示这一格有多行
+         * 一格的数据，为多个表示这一格有多行
          */
-        private final List<Object> cellValues;
+        private List<Object> cellValues;
 
-        private final boolean useSafeConvert = true;
+        private boolean useSafeConvert = true;
 
         public ExcelCell(Object... values) {
             if (values.length == 0) {
                 throw new BusinessException(BusinessErrorCode.ERROR, "Excel列数据不能为空");
             }
             this.cellValues = Arrays.stream(values).toList();
+        }
+
+        public ExcelCell(Object value, boolean useSafeConvert) {
+            this(List.of(Objects.isNull(value) ? EMPTY : value), useSafeConvert);
         }
 
         /**
@@ -313,6 +314,10 @@ public interface ExcelTemplate {
                 return EMPTY;
             }
 
+            if (s instanceof String str && StrUtil.isBlank(str)) {
+                return EMPTY;
+            }
+
             // 0 转为 "0"
             if (s instanceof Number num && num.intValue() == 0) {
                 return "0";
@@ -323,11 +328,18 @@ public interface ExcelTemplate {
                 return String.valueOf(d.intValue());
             }
 
-            // 把你的 NULL_STR 文本变为空
+            // 把 NULL_STR 文本变为空
             if ("null".equals(s)) {
                 return EMPTY;
             }
             return s.toString();
+        }
+
+        /**
+         * 返回空格子在 excel 中就是这个格没有展示如何内容
+         */
+        public static ExcelCell empty() {
+            return new ExcelCell(EMPTY);
         }
     }
 }

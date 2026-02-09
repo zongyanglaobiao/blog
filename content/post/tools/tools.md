@@ -154,6 +154,9 @@ comments: true
 
 - [这个网站提供世界各地的网上电视台。](https://tv.garden/comedy/HhYHpgeNR67LDQ)
 
+### 工具
+
+- [功能丰富的命令行音频/视频下载器](https://github.com/yt-dlp/yt-dlp?utm_source=gold_browser_extension)
 
 ### 跨平台
 
