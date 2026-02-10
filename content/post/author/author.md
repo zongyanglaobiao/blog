@@ -1,5 +1,5 @@
 ---
-title: ABOUT
+title: ABOUT ME
 description: 路漫漫其修远兮，吾将上下而求索
 slug: author
 date: 2024-08-08 04:13:33+0000
@@ -36,7 +36,7 @@ id: 1
 
 #### 运维
 
-- jenkins / JPom
+- Jenkins / JPom
 - Docker
 - Linux
 - MySQL
