@@ -158,6 +158,8 @@ comments: true
 
 - [功能丰富的命令行音频/视频下载器](https://github.com/yt-dlp/yt-dlp?utm_source=gold_browser_extension)
 
+- [画图神器,用于绘制类似手绘图表的虚拟白板](https://github.com/excalidraw/excalidraw)
+
 ### 跨平台
 
 - [Tauri是一个开源的软件框架，用户可以通过Web前端技术为Linux、macOS、Windows、Android和iOS创建跨平台的桌面和移动应用程序。该框架在技术上基于Rust后端和JavaScript前端，使用Tao、Wry等渲染库在本地的WebView库上运行。Tauri比现有的类似框架（如Electron）更轻量级。](https://v2.tauri.app/)
