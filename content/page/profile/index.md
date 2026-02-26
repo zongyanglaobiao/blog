@@ -1,15 +1,15 @@
 ---
-title: ABOUT ME
-description: 路漫漫其修远兮，吾将上下而求索
-slug: author
-date: 2024-08-08 04:13:33+0000
-image: img/author/fj-bg.jpg
-categories:
-  - life-insights-category
-tags:
-  - About
-weight: 1
-id: 1
+title: "ABOUT ME"
+date: 2026-02-26
+slug: "profile"
+menu:
+    main:
+        weight: 5
+        name: 我
+        params: 
+            icon: profile
+toc: false
+comments: false
 ---
 
 ## 📝 简介
@@ -71,3 +71,5 @@ thinking...
 <div>
     <img src="/blog/img/author/me.jpeg" style="width: 170px;height: 215px" alt="个人照片">
 </div>
+
+
