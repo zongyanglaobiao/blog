@@ -1,10 +1,9 @@
 ---
 title: 资源合集
 description: 收集 (有用 | 有趣) 的资源
-# 默认url路径是title如果不写slug
 slug: tools
 date: 2024-12-06 09:50:52+0000
-toc: true
+toc: false
 categories:
   - tool-category
 tags:
@@ -15,152 +14,389 @@ weight: 2
 id: 2c89599c-6ec1-47b9-8eab-848578f934d2
 comments: true
 ---
-## GitHub
-
-- [Git的奇技淫巧](https://github.com/521xueweihan/git-tips)
-
-### 推荐
-
-- [科技爱好者周刊](https://github.com/ruanyf/weekly)
-
-- [HelloGitHub](https://hellogithub.com)
-
-- [分享 GitHub 上有趣、入门级的开源项目。Share interesting, entry-level open source projects on GitHub.](https://github.com/521xueweihan/HelloGitHub)
-
-- [坚持分享 GitHub 上高质量、有趣实用的开源技术教程、开发者工具、编程网站、技术资讯。A list cool, interesting projects of GitHub.](https://github.com/GitHubDaily/GitHubDaily)
-
-## 计算机基础
-
-- [技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、系统设计](https://github.com/CyC2018/CS-Notes)
-
-## AI
-
-- [我的开发经验+提示词库=vibecoding工作站](https://github.com/tukuaiai/vibe-coding-cn/tree/main)
-
-## 算法
-
-- [关于《Hello 算法》：动画图解、一键运行的数据结构与算法教程。支持 Python, Java, C++, C, C#, JS, Go, Swift, Rust, Ruby, Kotlin, TS, Dart 代码。简体版和繁体版同步更新，English version ongoing](https://github.com/krahets/hello-algo)
-
-## 编程语言
-
-## 
-
-- [croc是一款允许任意两台计算机轻松安全地传输文件和文件夹的工具。 🐊 📦](https://github.com/schollz/croc?utm_source=gold_browser_extension)
-
-### Java
-
-- [java博客 - pdai.tech](https://pdai.tech/md/resource/tools.html)
-
-- [一份通俗易懂、风趣幽默的Java学习指南，内容涵盖Java基础、Java并发编程、Java虚拟机、Java企业级开发、Java面试等核心知识点。学Java，就认准二哥的Java进阶之路😄](https://github.com/itwanger/toBeBetterJavaer)
-
-- [Microservices from Design to Deployment 中文版 《微服务：从设计到部署》](https://github.com/DocsHome/microservices)
-
-### Python
-
-- [用于将文件和办公文档转换为Markdown的Python工具。](https://github.com/microsoft/markitdown?utm_source=gold_browser_extension)
-
-- [stock股票.获取股票数据,计算股票指标,识别股票形态,综合选股,选股策略,股票验证回测,股票自动交易,支持PC及移动设备](https://github.com/myhhub/stock?tab=readme-ov-file)
-
-- [使 AI 代理可以访问网站 - Make websites accessible for AI agents](https://github.com/browser-use/browser-use?utm_source=gold_browser_extension)
-
-- [Translate the video from one language to another and add dubbing. 将视频从一种语言翻译为另一种语言，同时支持语音识别转录、语音合成、字幕翻译。](https://github.com/jianchang512/pyvideotrans?tab=readme-ov-file) 
-
-- [轻松打造原生桌面应用的 Python 框架。这是一个简单易用的 Python GUI 框架，专为构建跨平台原生桌面应用而设计。它结合了 Python 的简洁易懂和操作系统的原生体验，支持丰富的组件库和展示动态网页等功能。](https://github.com/beeware/toga)
-
-### C++
-
-### Go
-
-- [一款开源、可自行托管的笔记服务。你的想法，你的数据，你的控制权——无追踪，无广告，无订阅费。](https://github.com/usememos/memos)
-
-### JavaScript
-
-- [FileSaver.js 是在客户端保存文件的解决方案，非常适合在客户端生成文件的 Web 应用程序，但是，如果文件来自服务器，我们建议您首先尝试使用Content-Disposition附件响应标头，因为它具有更好的跨浏览器兼容性。](https://github.com/eligrey/FileSaver.js)
-
-- [AI SDK是一个 TypeScript 工具包，旨在帮助您使用 Next.js、React、Svelte、Vue 等流行框架和 Node.js 等运行时构建 AI 驱动的应用程序。](https://github.com/vercel/ai):
-
-- [HivisionIDPhotos: a lightweight and efficient AI ID photos tools. 一个轻量级的AI证件照制作算法。](https://github.com/Zeyi-Lin/HivisionIDPhotos)
-
-- [社区制作的美观且一致的图标工具包。开源项目和 Feather Icons 的一个分支。](https://github.com/lucide-icons/lucide?utm_source=gold_browser_extension)
-
-### Rust
-
-- [🤱🏻 Turn any webpage into a desktop app with Rust. 🤱🏻 利用 Rust 轻松构建轻量级多端桌面应用](https://github.com/tw93/Pake)
-
-### Shell
-
-- [解决Cursor在免费订阅期间出现以下提示的问题: You've reached your trial request limit. / Too many free trial accounts used on this machine. Please upgrade to pro. We have this limit in place to prevent abuse. Please let us know if you believe this is a mistake.
-  Topics](https://github.com/yuaotian/go-cursor-help?tab=readme-ov-file)
-
-### Html
-
-### CSS
-
-- [CSS Inspiration，在这里找到写 CSS 的灵感！](https://github.com/chokcoco/CSS-Inspiration)
-
-## 框架
-
-### React & NextJS
-
-
-## 运维
-
-### Linux
-
-- [一键搞定 Linux 换源问题的脚本。该项目提供了一键切换 Linux 默认软件源为国内镜像源的脚本，以及 Docker 安装脚本，支持 Debian、Ubuntu、CentOS、Raspberry Pi OS 和 Deepin 等多种主流发行版](https://github.com/SuperManito/LinuxMirrors)
-
-### Docker
-
-- [🤖 一个运行 Android 模拟器作为服务的极简且可定制的 Docker 镜像。](https://github.com/HQarroum/docker-android)
-
-### Nginx
-
-### Jenkins
-
-## 在线实用网站
-
-### 编程工具
-
-- [在线测试websocket](https://wstool.js.org/)
-- [加解密](https://www.sojson.com/encrypt.html)
-- [只要有 html 文件就能生成一个有域名公网可以访问的网站](https://www.yourware.so/)
-
-## 生活
-
-### 剪辑相关
-
-- [Adobe全家桶 - 百度网盘](https://xia8.top/)
-- [Adobe全家桶 - 压缩包](https://www.sharelikes.com.cn/%E8%BD%AF%E4%BB%B6%E8%B5%84%E6%BA%90/Adobe%E5%85%A8%E5%AE%B6%E6%A1%B6)
-
-### 英语
-
-- [英语学习资源导航](https://en.knowledgefxg.com/)
-
-- [为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件 / Words learning and English muscle memory training software designed for keyboard workers](https://github.com/RealKai42/qwerty-learner)
-
-- [About 为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件](https://github.com/RealKai42/qwerty-learner?utm_source=gold_browser_extension)
-
-### 健身
-
-- [🏋 现代开源健身教练平台。创建锻炼计划、追踪进度，并访问全面的锻炼数据库。](https://github.com/Snouzy/workout-cool)
-
-## 工作
-
-- [💼【AI找工作助手】全平台自动投简历脚本：(boss、前程无忧、猎聘、拉勾、智联招聘)](https://github.com/loks666/get_jobs)
-
-## 资源
-
-### 影视资源
-
-- [这个网站提供世界各地的网上电视台。](https://tv.garden/comedy/HhYHpgeNR67LDQ)
-
-### 工具
-
-- [功能丰富的命令行音频/视频下载器](https://github.com/yt-dlp/yt-dlp?utm_source=gold_browser_extension)
-
-- [画图神器,用于绘制类似手绘图表的虚拟白板](https://github.com/excalidraw/excalidraw)
-
-### 跨平台
-
-- [Tauri是一个开源的软件框架，用户可以通过Web前端技术为Linux、macOS、Windows、Android和iOS创建跨平台的桌面和移动应用程序。该框架在技术上基于Rust后端和JavaScript前端，使用Tao、Wry等渲染库在本地的WebView库上运行。Tauri比现有的类似框架（如Electron）更轻量级。](https://v2.tauri.app/)
-
+<style>
+.tools-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+.tools-container h2, .tools-container h3, .tools-container h4, .tools-container h5 {
+  border-left: none !important;
+  /* padding-left: 0 !important; */
+}
+.tools-container h2::before, .tools-container h3::before,
+.tools-container h4::before, .tools-container h5::before {
+  display: none !important;
+}
+.category-section { margin-bottom: 48px; }
+.category-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+.category-icon { font-size: 28px; flex-shrink: 0; }
+.category-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  border: 1px solid rgba(0,0,0,.06);
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+  overflow: hidden;
+}
+.tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.12);
+  border-color: transparent;
+}
+.tool-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 0 0 8px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+.tool-desc {
+  font-size: 14px;
+  color: #86868b;
+  line-height: 1.6;
+  margin: 0 0 12px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  flex-shrink: 0;
+  background-color: #F2F2F7;
+  color: #8E8E93;
+  border: 1px solid #E5E5EA;
+}
+@media (max-width: 768px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .tools-container { padding: 12px; }
+}
+</style>
+
+<div class="tools-container">
+
+<section class="category-section">
+  <div class="category-header">
+    <span class="category-icon">📰</span>
+    <h2 class="category-title">资讯发现</h2>
+  </div>
+  <div class="cards-grid">
+    <a class="tool-card" href="https://github.com/ruanyf/weekly" target="_blank">
+      <h3 class="tool-name">科技爱好者周刊</h3>
+      <p class="tool-desc">阮一峰的科技爱好者周刊，每周更新技术资讯</p>
+      <div class="tags"><span class="tag">开源</span></div>
+    </a>
+    <a class="tool-card" href="https://hellogithub.com" target="_blank">
+      <h3 class="tool-name">HelloGitHub</h3>
+      <p class="tool-desc">分享 GitHub 上有趣、入门级的开源项目</p>
+      <div class="tags"><span class="tag">在线</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/521xueweihan/HelloGitHub" target="_blank">
+      <h3 class="tool-name">HelloGitHub 仓库</h3>
+      <p class="tool-desc">GitHub 上有趣、入门级开源项目分享</p>
+      <div class="tags"><span class="tag">开源</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/GitHubDaily/GitHubDaily" target="_blank">
+      <h3 class="tool-name">GitHubDaily</h3>
+      <p class="tool-desc">坚持分享 GitHub 上高质量、有趣实用的开源技术教程、开发者工具</p>
+      <div class="tags"><span class="tag">开源</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="category-header">
+    <span class="category-icon">🛠️</span>
+    <h2 class="category-title">开发工具</h2>
+  </div>
+  <div class="cards-grid">
+    <a class="tool-card" href="https://github.com/521xueweihan/git-tips" target="_blank">
+      <h3 class="tool-name">Git的奇技淫巧</h3>
+      <p class="tool-desc">Git 使用技巧集合，提升你的 Git 使用效率</p>
+      <div class="tags"><span class="tag">Git</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/yuaotian/go-cursor-help" target="_blank">
+      <h3 class="tool-name">Cursor 试用修复</h3>
+      <p class="tool-desc">解决 Cursor 免费试用限制问题</p>
+      <div class="tags"><span class="tag">JavaScript</span></div>
+    </a>
+    <a class="tool-card" href="https://wstool.js.org/" target="_blank">
+      <h3 class="tool-name">WebSocket 在线测试</h3>
+      <p class="tool-desc">在线 WebSocket 连接测试工具</p>
+      <div class="tags"><span class="tag">WebSocket</span></div>
+    </a>
+    <a class="tool-card" href="https://www.sojson.com/encrypt.html" target="_blank">
+      <h3 class="tool-name">加解密工具</h3>
+      <p class="tool-desc">在线加密解密工具，支持多种算法</p>
+      <div class="tags"><span class="tag">加解密</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="category-header">
+    <span class="category-icon">📚</span>
+    <h2 class="category-title">学习资源</h2>
+  </div>
+  <div class="cards-grid">
+    <a class="tool-card" href="https://github.com/CyC2018/CS-Notes" target="_blank">
+      <h3 class="tool-name">CS-Notes</h3>
+      <p class="tool-desc">技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、系统设计</p>
+      <div class="tags"><span class="tag">面试刷题</span></div>
+    </a>
+    <a class="tool-card" href="https://pdai.tech/md/resource/tools.html" target="_blank">
+      <h3 class="tool-name">Java 全栈知识体系</h3>
+      <p class="tool-desc">Java 博客，涵盖 Java 基础到高级的完整知识体系</p>
+      <div class="tags"><span class="tag">Java</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/itwanger/toBeBetterJavaer" target="_blank">
+      <h3 class="tool-name">Java 进阶之路</h3>
+      <p class="tool-desc">通俗易懂、风趣幽默的 Java 学习指南，涵盖基础、并发、JVM、企业级开发、面试</p>
+      <div class="tags"><span class="tag">Java</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/krahets/hello-algo" target="_blank">
+      <h3 class="tool-name">Hello 算法</h3>
+      <p class="tool-desc">动画图解、一键运行的数据结构与算法教程，支持多种编程语言</p>
+      <div class="tags"><span class="tag">算法</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/DocsHome/microservices" target="_blank">
+      <h3 class="tool-name">微服务：从设计到部署</h3>
+      <p class="tool-desc">Microservices from Design to Deployment 中文版</p>
+      <div class="tags"><span class="tag">微服务</span></div>
+    </a>
+    <a class="tool-card" href="https://en.knowledgefxg.com/" target="_blank">
+      <h3 class="tool-name">英语学习资源导航</h3>
+      <p class="tool-desc">英语学习资源聚合导航</p>
+      <div class="tags"><span class="tag">学习</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/RealKai42/qwerty-learner" target="_blank">
+      <h3 class="tool-name">Qwerty Learner</h3>
+      <p class="tool-desc">为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件</p>
+      <div class="tags"><span class="tag">学习</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="category-header">
+    <span class="category-icon">🤖</span>
+    <h2 class="category-title">AI 相关</h2>
+  </div>
+  <div class="cards-grid">
+    <a class="tool-card" href="https://github.com/tukuaiai/vibe-coding-cn/tree/main" target="_blank">
+      <h3 class="tool-name">Vibe Coding 工作站</h3>
+      <p class="tool-desc">开发经验 + 提示词库，AI 辅助编程工作站</p>
+      <div class="tags"><span class="tag">Python</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/browser-use/browser-use" target="_blank">
+      <h3 class="tool-name">Browser Use</h3>
+      <p class="tool-desc">使 AI 代理可以访问网站，让 AI 能够操作浏览器</p>
+      <div class="tags"><span class="tag">Python</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/vercel/ai" target="_blank">
+      <h3 class="tool-name">Vercel AI SDK</h3>
+      <p class="tool-desc">TypeScript 工具包，帮助构建 AI 驱动的应用程序</p>
+      <div class="tags"><span class="tag">TypeScript</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/Zeyi-Lin/HivisionIDPhotos" target="_blank">
+      <h3 class="tool-name">HivisionIDPhotos</h3>
+      <p class="tool-desc">轻量级的 AI 证件照制作算法</p>
+      <div class="tags"><span class="tag">Python</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="category-header">
+    <span class="category-icon">💻</span>
+    <h2 class="category-title">前端开发</h2>
+  </div>
+  <div class="cards-grid">
+    <a class="tool-card" href="https://github.com/eligrey/FileSaver.js" target="_blank">
+      <h3 class="tool-name">FileSaver.js</h3>
+      <p class="tool-desc">客户端保存文件的解决方案，适合在客户端生成文件的 Web 应用</p>
+      <div class="tags"><span class="tag">JavaScript</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/lucide-icons/lucide" target="_blank">
+      <h3 class="tool-name">Lucide Icons</h3>
+      <p class="tool-desc">美观且一致的图标工具包，Feather Icons 的分支</p>
+      <div class="tags"><span class="tag">JavaScript</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/chokcoco/CSS-Inspiration" target="_blank">
+      <h3 class="tool-name">CSS Inspiration</h3>
+      <p class="tool-desc">在这里找到写 CSS 的灵感</p>
+      <div class="tags"><span class="tag">CSS</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="category-header">
+    <span class="category-icon">🖥️</span>
+    <h2 class="category-title">桌面应用</h2>
+  </div>
+  <div class="cards-grid">
+    <a class="tool-card" href="https://v2.tauri.app/" target="_blank">
+      <h3 class="tool-name">Tauri</h3>
+      <p class="tool-desc">用 Web 前端技术构建跨平台桌面和移动应用，比 Electron 更轻量</p>
+      <div class="tags"><span class="tag">Rust</span><span class="tag">框架</span><span class="tag">跨平台</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/tw93/Pake" target="_blank">
+      <h3 class="tool-name">Pake</h3>
+      <p class="tool-desc">利用 Rust 轻松构建轻量级多端桌面应用，将网页打包成桌面应用</p>
+      <div class="tags"><span class="tag">Rust</span><span class="tag">跨平台</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/beeware/toga" target="_blank">
+      <h3 class="tool-name">Toga</h3>
+      <p class="tool-desc">Python GUI 框架，构建跨平台原生桌面应用</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">框架</span><span class="tag">跨平台</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="category-header">
+    <span class="category-icon">⚙️</span>
+    <h2 class="category-title">运维部署</h2>
+  </div>
+  <div class="cards-grid">
+    <a class="tool-card" href="https://github.com/SuperManito/LinuxMirrors" target="_blank">
+      <h3 class="tool-name">LinuxMirrors</h3>
+      <p class="tool-desc">一键切换 Linux 软件源为国内镜像，支持主流发行版</p>
+      <div class="tags"><span class="tag">Shell</span><span class="tag">Linux</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/HQarroum/docker-android" target="_blank">
+      <h3 class="tool-name">Docker Android</h3>
+      <p class="tool-desc">运行 Android 模拟器作为服务的 Docker 镜像</p>
+      <div class="tags"><span class="tag">Android</span><span class="tag">Docker</span></div>
+    </a>
+    <a class="tool-card" href="https://www.yourware.so/" target="_blank">
+      <h3 class="tool-name">Yourware</h3>
+      <p class="tool-desc">只要有 HTML 文件就能生成有域名公网可访问的网站</p>
+      <div class="tags"><span class="tag">在线</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="category-header">
+    <span class="category-icon">📁</span>
+    <h2 class="category-title">文件媒体</h2>
+  </div>
+  <div class="cards-grid">
+    <a class="tool-card" href="https://github.com/schollz/croc" target="_blank">
+      <h3 class="tool-name">Croc</h3>
+      <p class="tool-desc">任意两台计算机之间轻松安全地传输文件和文件夹</p>
+      <div class="tags"><span class="tag">Go</span><span class="tag">命令行</span><span class="tag">跨平台</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/microsoft/markitdown" target="_blank">
+      <h3 class="tool-name">MarkItDown</h3>
+      <p class="tool-desc">将文件和办公文档转换为 Markdown 的工具</p>
+      <div class="tags"><span class="tag">Python</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/jianchang512/pyvideotrans" target="_blank">
+      <h3 class="tool-name">视频翻译配音</h3>
+      <p class="tool-desc">将视频翻译为另一种语言，支持语音识别、合成、字幕翻译</p>
+      <div class="tags"><span class="tag">Python</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/yt-dlp/yt-dlp" target="_blank">
+      <h3 class="tool-name">yt-dlp</h3>
+      <p class="tool-desc">功能丰富的命令行音频/视频下载器</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">命令行</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="category-header">
+    <span class="category-icon">🎨</span>
+    <h2 class="category-title">设计绘图</h2>
+  </div>
+  <div class="cards-grid">
+    <a class="tool-card" href="https://github.com/excalidraw/excalidraw" target="_blank">
+      <h3 class="tool-name">Excalidraw</h3>
+      <p class="tool-desc">画图神器，绘制类似手绘风格的虚拟白板图表</p>
+      <div class="tags"><span class="tag">JavaScript</span><span class="tag">在线</span></div>
+    </a>
+    <a class="tool-card" href="https://xia8.top/" target="_blank">
+      <h3 class="tool-name">Adobe 全家桶</h3>
+      <p class="tool-desc">Adobe 全家桶软件资源 - 百度网盘</p>
+      <div class="tags"><span class="tag">资源</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="category-section">
+  <div class="category-header">
+    <span class="category-icon">🏃</span>
+    <h2 class="category-title">生活工作</h2>
+  </div>
+  <div class="cards-grid">
+    <a class="tool-card" href="https://github.com/loks666/get_jobs" target="_blank">
+      <h3 class="tool-name">AI 找工作助手</h3>
+      <p class="tool-desc">全平台自动投简历脚本：Boss、前程无忧、猎聘、拉勾、智联招聘</p>
+      <div class="tags"><span class="tag">找工作</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/Snouzy/workout-cool" target="_blank">
+      <h3 class="tool-name">Workout Cool</h3>
+      <p class="tool-desc">现代开源健身教练平台，创建锻炼计划、追踪进度</p>
+      <div class="tags"><span class="tag">健身</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/myhhub/stock" target="_blank">
+      <h3 class="tool-name">Stock 股票分析</h3>
+      <p class="tool-desc">获取股票数据、计算指标、识别形态、综合选股、回测验证</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">股票</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/usememos/memos" target="_blank">
+      <h3 class="tool-name">Memos</h3>
+      <p class="tool-desc">开源、可自托管的笔记服务，无追踪、无广告、无订阅费</p>
+      <div class="tags"><span class="tag">Go</span></div>
+    </a>
+    <a class="tool-card" href="https://tv.garden/comedy/HhYHpgeNR67LDQ" target="_blank">
+      <h3 class="tool-name">TV Garden</h3>
+      <p class="tool-desc">世界各地网上电视台直播</p>
+      <div class="tags"><span class="tag">影视</span></div>
+    </a>
+  </div>
+</section>
+
+</div>

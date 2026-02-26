@@ -46,3 +46,7 @@ go.work.sum
 /content/post/image-gallery/
 /index.html
 /content/post/draft-box/
+.trae
+package-lock.json
+package.json
+.DS_Store
