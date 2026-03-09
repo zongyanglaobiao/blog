@@ -95,6 +95,6 @@ services:
 
 启动后，浏览器访问 127.0.0.1:8080 初始化用户就可以正常聊天了
 
-![Open WebUI](img/ai/ai1.jpg)
+![Open WebUI](img/ai/ai1.png)
 
 
