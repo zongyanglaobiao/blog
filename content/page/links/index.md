@@ -240,6 +240,16 @@ comments: false
       <p class="tool-desc">轻量级的 AI 证件照制作算法</p>
       <div class="tags"><span class="tag">Python</span></div>
     </a>
+    <a class="tool-card" href="https://github.com/anthropics/skills" target="_blank">
+      <h3 class="tool-name">Skills 教程</h3>
+      <p class="tool-desc">Claude 官方开源的 Skills 教程。该项目是 Anthropic 官方开源的 Agent Skills 仓库，介绍如何通过标准化的 SKILL.md 文件结构，将提示词和工具调用封装为插件形式，为 AI 助手提供可动态加载的技能包，以可复用的方式更好地完成特定任务。</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">HTML</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/datawhalechina/hello-agents" target="_blank">
+      <h3 class="tool-name">搭建 Agent 教程</h3>
+      <p class="tool-desc">📚 《从零开始构建智能体》——从零开始的智能体原理与实践教程</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">HTML</span><span class="tag">JavaScript</span></div>
+    </a>
   </div>
 </section>
 
@@ -393,6 +403,11 @@ comments: false
       <h3 class="tool-name">TV Garden</h3>
       <p class="tool-desc">世界各地网上电视台直播</p>
       <div class="tags"><span class="tag">影视</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/ZhuLinsen/daily_stock_analysis" target="_blank">
+      <h3 class="tool-name">AI 智能股票分析系统</h3>
+      <p class="tool-desc">基于 LLM 的智能股票分析系统。这是一个由 LLM 驱动的智能股票分析工具，支持 A 股、港股和美股的每日自动分析与推送。它通过 AkShare、Tushare、YFinance 等数据源获取实时行情，并借助 DeepSeek 等大模型 API 服务，对自选股票进行多维度分析（技术面、筹码分布、舆情），生成决策仪表盘，支持 GitHub Actions 定时执行（无需服务器）或 Docker 一键部署。</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">JavaScript</span></div>
     </a>
   </div>
 </section>
