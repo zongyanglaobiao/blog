@@ -120,7 +120,7 @@ comments: false
   <div class="cards-grid">
     <a class="tool-card" href="https://github.com/ruanyf/weekly" target="_blank">
       <h3 class="tool-name">科技爱好者周刊</h3>
-      <p class="tool-desc">阮一峰的科技爱好者周刊，每周更新技术资讯</p>
+      <p class="tool-desc">科技爱好者周刊，每周更新技术资讯</p>
       <div class="tags"><span class="tag">开源</span></div>
     </a>
     <a class="tool-card" href="https://hellogithub.com" target="_blank">
@@ -210,6 +210,11 @@ comments: false
       <h3 class="tool-name">Qwerty Learner</h3>
       <p class="tool-desc">为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件</p>
       <div class="tags"><span class="tag">学习</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/codecrafters-io/build-your-own-x" target="_blank">
+      <h3 class="tool-name">build-your-own-x</h3>
+      <p class="tool-desc">通过从零开始重现你最喜欢的技术来掌握编程。</p>
+      <div class="tags"><span class="tag">造轮子</span></div>
     </a>
   </div>
 </section>

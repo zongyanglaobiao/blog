@@ -17,15 +17,10 @@ keywords:
   - open webui
   - ubuntu
   - docker
-weight: 1
 id: d1b6f336-7fbd-4d23-853a-06eed8994083
 # 是否可以添加评论
 comments: true
 ---
-
-![][github-release-shield]
-
-
 
 把旧的的 Windows 电脑，安装 Ubuntu 系统，有了环境就想试试本地大模型，便有本次博客
 
@@ -94,7 +89,5 @@ services:
 ```
 
 启动后，浏览器访问 127.0.0.1:8080 初始化用户就可以正常聊天了
-
-![Open WebUI](img/ai/ai1.png)
 
 
