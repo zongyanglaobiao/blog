@@ -417,4 +417,19 @@ comments: false
   </div>
 </section>
 
+<section class="category-section">
+  <div class="category-header">
+    <span class="category-icon"></span>
+    <h2 class="category-title">有趣网站合集</h2>
+  </div>
+  <div class="cards-grid">
+    <a class="tool-card" href="https://github.com/schollz/croc" target="_blank">
+      <h3 class="tool-name">Croc</h3>
+      <p class="tool-desc">任意两台计算机之间轻松安全地传输文件和文件夹</p>
+      <div class="tags"><span class="tag">Go</span><span class="tag">命令行</span><span class="tag">跨平台</span></div>
+    </a>
+
+  </div>
+</section>
+
 </div>
