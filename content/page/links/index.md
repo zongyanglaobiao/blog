@@ -370,6 +370,11 @@ comments: false
       <p class="tool-desc">画图神器，绘制类似手绘风格的虚拟白板图表</p>
       <div class="tags"><span class="tag">JavaScript</span><span class="tag">在线</span></div>
     </a>
+    <a class="tool-card" href="https://www.cloudcraft.co" target="_blank">
+      <h3 class="tool-name">CloudCraft</h3>
+      <p class="tool-desc">拖拽组件快速绘制 3D 云端架构图，能实时显示成本估算，并能与 AWS 实际账户连接</p>
+      <div class="tags"><span class="tag">画图</span><span class="tag">在线</span></div>
+    </a>
     <a class="tool-card" href="https://xia8.top/" target="_blank">
       <h3 class="tool-name">Adobe 全家桶</h3>
       <p class="tool-desc">Adobe 全家桶软件资源 - 百度网盘</p>
@@ -414,6 +419,11 @@ comments: false
       <p class="tool-desc">基于 LLM 的智能股票分析系统。这是一个由 LLM 驱动的智能股票分析工具，支持 A 股、港股和美股的每日自动分析与推送。它通过 AkShare、Tushare、YFinance 等数据源获取实时行情，并借助 DeepSeek 等大模型 API 服务，对自选股票进行多维度分析（技术面、筹码分布、舆情），生成决策仪表盘，支持 GitHub Actions 定时执行（无需服务器）或 Docker 一键部署。</p>
       <div class="tags"><span class="tag">Python</span><span class="tag">JavaScript</span></div>
     </a>
+    <a class="tool-card" href="https://www.modevol.com/" target="_blank">
+      <h3 class="tool-name">渐构</h3>
+      <p class="tool-desc">害怕自己的技能过时，担心被职场新星所取代？知识焦虑让你喘不过来气，明明不停学习却感觉啥都没学？对自己的天赋感到怀疑，与他人相比，总是充满挫败</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">JavaScript</span></div>
+    </a>
   </div>
 </section>
 
@@ -421,14 +431,6 @@ comments: false
   <div class="category-header">
     <span class="category-icon"></span>
     <h2 class="category-title">有趣网站合集</h2>
-  </div>
-  <div class="cards-grid">
-    <a class="tool-card" href="https://github.com/schollz/croc" target="_blank">
-      <h3 class="tool-name">Croc</h3>
-      <p class="tool-desc">任意两台计算机之间轻松安全地传输文件和文件夹</p>
-      <div class="tags"><span class="tag">Go</span><span class="tag">命令行</span><span class="tag">跨平台</span></div>
-    </a>
-
   </div>
 </section>
 
