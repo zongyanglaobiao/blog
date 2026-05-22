@@ -216,6 +216,11 @@ comments: false
       <p class="tool-desc">通过从零开始重现你最喜欢的技术来掌握编程。</p>
       <div class="tags"><span class="tag">造轮子</span></div>
     </a>
+    <a class="tool-card" href="https://www.ermao.net/posts/vpn/#%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%E8%AF%B4%E6%98%8E" target="_blank">
+      <h3 class="tool-name">VPN 机场推荐</h3>
+      <p class="tool-desc">2026年便宜好用的翻墙机场推荐评测(科学上网长期更新)</p>
+      <div class="tags"><span class="tag">VPN✈️</span></div>
+    </a>
   </div>
 </section>
 
@@ -229,6 +234,11 @@ comments: false
       <h3 class="tool-name">Vibe Coding 工作站</h3>
       <p class="tool-desc">开发经验 + 提示词库，AI 辅助编程工作站</p>
       <div class="tags"><span class="tag">Python</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/tukuaiai/vibe-coding-cn/tree/main" target="_blank">
+      <h3 class="tool-name">Agent + RAG 示例项目</h3>
+      <p class="tool-desc">100 多个可实际运行的 AI Agent 和 RAG 应用程序——克隆、自定义、发布。</p>
+      <div class="tags"><span class="tag">Agent</span><span class="tag">RAG</span></div>
     </a>
     <a class="tool-card" href="https://github.com/browser-use/browser-use" target="_blank">
       <h3 class="tool-name">Browser Use</h3>
@@ -426,12 +436,4 @@ comments: false
     </a>
   </div>
 </section>
-
-<section class="category-section">
-  <div class="category-header">
-    <span class="category-icon"></span>
-    <h2 class="category-title">有趣网站合集</h2>
-  </div>
-</section>
-
 </div>

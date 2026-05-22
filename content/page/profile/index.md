@@ -62,6 +62,12 @@ comments: false
 
 thinking...
 
+## 其他爱好
+
+- 健身
+- 打球
+- 游戏(LOL、三角洲)
+
 ## 📮 邮箱
 
 - aksisnotx@gmail.com
